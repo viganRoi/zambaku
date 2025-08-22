@@ -1,0 +1,5 @@
+.apartmentfilter {
+    -webkit-box-shadow: inset 0px -40px 50px -50px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0px -40px 50px -50px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0px -40px 50px -50px rgba(0, 0, 0, 0.4);
+}
