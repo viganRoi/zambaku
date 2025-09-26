@@ -5,13 +5,22 @@ import { Footer, Navbar, NavFooter } from "../";
 const ConditionalLayout = ({ children }) => {
   const location = useLocation();
 
-  const hideNavbarPaths = ["/apartments/:id", "/wishlist"];
-  const hideFooterPaths = ["/apartments/:id", "/wishlist"];
+  const hideNavbarPaths = [];
+  const hideFooterPaths = ["/wishlist", "/buildings/:id", "/"];
   const darkBackgroundPaths = ["/about"];
 
   const pathMatches = (pathsArray) => {
+    const pathToRegex = (path) => {
+      const parts = path.split('/').map((seg) => {
+        if (!seg) return '';
+        if (seg.startsWith(':')) return '[^/]+';
+        return seg.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      });
+      return new RegExp('^' + parts.join('/') + '/?$');
+    };
+
     return pathsArray.some((path) => {
-      const regex = new RegExp("^" + path.replace(":id", "\\d+") + "$");
+      const regex = pathToRegex(path);
       return regex.test(location.pathname);
     });
   };

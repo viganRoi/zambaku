@@ -1,0 +1,20 @@
+.apartment-page-bck{
+    height: 100%;
+    max-height: 200vh;
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    /* Decorative background images anchored to the bottom (left & right)
+       placed above the gradient. Images are in public/assets and served from /assets/... */
+    background-image:
+        url('/assets/images/hero/bckLeft.png'),
+        url('/assets/images/hero/bckRight.png'),
+        linear-gradient(to bottom, #00345B 0%, #E4AB8E 150%);
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: left bottom, right bottom, center;
+    /* background-size: width auto and height 40% to keep aspect ratio; tweak as needed */
+    background-size: auto 80%, auto 40%, cover;
+}

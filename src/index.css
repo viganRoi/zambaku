@@ -1,34 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold: #e6b34e;
   --color-black: #000;
   --color-white: #fff;
-  --color-dark: #7a7a7a;
-  --color-primary: #0E3752;
-  --color-secondary: #DFD8CF;
-  --color-secondaryD: #c9b8a1;
-  --color-tertiary: #385466;
-  --color-secondaryTxt: #dfd8cfbd;
-  --color-bck: #DFD8CF80;
-  --color-bckModal: #0E375295;
-  --color-bckLight: #e3dcd3;
+  --color-primary: #00345B;
+  --color-secondary: #E4AB8E;
 }
 
 :root {
   font-family: 'montserrat';
-  --color-gold: #e6b34e;
   --color-black: #000;
   --color-white: #fff;
-  --color-dark: #7a7a7a;
-  --color-primary: #0E3752;
-  --color-secondary: #DFD8CF;
-  --color-secondaryD: #c9b8a1;
-  --color-tertiary: #385466;
-  --color-secondaryTxt: #dfd8cfbd;
-  --color-bck: #DFD8CF80;
-  --color-bckModal: #0E375295;
-  --color-bckLight: #e3dcd3;
+  --color-primary: #00345B;
+  --color-secondary: #E4AB8E;
 }
 
 html {
@@ -44,41 +28,22 @@ html {
 }
 
 @font-face {
-  font-family: 'valky';
-  src: url('/assets/fonts/valky.otf');
+  font-family: 'anya';
+  src: url('/assets/fonts/Anya Tamy.otf');
 }
 
-.valky {
-  font-family: 'valky';
+.anya {
+  font-family: 'anya';
 }
 
-@font-face {
-  font-family: 'valkyR';
-  src: url('/assets/fonts/valkyRegular.ttf');
+.base-width{
+  width: 80%;
 }
-
-.valkyR {
-  font-family: 'valkyR';
+@media (max-width: 768px) {
+  .base-width{
+    width: 90%;
+  }
 }
-
-@font-face {
-  font-family: 'axiforma';
-  src: url('/assets/fonts/Kastelov - Axiforma Regular.otf');
-}
-
-.axiforma {
-  font-family: 'axiforma';
-}
-
-@font-face {
-  font-family: 'axiforma-thin';
-  src: url('/assets/fonts/Kastelov - Axiforma Thin.otf');
-}
-
-.axiforma-thin {
-  font-family: 'axiforma-thin';
-}
-
 
 .montserrat {
   font-family: "Montserrat", sans-serif;

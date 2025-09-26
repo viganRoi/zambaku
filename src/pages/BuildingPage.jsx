@@ -100,11 +100,23 @@ const BuildingPage = () => {
   };
 
   return (
-    <div className='mt-20 bg-white'>
-      <BuildingTitle buildingName={buildingData[0]?.buildingNr} />
+    <div className='relative h-screen w-full flex flex-col'>
+      <h1 className='absolute bottom-12 left-44 z-50 text-primary bg-secondary px-6 py-3 rounded-lg uppercase text-3xl anya'>Llamella {buildingData[0]?.buildingName}</h1>
       <BuildingFilter setFilterState={setFilterState} available={available} buildingName={buildingData[0]?.buildingNr} />
       {isSmallDev ? (
-        <BuildingMobile
+        // <BuildingMobile
+        //   handleNext={handleNext}
+        //   handlePrevious={handlePrevious}
+        //   currentIndex={currentIndex}
+        //   buildingData={buildingData}
+        //   buildingFloorData={buildingFloorData}
+        //   filterState={reduxFilterState}
+        //   roomFilter={roomFilter}
+        //   floorFilter={floorFilter}
+        //   squareFilter={squareFilter}
+        //   available={available}
+        // />
+        <BuildingView
           handleNext={handleNext}
           handlePrevious={handlePrevious}
           currentIndex={currentIndex}
@@ -114,7 +126,6 @@ const BuildingPage = () => {
           roomFilter={roomFilter}
           floorFilter={floorFilter}
           squareFilter={squareFilter}
-          available={available}
         />
       ) : (
         <BuildingView
@@ -129,7 +140,6 @@ const BuildingPage = () => {
           squareFilter={squareFilter}
         />
       )}
-      <BuildingTable apartments={filteredApartments} />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getApartmentDetailModalData } from '../features/apartment/ApartmentSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { ApartmentsCarousel, GalleryCarousel, SingleApartment } from '../components'
+import { ApartmentsCarousel, GalleryCarousel, Interior, SingleApartment } from '../components'
 import { BASE_URL } from '../utils/consts';
 import { banners } from '../utils/server';
 import { getApartmentById } from '../features/apartment/ApartmentAPI';
@@ -47,10 +47,19 @@ const SingleApartmentPage = () => {
   }, [apartment]);
 
   return (
-    <div className=''>
-      <SingleApartment apartment={apartment}/>
-      <GalleryCarousel gallery={banners}/>
-      <ApartmentsCarousel data={relatedApartments} />
+    <div className='flex flex-col w-full items-center'>
+      <SingleApartment apartment={apartment} />
+      <div className='relative base-width mb-20 flex items-center justify-center'>
+        <h1 className='absolute text-[150px] text-white anya font-400 uppercase'>Interior</h1>
+      </div>
+      <Interior
+        // images={apartment.images}
+        images={[
+          '/assets/images/apartments/1.png',
+          '/assets/images/apartments/2.png',
+          '/assets/images/apartments/3.png',
+        ]}
+      />
     </div>
   )
 }

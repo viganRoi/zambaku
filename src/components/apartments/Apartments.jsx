@@ -6,9 +6,9 @@ const Apartments = ({ filteredApartments }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center content-center py-12 md:py-24 bg-white">
-            <div className="w-11/12 flex-col align-center justify-center">
-                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6">
+        <div className="w-full h-full flex flex-col items-center justify-center content-center py-12 md:py-24 bg-transparent">
+            <div className="base-width flex-col align-center justify-center">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
                     {filteredApartments.map((el) => {
                         return (
                             <ApartmentCard
@@ -17,6 +17,8 @@ const Apartments = ({ filteredApartments }) => {
                                 category={el.category}
                                 image={el.name}
                                 title={el.name}
+                                floor={el.floorNumber === 0 ? 'Përdhesa' : el.floorNumber === -1 ? 'Suterren' : el.floorNumber === -2 ? 'Bodrum' : `Kati ${el.floorNumber}`}
+                                bathroom={el.bathroom}
                                 sqft={el.netoSquare}
                                 bedroom={el.rooms}
                                 navigateTo={() => navigate(`/apartments/${el.id}`)}

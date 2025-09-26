@@ -29,6 +29,8 @@ const initialState = {
             startVal: minFloor,
             endVal: maxFloor,
         },
+        // selected individual floors (for multiselect buttons)
+        floors: ['all'],
         square: {
             startVal: minSquare,
             endVal: maxSquare
@@ -126,6 +128,27 @@ const FilterSlice = createSlice({
     }
 },
 
+        setRegularFloorToggle(state, action) {
+            const value = action.payload;
+            if (value === 'all') {
+                state.regularFilter.floors = ['all'];
+                return;
+            }
+            const exists = state.regularFilter.floors.includes(value);
+            if (exists) {
+                state.regularFilter.floors = state.regularFilter.floors.filter((item) => item !== value);
+                if (state.regularFilter.floors.length === 0) {
+                    state.regularFilter.floors.push('all');
+                }
+            } else {
+                state.regularFilter.floors.push(value);
+                // remove 'all' if specific floors chosen
+                if (state.regularFilter.floors.includes('all') && state.regularFilter.floors.length > 1) {
+                    state.regularFilter.floors = state.regularFilter.floors.filter((item) => item !== 'all');
+                }
+            }
+        },
+
         handleRegularFilterType(state, action) {
             if (action.payload === 'all') {
                 state.regularFilter.type = ['all'];
@@ -174,6 +197,7 @@ export const {
     setRegularRoomFilter,
     setRegularSquareFilter,
     setRegularSeeViewFilter,
+        setRegularFloorToggle,
     handleRegularFilterState,
     handleRegularFilterReset,
     handleMobileFilterReset,
@@ -193,6 +217,7 @@ export const getRegularSeeViewFilter = (state) => state.FilterSlice.regularFilte
 export const getRegularBuildingFilter = (state) => state.FilterSlice.regularFilter.building;
 export const getRegularRoomFilter = (state) => state.FilterSlice.regularFilter.rooms;
 export const getRegularFloorFilter = (state) => state.FilterSlice.regularFilter.floor;
+export const getRegularFloors = (state) => state.FilterSlice.regularFilter.floors;
 export const getRegularFilterState = (state) => state.FilterSlice.regularFilterState;
 export const getRegularFilterModalState = (state) => state.FilterSlice.regularModalFilterState;
 export const getRegularFilterType = (state) => state.FilterSlice.regularFilter.type;
