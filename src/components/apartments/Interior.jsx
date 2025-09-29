@@ -7,76 +7,70 @@ import { Pagination, Navigation } from 'swiper/modules';
 
 const Interior = ({ images }) => {
     const swiperRef = useRef(null);
+    const [swiper, setSwiper] = useState(null);
     const trackRef = useRef(null);
     const handleRef = useRef(null);
     const [progress, setProgress] = useState(0); // 0..1
 
+    // Attach listeners when swiper instance becomes available
     useEffect(() => {
-        const swiper = swiperRef.current;
-        if (!swiper) return;
+        const s = swiper;
+        if (!s) return;
 
         const updateProgress = () => {
-            // determine logical slide count (real slides) - prefer realIndex if available
-            const realCount = swiper.slides && swiper.slides.length ? (swiper.slides.length) : 1;
-            const total = Math.max(realCount - 1, 1);
-            const idx = typeof swiper.realIndex === 'number' ? swiper.realIndex : (typeof swiper.activeIndex === 'number' ? swiper.activeIndex : 0);
-            setProgress(total === 0 ? 0 : idx / total);
+            const slidesCount = (s.slides && s.slides.length) || 1;
+            const lastIndex = Math.max(slidesCount - 1, 1);
+            const idx = typeof s.realIndex === 'number' ? s.realIndex : (typeof s.activeIndex === 'number' ? s.activeIndex : 0);
+            setProgress(lastIndex === 0 ? 0 : idx / lastIndex);
         };
 
-        // initial
         updateProgress();
 
-        swiper.on('slideChange', updateProgress);
-        swiper.on('update', updateProgress);
+        s.on && s.on('slideChange', updateProgress);
+        s.on && s.on('update', updateProgress);
 
         return () => {
-            if (swiper && swiper.off) {
-                swiper.off('slideChange', updateProgress);
-                swiper.off('update', updateProgress);
-            }
+            s.off && s.off('slideChange', updateProgress);
+            s.off && s.off('update', updateProgress);
         };
-    }, [swiperRef.current]);
+    }, [swiper]);
 
     // Advance-only button behavior: on click, advance to next slide; if last slide, go to start
     const onHandleClick = () => {
-        const swiper = swiperRef.current;
-        if (!swiper) return;
-        const totalSlides = Math.max(swiper.slides.length, 1);
-        const current = typeof swiper.realIndex === 'number' ? swiper.realIndex : (typeof swiper.activeIndex === 'number' ? swiper.activeIndex : 0);
-        const lastIndex = totalSlides - 1;
+        const s = swiperRef.current || swiper;
+        if (!s) return;
+        const slidesCount = Math.max(images?.length || (s.slides && s.slides.length) || 1, 1);
+        const current = typeof s.realIndex === 'number' ? s.realIndex : (typeof s.activeIndex === 'number' ? s.activeIndex : 0);
+        const lastIndex = slidesCount - 1;
         const duration = 600;
-        // If loop is enabled, slideNext handles wrap automatically; otherwise, wrap manually
-        if (swiper.params && swiper.params.loop) {
-            // optimistic UI: move progress to next visual index (realIndex + 1)
-            const next = current + 1;
-            const pct = lastIndex === 0 ? 0 : (next % totalSlides) / lastIndex;
-            setProgress(pct);
-            swiper.slideNext(duration);
-        } else {
-            const nextIndex = current >= lastIndex ? 0 : current + 1;
-            const pct = lastIndex === 0 ? 0 : nextIndex / lastIndex;
-            setProgress(pct);
-            // use slideNext when possible for smoother behavior
-            if (typeof swiper.slideNext === 'function') {
-                swiper.slideNext(duration);
-                // if we wrapped to 0, ensure slideTo(0) when current was last
-                if (current >= lastIndex) {
-                    // small timeout ensures animation sequencing
-                    setTimeout(() => { try { swiper.slideTo(0, duration); } catch (e) {} }, duration + 10);
-                }
-            } else {
-                try { swiper.slideTo(nextIndex, duration); } catch (e) { swiper.slideTo(nextIndex); }
-            }
+
+        if (s.params && s.params.loop) {
+            // loop mode: just call slideNext
+            s.slideNext(duration);
+            // optimistic progress update
+            const next = (current + 1) % slidesCount;
+            setProgress(lastIndex === 0 ? 0 : next / lastIndex);
+            return;
+        }
+
+        const nextIndex = current >= lastIndex ? 0 : current + 1;
+        setProgress(lastIndex === 0 ? 0 : nextIndex / lastIndex);
+        // prefer slideTo for exact positioning
+        try {
+            s.slideTo(nextIndex, duration);
+        } catch (e) {
+            // fallback
+            try { s.slideTo(nextIndex); } catch (er) { s.slideNext && s.slideNext(); }
         }
     };
 
-    const slides = [
-        (<div><img src="/projektet/assets/images/apartments/1.png" alt="" /></div>),
-        (<div><img src="/projektet/assets/images/apartments/2.png" alt="" /></div>),
-        (<div><img src="/projektet/assets/images/apartments/3.png" alt="" /></div>),
-        (<div><img src="/projektet/assets/images/apartments/4.jpg" alt="" /></div>),
-        (<div><img src="/projektet/assets/images/apartments/5.jpg" alt="" /></div>),
+    // derive slides from images prop; fallback to a small default set when images is empty
+    const fallbackSlides = [
+        '/projektet/assets/images/apartments/1.png',
+        '/projektet/assets/images/apartments/3.png',
+        '/projektet/assets/images/apartments/4.jpg',
     ];
+    const slideSources = (images && images.length) ? images : fallbackSlides;
 
     return (
         <div className='w-full h-full flex flex-col items-center justify-center py-36'>
@@ -97,7 +91,6 @@ const Interior = ({ images }) => {
                             {row.map((img, i) => (
                                 <img
                                     key={i}
-                                    // src={`${API_URL}${img}`}
                                     src={img}
                                     alt={`Project image ${rowIndex + 1}-${i + 1}`}
                                     className="w-full object-cover aspect-[16/9]"
@@ -106,29 +99,36 @@ const Interior = ({ images }) => {
                         </div>
                     ))}
             </div>
-            <div className="relative base-width h-screen flex flex-col gap-6 py-12">
+            <div className="relative base-width h-screen flex flex-col gap-6 py-12 overflow-x-hidden">
                 <Swiper
-                    onSwiper={(s) => { swiperRef.current = s; }}
+                    onSwiper={(s) => { swiperRef.current = s; setSwiper(s); }}
                     onProgress={() => { /* handled via effect */ }}
                     navigation={true}
                     modules={[Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    {slides.map((slideContent, index) => (
+                    {slideSources.map((src, index) => (
                         <SwiperSlide key={index}>
-                            {slideContent}
+                            {typeof src === 'string' ? (
+                                <div>
+                                    <img src={src} alt={`Slide ${index + 1}`} className="w-full object-cover" />
+                                </div>
+                            ) : (
+                                // if images array contains react nodes or objects, render directly
+                                src
+                            )}
                         </SwiperSlide>
                     ))}
                 </Swiper>
                 <div
                     ref={trackRef}
-                    className="absolute left-1/2 -translate-x-1/2 bottom-6 w-[90%] h-20 flex items-center justify-center pointer-events-auto"
+                    className="absolute left-1/2 -translate-x-1/2 bottom-6 base-width h-20 flex items-center justify-center pointer-events-auto"
                     style={{ zIndex: 60 }}
                 >
-                    <div className="relative w-full h-4 bg-white/50 rounded-full">
+                    <div className="relative w-full h-1 bg-white/30 rounded-full">
                         <div
                             style={{ width: `${progress * 100}%` }}
-                            className="absolute left-0 top-0 h-full rounded-full bg-transparent"
+                            className="absolute left-0 top-0 h-full rounded-full bg-secondary"
                         />
                         <div
                             ref={handleRef}
@@ -145,9 +145,22 @@ const Interior = ({ images }) => {
                                 }
                             }}
                             onClick={onHandleClick}
-                            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-20 h-20 rounded-full bg-white shadow-lg flex items-center justify-center cursor-pointer"
-                            style={{ left: `${progress * 100}%`, transform: 'translate(-50%, -50%)', transition: 'left 600ms cubic-bezier(0.22,0.9,0.35,1)' }}
-                        />
+                            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-secondary shadow-lg flex items-center justify-center cursor-pointer"
+                            // style={{ 
+                            //     left: `${progress * 100}%`, 
+                            //     transform: 'translate(-50%, -50%)',
+                            //      transition: 'left 600ms cubic-bezier(0.22,0.9,0.35,1)' 
+                            //    }}
+                            style={{
+                                left: `${progress * 100}%`,
+                                transform: 'translate(-50%, -50%)',
+                                transition: 'left 600ms ease'
+                            }}
+                        >
+                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 12.2349L5 12.2349M19 12.2349L13 18.2349M19 12.2349L13 6.23486" stroke="#00345B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>

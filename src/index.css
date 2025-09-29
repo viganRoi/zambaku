@@ -39,6 +39,7 @@ html {
 .base-width{
   width: 80%;
 }
+
 @media (max-width: 768px) {
   .base-width{
     width: 90%;
