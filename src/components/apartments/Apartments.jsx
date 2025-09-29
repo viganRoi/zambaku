@@ -6,22 +6,28 @@ const Apartments = ({ filteredApartments }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full h-full min-h-[150vh] flex flex-col items-center justify-center content-center py-12 md:py-24 bg-transparent">
+        <div className="w-full h-full min-h-[150vh] flex flex-col items-center justify-center content-center py-12 md:py-24 mb-44 bg-transparent">
             <div className="base-width flex-col align-center justify-center">
                 <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
                     {filteredApartments.slice(0,9).map((el) => {
+                        const key = el.apartmentId ?? el.id ?? el.apartmentNumber;
+                        const sqft = el.netoSquare ?? el.square ?? el.sqft ?? '';
+                        const title = el.name ?? `Apartment ${el.apartmentNumber ?? key}`;
+                        const floorRaw = el.floorNumber ?? el.floor ?? '';
+                        const floor = floorRaw === 0 ? 'Përdhesa' : floorRaw === -1 ? 'Suterren' : floorRaw === -2 ? 'Bodrum' : `Kati ${floorRaw}`;
+                        const navigateId = el.apartmentId ?? el.id ?? key;
                         return (
                             <ApartmentCard
-                                key={el.id}
+                                key={key}
                                 object={el.apartmentNumber}
                                 category={el.category}
-                                image={el.name}
-                                title={el.name}
-                                floor={el.floorNumber === 0 ? 'Përdhesa' : el.floorNumber === -1 ? 'Suterren' : el.floorNumber === -2 ? 'Bodrum' : `Kati ${el.floorNumber}`}
-                                bathroom={el.bathroom}
-                                sqft={el.netoSquare}
-                                bedroom={el.rooms}
-                                navigateTo={() => navigate(`/apartments/${el.id}`)}
+                                image={el.imageUrl ?? el.image3dUrl ?? el.image}
+                                title={title}
+                                floor={floor}
+                                bathroom={el.bathroom ?? ''}
+                                sqft={sqft}
+                                bedroom={el.rooms ?? ''}
+                                navigateTo={() => navigate(`/apartments/${navigateId}`)}
                             />
                         )
                     })}

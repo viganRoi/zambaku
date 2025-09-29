@@ -75,12 +75,12 @@ import { buildings, object } from "../../utils/server";
               {currentBuilding.points.map((point) => (
                 <path
                   key={point.id}
-                  className={point.name === 'a' ? 'sold' : 'available'}
+                  className={point.name === 'c' ? 'sold' : 'available'}
                   d={point.path}
                   onMouseEnter={() => setHoveredId(point.id)}
                   onMouseMove={handleMouseMove}
                   onMouseLeave={() => setHoveredId(null)}
-                  onClick={() => navigate(`/buildings/${point.id}`)}
+                  onClick={() => navigate(`/buildings/${point.name}`)}
                   style={{
                     cursor: 'pointer'
                   }}
@@ -104,7 +104,7 @@ import { buildings, object } from "../../utils/server";
           <SlArrowRight color="#fff" />
         </button>
       </div>
-      <BuildingModal object={hoveredBuilding} mousePosition={mousePosition} />
+      {/* <BuildingModal object={hoveredBuilding} mousePosition={mousePosition} /> */}
     </div>
   );
 };

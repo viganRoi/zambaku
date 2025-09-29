@@ -66,7 +66,10 @@ const AllApartmentsPage = () => {
       filtered = filtered.filter(apartment => floorMatchesFilter(floorFilter, apartment.floorNumber));
     }
     if (squareFilter.startVal !== undefined && squareFilter.endVal !== undefined) {
-      filtered = filtered.filter(apartment => apartment.netoSquare >= squareFilter.startVal && apartment.netoSquare <= squareFilter.endVal);
+      filtered = filtered.filter(apartment => {
+        const size = apartment.netoSquare ?? apartment.square ?? apartment.sqft ?? 0;
+        return Number(size) >= squareFilter.startVal && Number(size) <= squareFilter.endVal;
+      });
     }
 
     filtered = Array.from(
