@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getApartmentDetailModalData } from '../features/apartment/ApartmentSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { ApartmentsCarousel, GalleryCarousel, Interior, SingleApartment } from '../components'
+import { ApartmentsCarousel, Contact, GalleryCarousel, Interior, SingleApartment } from '../components'
 import { BASE_URL } from '../utils/consts';
 import { banners } from '../utils/server';
 import { getApartmentById } from '../features/apartment/ApartmentAPI';
@@ -55,11 +55,14 @@ const SingleApartmentPage = () => {
       <Interior
         // images={apartment.images}
         images={[
-          '/assets/images/apartments/1.png',
-          '/assets/images/apartments/2.png',
-          '/assets/images/apartments/3.png',
+          '/projektet/assets/images/apartments/1.png',
+          '/projektet/assets/images/apartments/2.png',
+          '/projektet/assets/images/apartments/3.png',
         ]}
       />
+      <div className='mt-20 w-full'>
+      <Contact />
+      </div>
     </div>
   )
 }

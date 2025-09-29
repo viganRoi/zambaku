@@ -66,7 +66,7 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
           <a className='w-[1px] bg-white h-full' />
           <div className="w-full md:w-auto flex flex-col items-start gap-1 md:gap-4">
             <h1 className="text-secondary">{t('propertysize')} m<sup>2</sup></h1>
-            <div className='w-full md:w-64 flex flex-col justify-between'>
+            <div className='relative w-full md:w-64 flex flex-col justify-between'>
               <div className='border border-white/50 rounded-full px-4 w-full flex justify-between items-center'>
                 <div className='border-r border-white/50 w-1/2 h-full py-2'>
                   <h1 className='text-white/50'>Nga: <span className='text-secondary'>{squareFilter.startVal}m<sup>2</sup></span></h1>
@@ -75,23 +75,30 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
                   <h1 className='text-white/50'>Deri: <span className='text-secondary'>{squareFilter.endVal}m<sup>2</sup></span></h1>
                 </div>
               </div>
-              <div className="w-full">
-                <Slider
-                  getAriaLabel={() => "size range"}
-                  value={[squareFilter.startVal, squareFilter.endVal]}
-                  shiftStep={1}
-                  onChange={handleSizeChange}
-                  step={1}
-                  min={minSquare}
-                  max={maxSquare}
-                  color="var(--secondary-color)"
-                  sx={{
-                    color: "var(--secondary-color)",
-                    height: '1px',
-                    width: isSmallDev ? '100%' : '92%',
-                  }}
-                />
-              </div>
+              
+            <div className="absolute top-7 w-full flex items-center justify-center">
+              <Slider
+                getAriaLabel={() => "size range"}
+                value={[squareFilter.startVal, squareFilter.endVal]}
+                shiftStep={1}
+                onChange={handleSizeChange}
+                step={1}
+                min={minSquare}
+                max={maxSquare}
+                color="var(--color-secondary)"
+                sx={{
+                  color: "var(--color-secondary)",
+                  height: '1px',
+                  width: '80%',
+                  '& .MuiSlider-thumb': {
+                    width: 16,
+                    height: 10,
+                    borderRadius: '999px',
+                    boxShadow: 'none',
+                  },
+                }}
+              />
+            </div>
             </div>
           </div>
           <a className='w-[1px] bg-white h-full' />

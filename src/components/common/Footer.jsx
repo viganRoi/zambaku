@@ -12,7 +12,7 @@ const Footer = () => {
     <footer className="bg-primary text-white w-full h-full flex flex-col items-center justify-center py-10">
       <div className="base-width flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 py-12">
         <div className="w-1/3 flex flex-col axiforma-thin text-center md:text-left gap-4 md:gap-0">
-          <img src="/assets/images/brand/fullLogo.png" alt="logo" className="h-48 object-contain" />
+          <img src="/projektet/assets/images/brand/fullLogo.png" alt="logo" className="h-48 object-contain" />
         </div>
         <div className="w-2/3 flex items-center justify-end flex-wrap gap-4">
           <div className="flex gap-4">

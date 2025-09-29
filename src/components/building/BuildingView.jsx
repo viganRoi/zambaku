@@ -92,7 +92,6 @@ const BuildingView = ({
                   const isInFloor = parseInt(apartment.floorNumber) >= floorFilter.startVal &&
                     parseInt(apartment.floorNumber) <= floorFilter.endVal;
                   const isInRoom = roomFilter.includes(apartment.rooms) || roomFilter.includes("all");
-                  const checkSeaView = seaViewFilter.includes(apartment.hasSeaView.toString()) || seaViewFilter.includes("all");
                   const isInSquare = parseInt(apartment.netoSquare) >= squareFilter.startVal &&
                     parseInt(apartment.netoSquare) <= squareFilter.endVal;
                   if (apartment.pointsType === 'path') {

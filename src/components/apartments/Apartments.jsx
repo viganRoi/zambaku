@@ -6,10 +6,10 @@ const Apartments = ({ filteredApartments }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center content-center py-12 md:py-24 bg-transparent">
+        <div className="w-full h-full min-h-[150vh] flex flex-col items-center justify-center content-center py-12 md:py-24 bg-transparent">
             <div className="base-width flex-col align-center justify-center">
                 <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
-                    {filteredApartments.map((el) => {
+                    {filteredApartments.slice(0,9).map((el) => {
                         return (
                             <ApartmentCard
                                 key={el.id}

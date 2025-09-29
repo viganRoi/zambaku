@@ -177,6 +177,12 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
                             color: "var(--primary-color)",
                             height: '1px',
                             width: '100%',
+                            '& .MuiSlider-thumb': {
+                              width: 8,
+                              height: 4,
+                              borderRadius: '999px',
+                              boxShadow: 'none',
+                            },
                           }}
                         />
                       </div>
@@ -206,6 +212,12 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
                             color: "var(--brand2-color)",
                             height: '1px',
                             width: '100%',
+                            '& .MuiSlider-thumb': {
+                              width: 8,
+                              height: 4,
+                              borderRadius: '999px',
+                              boxShadow: 'none',
+                            },
                           }}
                         />
                       </div>
@@ -272,7 +284,7 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
         </div>
         <div className="w-full flex flex-col items-start gap-2 md:gap-4">
           <h1 className="text-secondary">{t('propertysize')} m<sup>2</sup></h1>
-          <div className='w-full flex flex-col justify-between'>
+          <div className='relative w-full flex flex-col justify-between'>
             <div className='border border-white/50 rounded-full px-4 w-full flex justify-between items-center'>
               <div className='border-r border-white/50 w-1/2 h-full py-2'>
                 <h1 className='text-white/50'>Nga: <span className='text-secondary'>{squareFilter.startVal}m<sup>2</sup></span></h1>
@@ -281,7 +293,7 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
                 <h1 className='text-white/50'>Deri: <span className='text-secondary'>{squareFilter.endVal}m<sup>2</sup></span></h1>
               </div>
             </div>
-            <div className="w-full">
+            <div className="absolute top-7 w-full flex items-center justify-center">
               <Slider
                 getAriaLabel={() => "size range"}
                 value={[squareFilter.startVal, squareFilter.endVal]}
@@ -290,17 +302,23 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
                 step={1}
                 min={minSquare}
                 max={maxSquare}
-                color="var(--secondary-color)"
+                color="var(--color-secondary)"
                 sx={{
-                  color: "var(--secondary-color)",
+                  color: "var(--color-secondary)",
                   height: '1px',
-                  width: isSmallDev ? '100%' : '100%',
+                  width: '80%',
+                  '& .MuiSlider-thumb': {
+                    width: 16,
+                    height: 10,
+                    borderRadius: '999px',
+                    boxShadow: 'none',
+                  },
                 }}
               />
             </div>
           </div>
         </div>
-        <div className="w-full flex items-start justify-between gap-2 md:gap-4">
+        <div className="w-full flex items-center justify-between gap-2 md:gap-4">
           <button
             className='flex items-center gap-4'
             onClick={() => {

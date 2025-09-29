@@ -94,7 +94,7 @@ const Navbar = () => {
           </div>
           <NavLink to="/">
             <img
-              src={`${isScrolled ? "/assets/images/brand/logo.png" : "/assets/images/brand/logo.png"}`}
+              src={`${isScrolled ? "/projektet/assets/images/brand/logo.png" : "/projektet/assets/images/brand/logo.png"}`}
               alt="Otrant Reef"
               className="h-24 mx-auto"
             />
@@ -118,7 +118,7 @@ const Navbar = () => {
         <div className="w-11/12 flex md:hidden items-center justify-between">
           <NavLink to="/" className='w-1/3 flex items-center justify-start'>
             <img
-              src="/assets/images/brand/logo.png"
+              src="/projektet/assets/images/brand/logo.png"
               alt="Otrant Reef"
               className="h-14 w-full"
             />
@@ -187,7 +187,7 @@ const Navbar = () => {
           <AiOutlineClose className="text-white text-2xl" />
         </button>
         <div className="w-full flex items-center justify-between text-white">
-          <img src="/assets/images/brand/whiteLogo.png" alt="" className="object-contain h-36" />
+          <img src="/projektet/assets/images/brand/whiteLogo.png" alt="" className="object-contain h-36" />
           <div className="w-full flex items-center justify-end gap-4">
             <button
               onClick={() => navigate("/apartments")}
@@ -273,7 +273,7 @@ const Navbar = () => {
               </div>
             </div>
             <img
-              src="/assets/images/hero/bckNav.png"
+              src="/projektet/assets/images/hero/bckNav.png"
               alt=""
               className="absolute -bottom-12 -right-64 w-full h-full object-contain"
             />

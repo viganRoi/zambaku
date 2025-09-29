@@ -71,11 +71,11 @@ const Interior = ({ images }) => {
     };
 
     const slides = [
-        (<div><img src="/assets/images/apartments/1.png" alt="" /></div>),
-        (<div><img src="/assets/images/apartments/2.png" alt="" /></div>),
-        (<div><img src="/assets/images/apartments/3.png" alt="" /></div>),
-        (<div><img src="/assets/images/apartments/4.jpg" alt="" /></div>),
-        (<div><img src="/assets/images/apartments/5.jpg" alt="" /></div>),
+        (<div><img src="/projektet/assets/images/apartments/1.png" alt="" /></div>),
+        (<div><img src="/projektet/assets/images/apartments/2.png" alt="" /></div>),
+        (<div><img src="/projektet/assets/images/apartments/3.png" alt="" /></div>),
+        (<div><img src="/projektet/assets/images/apartments/4.jpg" alt="" /></div>),
+        (<div><img src="/projektet/assets/images/apartments/5.jpg" alt="" /></div>),
     ];
 
     return (

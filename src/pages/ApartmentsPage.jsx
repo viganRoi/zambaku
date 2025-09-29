@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Apartments, ApartmentsFilter } from '../components';
+import { Apartments, ApartmentsFilter, Contact } from '../components';
 import axios from 'axios';
 import { BASE_URL } from '../utils/consts';
 import { useSelector } from 'react-redux';
@@ -85,6 +85,7 @@ const AllApartmentsPage = () => {
       <div className='apartment-page-bck scroller-thin'>
         <Apartments filteredApartments={filteredApartments} />
       </div>
+      <Contact />
     </div>
   );
 };

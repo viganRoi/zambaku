@@ -2,37 +2,37 @@ import i18n from "./i18n"
 export const banners = [
     {
         id: 1,
-        image: '/assets/images/hero/banner/1.png',
+        image: '/projektet/assets/images/hero/banner/1.png',
     },
     {
         id: 2,
-        image: '/assets/images/hero/banner/2.png',
+        image: '/projektet/assets/images/hero/banner/2.png',
     },
     {
         id: 3,
-        image: '/assets/images/hero/banner/3.png',
+        image: '/projektet/assets/images/hero/banner/3.png',
     },
 ]
 export const gallery = [
     {
         id: 1,
         title: 'ARCHITECTURE',
-        image: '/assets/images/hero/banner/1.png',
+        image: '/projektet/assets/images/hero/banner/1.png',
     },
     {
         id: 2,
         title: 'INTERIORS',
-        image: '/assets/images/hero/banner/2.png',
+        image: '/projektet/assets/images/hero/banner/2.png',
     },
     {
         id: 3,
         title: 'TERRITORY',
-        image: '/assets/images/hero/banner/3.png',
+        image: '/projektet/assets/images/hero/banner/3.png',
     },
     {
         id: 4,
         title: 'INSIDE',
-        image: '/assets/images/hero/banner/4.png',
+        image: '/projektet/assets/images/hero/banner/4.png',
     },
 ]
 export const staff = [
@@ -41,28 +41,28 @@ export const staff = [
         name: 'Nita',
         surname: 'Sowley',
         position: 'salesrepresentative',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 2,
         name: 'Langston',
         surname: 'Brittle',
         position: 'vpaccounting',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 3,
         name: 'Ernst',
         surname: 'Boriston',
         position: 'projectmanager',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 4,
         name: 'Jasmin',
         surname: 'Dickon',
         position: 'directorofsales',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
 ]
 export const partners = [
@@ -70,93 +70,93 @@ export const partners = [
         id: 1,
         title: 'Lorem Ipsum',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis earum autem accusantium dolorum dolorem impedit hic accusamus natus maiores harum fugit, adipisci quibusdam, asperiores reprehenderit distinctio praesentium aliquid consequatur incidunt recusandae sunt sed tempora voluptatibus. Ullam labore quibusdam ratione neque et impedit, minima provident aliquam distinctio reiciendis eos laborum blanditiis. Exercitationem aut harum nesciunt consequatur aperiam dolorum praesentium minima in at consequuntur iure, fugit ipsum animi quos sequi unde ad, culpa porro facere expedita fugiat eius esse voluptate? Ipsam saepe est provident asperiores consequuntur aliquam, sit natus fuga deserunt reiciendis unde, error, rerum animi dolor officia. Corrupti veniam laboriosam minima optio, debitis, aliquid exercitationem nisi rerum porro incidunt omnis ratione totam similique aliquam at est natus mollitia, ipsum saepe doloribus nemo obcaecati quisquam pariatur? Eaque error laborum enim, at nam officia non reiciendis nisi, ipsam distinctio possimus ad corporis voluptatum asperiores hic consectetur natus saepe labore cupiditate facilis officiis explicabo obcaecati? Iure aperiam est enim fuga inventore iste at. Fugit saepe dolorem optio iste, hic nam nobis quos veniam eveniet omnis harum? Doloremque eaque inventore velit, consectetur accusantium eius voluptate, vel excepturi facere fugit quasi dignissimos rerum eveniet earum recusandae ut? Sunt, vel laudantium rem ducimus totam ex provident tenetur!',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 2,
         title: 'Lorem Ipsum',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo corrupti fugit a rerum nulla eum, at in eveniet architecto quos!',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 3,
         title: 'Lorem Ipsum',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo corrupti fugit a rerum nulla eum, at in eveniet architecto quos!',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 4,
         title: 'Lorem Ipsum',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo corrupti fugit a rerum nulla eum, at in eveniet architecto quos!',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 5,
         title: 'Lorem Ipsum',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo corrupti fugit a rerum nulla eum, at in eveniet architecto quos!',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 6,
         title: 'Lorem Ipsum',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo corrupti fugit a rerum nulla eum, at in eveniet architecto quos!',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 7,
         title: 'Lorem Ipsum',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo corrupti fugit a rerum nulla eum, at in eveniet architecto quos!',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
     {
         id: 8,
         title: 'Lorem Ipsum',
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo corrupti fugit a rerum nulla eum, at in eveniet architecto quos!',
-        image: '/assets/images/about/profile.png',
+        image: '/projektet/assets/images/about/profile.png',
     },
 ]
 export const amenities = [
     {
         id: 1,
         title: 'Lifewithinthecomplex',
-        image: '/assets/images/amenities/Lifewithinthecomplex.jpg',
+        image: '/projektet/assets/images/amenities/Lifewithinthecomplex.jpg',
         desc: 'lifewithincomplex1',
     },
     {
         id: 2,
         title: 'landscape',
-        image: '/assets/images/amenities/landscape.jpg',
+        image: '/projektet/assets/images/amenities/landscape.jpg',
         desc: "landscapenaturalheaven"
     },
     {
         id: 3,
         title: 'lightfilled',
-        image: '/assets/images/amenities/lightfilled.jpg',
+        image: '/projektet/assets/images/amenities/lightfilled.jpg',
         desc: 'lightfilled1'
     },
     {
         id: 4,
         title: 'indooroasis',
-        image: '/assets/images/amenities/indooroasis.png',
+        image: '/projektet/assets/images/amenities/indooroasis.png',
         desc: `indooroasis1`
     },
     {
         id: 5,
         title: 'interiormastery',
-        image: '/assets/images/amenities/interiormastery.jpg',
+        image: '/projektet/assets/images/amenities/interiormastery.jpg',
         desc: `interiormastery1`
     },
     {
         id: 6,
         title: 'equisitecomfort',
-        image: '/assets/images/amenities/equisitecomfort.jpg',
+        image: '/projektet/assets/images/amenities/equisitecomfort.jpg',
         desc: `equisitecomfort1`
     },
 ]
 export const buildings = [
     {
         id: 1,
-        image: '/assets/images/general/Para.jpg',
+        image: '/projektet/assets/images/general/Para.jpg',
         pathType: 'path',
         points: [
             { path: 'M437.27,320.79l-129.7,5.11l-3.06,8.17h-20.43c0,0-22.47,2.38-28.26,16l-7.49,20.09c0,0-40.85-5.79-45.28,25.87  l-64.68,3.4c0,0-26.55,1.7-25.19,20.43l-1.7,28.26c0,0-6.47,1.02-7.49,14.64l-7.83,116.43c0,0-0.51,13.11,4.09,13.11  c0,0,4.43,9.02,8.17,9.19c0,0-3.57,7.32,3.91,14.81c0,0,10.38,15.49,16,17.19c0,0-4.09,2.55,9.02,16.51l1.19,0.85  c0,0,4.43,10.04,9.7,10.04c0,0-2.55,3.23,5.79,11.91l6.81,10.38c0,0,1.36,3.23,4.94,3.06v18.38c0,0,0.17,5.96,4.26,7.15  c0,0,3.4,9.53,13.96,7.66l24.17-0.51l10.89,15.15c0,0-1.02,2.55,14.64,1.53l364.26-19.23l0.85-1.36l24.68-0.68  c0,0-8-14.98-4.6-33.87c0,0-4.43-8.51-3.74-15.49c0,0-3.4-4.09-4.94-11.57c0,0-4.09-4.26-3.19-15.11c0,0-3.96-5.23-4.6-10.98  c0,0-5.62-6.64-3.57-16.09c0,0-4.6-2.81-5.87-13.53c0,0-4.85-6.13-2.94-15.83c0,0-4.98-3.32-5.74-13.4c0,0-5.23-8.43-3.19-16.21  c0,0-3.96-3.06-6.89-15.7c0,0-4.47-9.57-2.55-16.47c0,0-8.17-10.34-7.79-16.72c0,0-4.72-8.3-2.68-16.85c0,0-4.47-3.06-5.36-8.17  l-61.66,2.81l-1.74-4.94l1.45-7.74l-2.55-6.38l-4.26-0.09l-4.85-14.13l1.45-7.57l-2.55-7.23l-4.68,0.09l-4.77-14.3l1.62-7.57  l-3.4-8.68l-4,0.09l-5.96-17.19l1.45-7.23l-2.21-6.64l-4.51-0.17L437.27,320.79z', id: 1, name: 'a' },
@@ -166,7 +166,7 @@ export const buildings = [
     },
     {
         id: 2,
-        image: '/assets/images/general/Pas.jpg',
+        image: '/projektet/assets/images/general/Pas.jpg',
         pathType: 'path',
         points: [
             { path: 'M1478.81,299.14l-4.43,27.23c0,0-6.64-0.68-8.43,5.06l-2.94,22.34l5.87,7.53l-16.21,0.77  c0,0-7.28,0.26-7.15,4.98l-1.28,11.62l10.21,15.32c0,0-9.57-2.68-8.3,8.17c0,0-6.38,0.38-6.13,5.3l-1.02,10.6l6.57,9.64  c0,0-9.77-0.13-9.83,5.87l-2.62,22.09l6.13,9.64l-17.4,0.23c0,0,4.17,21.7-22.04,26.13c0,0,8.51,13.45,5.96,20.09l-1.53,13.96  c0,0-1.02,7.49-11.74,10.38l4.77,11.23c0,0,6.13,7.32,1.53,12.94l-1.53,13.62c0,0-2.21,7.83-11.57,9.7c0,0,11.74,15.83,6.81,23.15  l-1.36,11.91c0,0,0.17,2.38-2.04,4.94c0,0,11.06,14.3,7.66,25.87l-1.02,12.6c0,0-0.85,6.98-8.68,12.26c0,0,4.6,8.17,4.94,12.6  l116.6-4.77l35.23-170.04l1.02-0.17l1.36-5.28l309.53-2.13l-10.89-6.55c0,0,17.79,1.45,19.23-3.74l7.15-24.6  c0,0,3.4-3.83-15.91-13.45l13.53-0.17c0,0,6.04-0.68,6.47-5.19l2.21-8.68c0,0,3.49-5.02-9.28-10.21l-5.62-2.64  c0,0,1.19-3.4,0.09-5.53c0,0,0.43-1.45-20.09-11.91l0.68-2.64c0,0,4.34-0.17,5.45-4.09l5.87-22.55c0,0,4.17-4.6-24.94-16.68  l5.7-4.17c0,0-10.98-10.98-29.87-10.72l-3.74,0.17l-32.68-16.6l6.72-5.53c0,0-5.79-7.91-25.62-13.11l-0.43,1.36l-59.66,0.34  l-31.57-29.36c0,0-8.43-6.64-23.49-7.06h-22.98c0,0-3.49-7.06-29.36-5.87l-90.64,0.34c0,0-13.7,0.43-11.32,6.55  c0,0-5.62-0.43-4.51,9.53l-0.17,2.55L1478.81,299.14z', id: 1, name: 'a' },

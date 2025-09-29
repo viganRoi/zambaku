@@ -20,7 +20,7 @@ const SingleApartment = ({ apartment }) => {
     return (
         <div
             className='w-full h-full min-h-[1200px] flex flex-col items-center justify-center relative py-24'
-            style={{ backgroundImage: `url(/assets/images/hero/bckSingle.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+            style={{ backgroundImage: `url(/projektet/assets/images/hero/bckSingle.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
             <div className="absolute inset-0 bg-primary/60" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }} />
             <div className="base-width h-1/2 z-10  flex flex-col-reverse md:flex-row items-center justify-center scroller-thin">
@@ -72,7 +72,7 @@ const SingleApartment = ({ apartment }) => {
                 <div className='w-full md:w-1/2 h-full flex flex-col md:items-center justify-center relative rounded-xl bg-secondary p-12'>
                     <img 
                     // src={`${homepage}${planmetricImageUrl}${name}-3d.png`}
-                        src={'/assets/images/apartments/apartment3d.png'}
+                        src={'/projektet/assets/images/apartments/apartment3d.png'}
                         alt={"3D view"}
                         className="h-full object-contain cursor-pointer"
                     />
