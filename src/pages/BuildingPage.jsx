@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from '../utils/consts';
 import { useSelector, useDispatch } from 'react-redux';
 import { getRegularRoomFilter, getRegularFloorFilter, getRegularSquareFilter, getFilterState, getRegularSeeViewFilter } from '../features/filter/FilterSlice';
+import { roomMatchesFilter, floorMatchesFilter } from '../utils/filterHelpers';
 import { useParams } from 'react-router-dom';
 import { getAllApartmentSvgData, getAllFloorSvgData } from '../features/apartment/ApartmentSlice';
 import { getObjectSvgDataAll, getFloorSelectionSvg } from '../features/apartment/ApartmentAPI';
@@ -56,14 +57,12 @@ const BuildingPage = () => {
     }
 
     if (roomFilter.length && !roomFilter.includes('all')) {
-      filtered = filtered.filter(apartment => roomFilter.includes(apartment.rooms));
+      filtered = filtered.filter(apartment => roomMatchesFilter(roomFilter, apartment.rooms));
     }
 
-    if (floorFilter.startVal !== undefined && floorFilter.endVal !== undefined) {
-      filtered = filtered.filter(apartment =>
-        parseInt(apartment.floorNumber) >= floorFilter.startVal &&
-        parseInt(apartment.floorNumber) <= floorFilter.endVal
-      );
+    if (floorFilter) {
+      // floorFilter may be range object or an array of selected floors
+      filtered = filtered.filter(apartment => floorMatchesFilter(floorFilter, apartment.floorNumber));
     }
 
     if (squareFilter.startVal !== undefined && squareFilter.endVal !== undefined) {

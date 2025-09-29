@@ -4,6 +4,7 @@ import "./tabs.css";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { useState } from "react";
 import { getRegularSeeViewFilter } from "../../features/filter/FilterSlice";
+import { roomMatchesFilter, floorMatchesFilter } from '../../utils/filterHelpers';
 import { useSelector } from "react-redux";
 
 const BuildingMobile = ({
@@ -70,9 +71,8 @@ const BuildingMobile = ({
               transform={building.imgTransform}
             />
             {building?.apartmentList?.map((apartment) => {
-              const isInFloor = parseInt(apartment.floorNumber) >= floorFilter.startVal &&
-                parseInt(apartment.floorNumber) <= floorFilter.endVal;
-              const isInRoom = roomFilter.includes(apartment.rooms) || roomFilter.includes("all");
+              const isInFloor = floorMatchesFilter(floorFilter, apartment.floorNumber);
+              const isInRoom = roomMatchesFilter(roomFilter, apartment.rooms);
               const checkSeaView = seaViewFilter.includes(apartment.hasSeaView.toString()) || seaViewFilter.includes("all");
               const isInSquare = parseInt(apartment.netoSquare) >= squareFilter.startVal &&
                 parseInt(apartment.netoSquare) <= squareFilter.endVal;

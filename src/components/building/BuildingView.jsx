@@ -1,16 +1,13 @@
 import { useState } from 'react';
+import { roomMatchesFilter, floorMatchesFilter } from '../../utils/filterHelpers';
 import { useNavigate } from 'react-router-dom';
 import ContextMenu from '../contextMenu/ContextMenu';
 import AdmApartmentModal from '../admin/apartments/AdmApartmentModal';
 import { AuthProvider } from '../auth/AuthProvider';
 import './tabs.css'
-import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import AdmApartmentIdModal from '../admin/apartments/AdmApartmentIdModal';
-import { ApartmentModal } from '../';
 import { imagePath } from '../../utils/consts';
 import { useTranslation } from "react-i18next";
-import { useSelector } from 'react-redux';
-import { getRegularSeeViewFilter } from '../../features/filter/FilterSlice';
 
 const BuildingView = ({
   handleNext,
@@ -24,7 +21,6 @@ const BuildingView = ({
 }) => {
 
   const { t } = useTranslation();
-  const seaViewFilter = useSelector(getRegularSeeViewFilter)
   const navigate = useNavigate();
   const [contextMenu, setContextMenu] = useState({
     anchorEl: null,
@@ -89,9 +85,8 @@ const BuildingView = ({
                 />
                 {building?.apartmentList?.map((apartment) => {
                   // Filtering logic moved here from props
-                  const isInFloor = parseInt(apartment.floorNumber) >= floorFilter.startVal &&
-                    parseInt(apartment.floorNumber) <= floorFilter.endVal;
-                  const isInRoom = roomFilter.includes(apartment.rooms) || roomFilter.includes("all");
+                  const isInFloor = floorMatchesFilter(floorFilter, apartment.floorNumber);
+                  const isInRoom = roomMatchesFilter(roomFilter, apartment.rooms);
                   const isInSquare = parseInt(apartment.square) >= squareFilter.startVal &&
                     parseInt(apartment.square) <= squareFilter.endVal;
                   if (apartment.pointsType === 'path') {

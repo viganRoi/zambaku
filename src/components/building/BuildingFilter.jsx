@@ -1,28 +1,43 @@
-import { getRegularFloors, getRegularRoomFilter, getRegularSeeViewFilter, getRegularSquareFilter, handleRegularFilterReset, maxFloor, maxSquare, minFloor, minSquare, setRegularFloorFilter, setRegularRoomFilter, setRegularSeeViewFilter, setRegularSquareFilter } from '../../features/filter/FilterSlice';
+import { getRegularFloors, getRegularRoomFilter, getRegularSquareFilter, handleRegularFilterReset, maxFloor, maxSquare, minFloor, minSquare, setRegularFloorFilter, setRegularRoomFilter, setRegularSeeViewFilter, setRegularSquareFilter, setRegularFloorToggle } from '../../features/filter/FilterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from '@mui/material';
 import './style.css'
 import { useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
-import { PiSliders } from "react-icons/pi";
 
 
-const BuildingFilter = ({ setFilterState, available, buildingName }) => {
+const BuildingFilter = ({ setFilterState, building, apartmentList }) => {
   const { t } = useTranslation();
   const roomFilter = useSelector(getRegularRoomFilter);
   const squareFilter = useSelector(getRegularSquareFilter);
   const floorButtons = useSelector(getRegularFloors);
-  const seeViewFilter = useSelector(getRegularSeeViewFilter);
   const dispatch = useDispatch();
   const location = useLocation();
-  const isSmallDev = window.innerWidth < 768;
 
   const [open, setOpen] = useState(false);
 
-  const handleSeeViewChange = (event) => {
-    dispatch(setRegularSeeViewFilter(event.target.name));
-  };
+  // Derive floor range from passed data (apartmentList or building.maxFloor).
+  // Fallback to defaults from the filter slice constants when no data available.
+  const apartments = apartmentList || building?.apartmentList || [];
+  const floorNumbers = apartments
+    .map((a) => {
+      // some data uses strings like "4"; handle 'p' and non-numeric gracefully
+      const n = parseInt(a.floorNumber, 10);
+      return Number.isFinite(n) ? n : null;
+    })
+    .filter((n) => n !== null);
+
+  let computedMinFloor = minFloor;
+  let computedMaxFloor = maxFloor;
+
+  if (floorNumbers.length > 0) {
+    computedMinFloor = Math.min(...floorNumbers);
+    computedMaxFloor = Math.max(...floorNumbers);
+  } else if (building && typeof building.maxFloor === 'number' && building.maxFloor > 0) {
+    computedMinFloor = Math.min(minFloor, 1);
+    computedMaxFloor = building.maxFloor;
+  }
 
   const handleRoomChange = (event) => {
     dispatch(setRegularRoomFilter(event.target.name));
@@ -39,14 +54,23 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
     dispatch(setRegularSquareFilter(newSizeRange));
   };
   const floorLabelMapping = {
-    0: "Përdhesa",
-    "-1": "Suterren",
-    "-2": "Bodrum",
+    p: "P",
   };
 
   const getFloorLabel = (floor) => {
-    return floorLabelMapping[floor] || floor;
+    if (floor === 'p') return floorLabelMapping.p;
+    return floor;
   };
+
+  const topSplitFloor = 4;
+  const maxTop = Math.min(topSplitFloor, computedMaxFloor);
+  // include 'p' as in the original design
+  const topFloors = [
+    'p',
+    ...Array.from({ length: Math.max(0, maxTop - computedMinFloor + 1) }, (_, i) => String(computedMinFloor + i)),
+  ];
+  const bottomFloors =
+    computedMaxFloor > maxTop ? Array.from({ length: computedMaxFloor - maxTop }, (_, i) => String(maxTop + 1 + i)) : [];
 
   const handleReset = () => {
     dispatch(handleRegularFilterReset());
@@ -55,207 +79,6 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
   useEffect(() => {
     dispatch(handleRegularFilterReset());
   }, [location.pathname]);
-
-  if (isSmallDev) {
-    return (
-      <div className='w-full h-full flex items-end justify-between md:justify-end bg-white px-4 pt-8'>
-        <h1 className='valky text-3xl md:text-5xl text-white '>{t('tower')} <span className='uppercase'>{buildingName}</span></h1>
-        <button
-          className="px-8 py-3 bg-primary text-white rounded-full text-base md:hidden gap-2"
-          onClick={() => setOpen(true)}
-        >
-          <PiSliders className='text-3xl' /> Open Filters
-        </button>
-        {open && (
-          <div className="fixed inset-0 z-[1000] flex items-center justify-center md:hidden">
-            {/* Backdrop */}
-            <div
-              className="fixed inset-0 bg-black/40 z-[1001]"
-              onClick={() => setOpen(false)}
-            />
-            {/* Modal content */}
-            <div className="relative z-[1002] bg-white rounded-xl w-[95vw] max-w-[500px] h-[700px] max-h-[90vh] overflow-y-auto p-6 shadow-2xl animate-[modalIn_0.2s]">
-              <button
-                className="absolute top-4 right-4 bg-gray-200 hover:bg-gray-300 rounded-full w-9 h-9 flex items-center justify-center text-xl text-gray-700 z-[1003]"
-                onClick={() => setOpen(false)}
-                aria-label="Close"
-              >
-                ✕
-              </button>
-              {/* ...existing filter content... */}
-              <div className="w-11/12 h-full text-white flex flex-col justify-between items-center gap-4 uppercase axiformaThin">
-                <div className="w-full h-full flex flex-col gap-2 justify-between items-start">
-                  {/* Sea view */}
-                  <div className="w-full md:w-auto flex flex-col items-start gap-1 md:gap-4">
-                    <h1 className="md:text-lg text-white">{t('seaview')}</h1>
-                    <div className='w-full flex gap-2 justify-start valky'>
-                      <button
-                        name='true'
-                        onClick={handleSeeViewChange}
-                        className={`px-4 py-2 rounded-full border border-primary text-nowrap ${seeViewFilter.includes('true')
-                          ? 'bg-primary text-white'
-                          : 'bg-brand text-white'
-                          }`}
-                      >
-                        See View
-                      </button>
-                      <button
-                        name='false'
-                        onClick={handleSeeViewChange}
-                        className={`px-4 py-2 rounded-full border border-primary text-nowrap ${seeViewFilter.includes('false')
-                          ? 'bg-primary text-white'
-                          : 'bg-brand text-white'
-                          }`}
-                      >
-                        Whithout
-                      </button>
-                    </div>
-                  </div>
-                  <div className="w-full border-t border-primary my-2" />
-                  {/* Rooms */}
-                  <div className="flex flex-col items-start gap-1">
-                    <h1 className="text-white">{t('rooms')}</h1>
-                    <div className="w-full flex gap-2 justify-start valky">
-                      <button
-                        name="Studio"
-                        onClick={handleRoomChange}
-                        className={`px-4 py-2 rounded-full border border-primary text-nowrap ${roomFilter.includes('Studio')
-                          ? 'bg-primary text-white'
-                          : 'bg-brand text-white'
-                          }`}
-                      >
-                        Studio
-                      </button>
-                      <button
-                        name="1"
-                        onClick={handleRoomChange}
-                        className={`px-4 py-2 rounded-full border border-primary text-nowrap ${roomFilter.includes('1')
-                          ? 'bg-primary text-white'
-                          : 'bg-brand text-white'
-                          }`}
-                      >
-                        1 + 1
-                      </button>
-                      <button
-                        name="2"
-                        onClick={handleRoomChange}
-                        className={`px-4 py-2 rounded-full border border-primary text-nowrap ${roomFilter.includes('2')
-                          ? 'bg-primary text-white'
-                          : 'bg-brand text-white'
-                          }`}
-                      >
-                        2 + 1
-                      </button>
-                      <button
-                        name="3"
-                        onClick={handleRoomChange}
-                        className={`px-4 py-2 rounded-full border border-primary text-nowrap ${roomFilter.includes('3')
-                          ? 'bg-primary text-white'
-                          : 'bg-brand text-white'
-                          }`}
-                      >
-                        3 + 1
-                      </button>
-                    </div>
-                  </div>
-                  <div className="w-full border-t border-primary my-2" />
-                  {/* Floor */}
-                  <div className="w-full flex flex-col items-start gap-1">
-                    <h1 className="text-white">{t('floor')}</h1>
-                    <div className="w-full flex flex-col justify-between">
-                      <div className="w-full">
-                        <Slider
-                          getAriaLabel={() => "Floor range"}
-                          value={[floorFilter.startVal, floorFilter.endVal]}
-                          shiftStep={1}
-                          onChange={handleFloorChange}
-                          step={1}
-                          min={minFloor}
-                          max={maxFloor}
-                          color="var(--primary-color)"
-                          sx={{
-                            color: "var(--primary-color)",
-                            height: '1px',
-                            width: '100%',
-                            '& .MuiSlider-thumb': {
-                              width: 8,
-                              height: 4,
-                              borderRadius: '999px',
-                              boxShadow: 'none',
-                            },
-                          }}
-                        />
-                      </div>
-                      <p className="valky capitalize">
-                        {getFloorLabel(floorFilter.startVal)} - {getFloorLabel(floorFilter.endVal)}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="w-full border-t border-primary my-2" />
-                  {/* Property Size */}
-                  <div className="w-full flex flex-col items-start gap-1">
-                    <h1 className="text-white">
-                      {t('propertysize')}(M<sup>2</sup>)
-                    </h1>
-                    <div className="w-full flex flex-col justify-between">
-                      <div className="w-full">
-                        <Slider
-                          getAriaLabel={() => "Size range"}
-                          value={[squareFilter.startVal, squareFilter.endVal]}
-                          onChange={handleSizeChange}
-                          shiftStep={1}
-                          step={10}
-                          min={minSquare}
-                          max={maxSquare}
-                          color="var(--brand2-color)"
-                          sx={{
-                            color: "var(--brand2-color)",
-                            height: '1px',
-                            width: '100%',
-                            '& .MuiSlider-thumb': {
-                              width: 8,
-                              height: 4,
-                              borderRadius: '999px',
-                              boxShadow: 'none',
-                            },
-                          }}
-                        />
-                      </div>
-                      <p className="valky capitalize">
-                        {squareFilter.startVal}m2 - {squareFilter.endVal}m2
-                      </p>
-                    </div>
-                  </div>
-                  <div className="w-full border-t border-primary my-2" />
-                  {/* Available */}
-                  <div className="w-full flex flex-col items-start justify-center gap-1">
-                    <div className="flex flex-col items-start gap-2">
-                      <h1 className="text-white">{t('apartmentavailable')}</h1>
-                      <h1 className="text-4xl valky text-white">{available}</h1>
-                    </div>
-                  </div>
-                  <div className='w-full h-full flex justify-end items-end gap-4'>
-                    <button
-                      className="px-6 py-2 bg-gray-200 text-white rounded-full font-bold"
-                      onClick={handleReset}
-                    >
-                      {t('resetfilter')}
-                    </button>
-                    <button
-                      className="px-6 py-2 bg-gray-200 text-white rounded-full font-bold"
-                      onClick={() => setOpen(false)}
-                    >
-                      {t('applyfilters')}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
 
   return (
     <div className='absolute bottom-12 right-44 w-auto h-auto p-12 flex items-center justify-center bg-primary z-100 text-white rounded-3xl shadow-lg'>
@@ -271,15 +94,33 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
         </div>
         <div className="w-full flex flex-col items-start gap-2 md:gap-4">
           <h1 className="text-secondary">{t('floor')}</h1>
-          <div className='w-full flex gap-8 justify-start'>
-            {
-              // helper to check if a floor button is active (inside current range)
-            }
-            <button name='p' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('p')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>P</button>
-            <button name='1' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('1')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>1</button>
-            <button name='2' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('2')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>2</button>
-            <button name='3' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('3')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>3</button>
-            <button name='4' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('4')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>4</button>
+          <div className='w-full flex flex-col gap-2'>
+            <div className='w-full flex gap-4 flex-wrap justify-start'>
+              {topFloors.map((fl) => (
+                <button
+                  key={fl}
+                  name={fl}
+                  onClick={handleFloorChange}
+                  className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${floorButtons.includes(fl) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}
+                >
+                  {getFloorLabel(fl)}
+                </button>
+              ))}
+            </div>
+            {bottomFloors.length > 0 && (
+              <div className='w-full flex gap-4 flex-wrap justify-start'>
+                {bottomFloors.map((fl) => (
+                  <button
+                    key={fl}
+                    name={fl}
+                    onClick={handleFloorChange}
+                    className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${floorButtons.includes(fl) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}
+                  >
+                    {getFloorLabel(fl)}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <div className="w-full flex flex-col items-start gap-2 md:gap-4">
@@ -331,7 +172,9 @@ const BuildingFilter = ({ setFilterState, available, buildingName }) => {
             </svg>
             Reseto
           </button>
-          <button className="text-white border border-2 hover: border-secondary px-4 py-2 rounded-full font-semibold text-nowrap">
+          <button 
+          className="text-white border border-2 hover: border-secondary px-4 py-2 rounded-full font-semibold text-nowrap"
+          >
             Selekto Apartmentin
           </button>
         </div>

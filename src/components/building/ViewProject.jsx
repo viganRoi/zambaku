@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { BuildingModal } from "../";
@@ -80,7 +80,7 @@ import { buildings, object } from "../../utils/server";
                   onMouseEnter={() => setHoveredId(point.id)}
                   onMouseMove={handleMouseMove}
                   onMouseLeave={() => setHoveredId(null)}
-                  onClick={() => navigate(`/buildings/${point.name}`)}
+                  onClick={() => navigate(`/buildings/${point.id}`)}
                   style={{
                     cursor: 'pointer'
                   }}
