@@ -34,7 +34,7 @@ import { buildings, object } from "../../utils/server";
   };
 
   return (
-    <div className="relative bg-brand w-full h-[90vh] md:min-h-[1080px] flex flex-col items-center justify-center">
+    <div className="relative bg-brand w-full h-[110vh] md:min-h-[1080px] flex flex-col items-center justify-center">
       <div className="relative bg-brand w-full h-full flex flex-col justify-center items-center overflow-x-auto md:overflow-x-hidden">
         <div
           className="absolute md:relative w-full flex items-center justify-center"

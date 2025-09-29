@@ -14,35 +14,26 @@ import { useTranslation } from "react-i18next";
 const SingleApartment = ({ apartment }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const isInWishlist = useSelector((state) =>
-        isProductInWishlist(state, apartment.id)
-    );
 
     const { isSold, imageUrl, image3dUrl, pdfUrl, netoSquare, grossySquare, floorNumber, name, balconySquare, hasSeaView, subtitle, rooms, apartmentId, apartmentNumber, apartmentPositionImageUrl, vtourUrl } = apartment;
 
-    const handleWishlistDataFunction = () => {
-        dispatch(handleWishlistData(apartment));
-    };
-
-
     return (
         <div
-            className='w-full h-screen flex flex-col items-center justify-center relative'
+            className='w-full h-full min-h-[1200px] flex flex-col items-center justify-center relative py-24'
             style={{ backgroundImage: `url(/assets/images/hero/bckSingle.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
             <div className="absolute inset-0 bg-primary/60" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }} />
-            <div className="base-width h-2/3 z-10 overflow-y-auto flex flex-col-reverse md:flex-row items-center justify-center scroller-thin">
+            <div className="base-width h-1/2 z-10  flex flex-col-reverse md:flex-row items-center justify-center scroller-thin">
                 <div className="w-full md:w-1/2 h-full text-white flex flex-col items-center justify-between gap-4 pb-8 md:pb-0 pr-12">
-                    <div className='w-full flex items-center gap-4 pb-4'>
+                    <div className='w-full flex items-center'>
                         <button onClick={() => navigate(-1)} className='px-6 py-3 border border-secondary text-white rounded-full flex items-center justify-center'>
                             Kthehu
                         </button>
                     </div>
-                    <div className='w-full flex flex-col items-start gap-4 py-4'>
+                    <div className='w-full flex flex-col items-start gap-2 py-4'>
                         <div className='w-full flex flex-col w-full items-start justify-between py-4'>
-                            <p className='text-[150px] font-thin leading-[160px]' style={{ lineHeight: '160px' }}>{name}</p>
-                            <p className='text-[150px] text-secondary leading-[160px]' style={{ lineHeight: '160px' }}>{(netoSquare || 0).toFixed(2)}m<sup>2</sup></p>
+                            <p className='text-[150px] font-thin leading-[150px]' style={{ lineHeight: '160px' }}>{name}</p>
+                            <p className='text-[150px] text-secondary leading-[150px]' style={{ lineHeight: '160px' }}>{(netoSquare || 0).toFixed(2)}m<sup>2</sup></p>
                         </div>
                         <div className="w-full flex gap-4 items-center">
                             <svg width="48" height="50" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +65,7 @@ const SingleApartment = ({ apartment }) => {
                             <p className="text-2xl">bathroom</p>
                         </div>
                     </div>
-                    <button className="flex items-center justify-center w-full px-12 py-3 overflow-hidden text-primary text-xl bg-secondary hover:bg-white duration-300 rounded-full">
+                    <button className="flex items-center justify-center w-full px-12 py-3 text-primary text-xl bg-secondary hover:bg-white duration-300 rounded-full">
                         Kontaktoni per cmimin
                     </button>
                 </div>
@@ -85,27 +76,6 @@ const SingleApartment = ({ apartment }) => {
                         alt={"3D view"}
                         className="h-full object-contain cursor-pointer"
                     />
-                </div>
-                <div className='w-11/12 md:hidden flex items-center justify-center py-4 gap-4'>
-                    <p className='text-primary text-4xl anya'>{(grossySquare || 0).toFixed(2)}m<sup>2</sup></p>
-                    <button
-                        className={`absolute p-2 md:p-4 text-sm md:text-base uppercase transition border text-nowrap bg-primary rounded-full right-4`}
-                        onClick={() => {
-                            handleWishlistDataFunction();
-                        }}
-                    >
-                        {isInWishlist ?
-                            <IoIosHeart className="fill-white text-lg sm:text-2xl" />
-                            :
-                            <IoIosHeartEmpty className="fill-white text-lg sm:text-2xl" />
-                        }
-                    </button>
-                </div>
-                <div className='w-full md:hidden flex items-center gap-4 pt-12'>
-                    <button onClick={() => navigate(-1)} className=' cursor-pointer bg-primary transition-all duration-.3s hover:text-bck w-[35px] md:w-[50px] h-[35px] md:h-[50px] radius-50 rounded-[50px] flex items-center justify-center'>
-                        <SlArrowLeft color='#fff' />
-                    </button>
-                    <h1 className='anya text-primary text-base'>{t('backtoselectanobject')}</h1>
                 </div>
             </div>
         </div>
