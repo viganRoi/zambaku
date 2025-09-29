@@ -81,7 +81,7 @@ const BuildingView = ({
                 viewBox={building.viewBoxStyle}
               >
                 <image
-                  xlinkHref={`${imagePath}${building.buildingNr}-${building.buildingSide}.png`}
+                  xlinkHref={`${imagePath}${building.buildingNr}-${building.buildingSide}.jpg`}
                   alt=""
                   width={building.imgWidth}
                   height={building.imgHeight}
@@ -92,8 +92,8 @@ const BuildingView = ({
                   const isInFloor = parseInt(apartment.floorNumber) >= floorFilter.startVal &&
                     parseInt(apartment.floorNumber) <= floorFilter.endVal;
                   const isInRoom = roomFilter.includes(apartment.rooms) || roomFilter.includes("all");
-                  const isInSquare = parseInt(apartment.netoSquare) >= squareFilter.startVal &&
-                    parseInt(apartment.netoSquare) <= squareFilter.endVal;
+                  const isInSquare = parseInt(apartment.square) >= squareFilter.startVal &&
+                    parseInt(apartment.square) <= squareFilter.endVal;
                   if (apartment.pointsType === 'path') {
                     return (
                       <path
@@ -101,7 +101,7 @@ const BuildingView = ({
                         d={apartment.path}
                         onContextMenu={(e) => handleContextMenu(e, apartment)}
                         className={
-                          isInFloor && isInRoom && isInSquare && checkSeaView
+                          isInFloor && isInRoom && isInSquare
                             ? apartment.isSold
                               ? "sold"
                               : apartment.isReserved
