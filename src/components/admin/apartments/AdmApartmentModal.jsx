@@ -50,7 +50,7 @@ function AdmApartmentModal() {
     hasSeaView: false,
     floorNumber: 0,
     grossySquare: 0,
-    netoSquare: 0,
+    square: 0,
     name: "",
     imageData: null,
     apartmentNumber: 1,
@@ -78,7 +78,7 @@ function AdmApartmentModal() {
       hasSeaView: false,
       floorNumber: 0,
       grossySquare: 0,
-      netoSquare: 0,
+      square: 0,
       name: "",
       imageData: null,
       apartmentNumber: 1,
@@ -172,7 +172,7 @@ function AdmApartmentModal() {
     formData.append("isSold", apartmentData.isSold);
     formData.append("floorNumber", apartmentData.floorNumber);
     formData.append("grossySquare", apartmentData.grossySquare);
-    formData.append("netoSquare", apartmentData.netoSquare);
+    formData.append("square", apartmentData.square);
     formData.append("hasSeaView", apartmentData.hasSeaView);
     formData.append("isReserved", apartmentData.isReserved);
     formData.append("name", apartmentData.name);
@@ -389,14 +389,14 @@ function AdmApartmentModal() {
                 <TextField
                   fullWidth
                   size="small"
-                  value={apartmentData.netoSquare}
+                  value={apartmentData.square}
                   onChange={(e) => {
                     setApartmentData((prev) => ({
                       ...prev,
-                      netoSquare: e.target.value,
+                      square: e.target.value,
                     }));
                   }}
-                  name="netoSquare"
+                  name="square"
                   label="Siperfaqja neto m2"
                 />
               </Grid>
