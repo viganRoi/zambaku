@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from '../utils/consts';
 import { useSelector } from 'react-redux';
 import { getRegularRoomFilter, getRegularFloorFilter, getRegularSquareFilter, getRegularSeeViewFilter } from '../features/filter/FilterSlice';
+import { roomMatchesFilter, floorMatchesFilter } from '../utils/filterHelpers';
 import './bckApartment.css'
 
 const AllApartmentsPage = () => {
@@ -58,14 +59,17 @@ const AllApartmentsPage = () => {
     }
 
     if (roomFilter.length && !roomFilter.includes('all')) {
-      filtered = filtered.filter(apartment => roomFilter.includes(apartment.rooms));
+      filtered = filtered.filter(apartment => roomMatchesFilter(roomFilter, apartment.rooms));
     }
 
     if (floorFilter.length && !floorFilter.includes('all')) {
-      filtered = filtered.filter(apartment => floorFilter.includes(apartment.floorNumber));
+      filtered = filtered.filter(apartment => floorMatchesFilter(floorFilter, apartment.floorNumber));
     }
     if (squareFilter.startVal !== undefined && squareFilter.endVal !== undefined) {
-      filtered = filtered.filter(apartment => apartment.netoSquare >= squareFilter.startVal && apartment.netoSquare <= squareFilter.endVal);
+      filtered = filtered.filter(apartment => {
+        const size = apartment.netoSquare ?? apartment.square ?? apartment.sqft ?? 0;
+        return Number(size) >= squareFilter.startVal && Number(size) <= squareFilter.endVal;
+      });
     }
 
     filtered = Array.from(

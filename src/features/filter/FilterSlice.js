@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-export const maxFloor = 20;
+export const maxFloor = 9;
 export const minFloor = 1;
-export const maxSquare = 400;
+export const maxSquare = 170;
 export const minSquare = 30;
 
 const initialState = {
@@ -20,10 +20,6 @@ const initialState = {
         building: ['all'],
     },
     regularFilter: {
-        // rooms: {
-        //     startVal: 1,
-        //     endVal: 6,
-        // },
         rooms: ['all'],
         floor: {
             startVal: minFloor,
@@ -170,6 +166,7 @@ const FilterSlice = createSlice({
         handleRegularFilterReset(state, action) {
             state.regularFilter.floor.endVal = maxFloor
             state.regularFilter.floor.startVal = minFloor
+            state.regularFilter.floors = ['all']
             state.regularFilter.rooms = ['all']
             state.regularFilter.building = ['all']
             state.regularFilter.seeView = ['all']
@@ -197,7 +194,7 @@ export const {
     setRegularRoomFilter,
     setRegularSquareFilter,
     setRegularSeeViewFilter,
-        setRegularFloorToggle,
+    setRegularFloorToggle,
     handleRegularFilterState,
     handleRegularFilterReset,
     handleMobileFilterReset,

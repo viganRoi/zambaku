@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllApartmentSvgData, getAllFloorSvgData } from '../../features/apartment/ApartmentSlice';
 import { getFilterState, getRegularFloorFilter, getRegularRoomFilter, getRegularSquareFilter } from '../../features/filter/FilterSlice';
+import { roomMatchesFilter, floorMatchesFilter } from '../../utils/filterHelpers';
 import { getAllApartmentsByFloorId, getFloorSelectionSvg, getObjectSvgDataAll } from '../../features/apartment/ApartmentAPI';
 import { imagePath } from '../../utils/consts';
 import ContextMenu from '../contextMenu/ContextMenu';
@@ -105,10 +106,8 @@ const ApartmentsSvg = () => {
                                         d={apartment.path}
                                         onContextMenu={(e) => handleContextMenu(e, apartment)}
                                         className={
-                                            parseInt(apartment.floorNumber) >= floorRange.startVal &&
-                                                parseInt(apartment.floorNumber) <= floorRange.endVal &&
-                                                (roomRange.includes(apartment.rooms) ||
-                                                    roomRange.includes("all")) &&
+                                            floorMatchesFilter(floorRange, apartment.floorNumber) &&
+                                                roomMatchesFilter(roomRange, apartment.rooms) &&
                                                 parseInt(apartment.netoSquare) >= sizeRange.startVal &&
                                                 parseInt(apartment.netoSquare) <= sizeRange.endVal
                                                 ? apartment.isSold
@@ -144,12 +143,8 @@ const ApartmentsSvg = () => {
                                         }}
                                         onClick={() => {
                                             if (
-                                                parseInt(apartment.floorNumber) >=
-                                                floorRange.startVal &&
-                                                parseInt(apartment.floorNumber) <=
-                                                floorRange.endVal &&
-                                                (roomRange.includes(apartment.rooms) ||
-                                                    roomRange.includes("all")) &&
+                                                floorMatchesFilter(floorRange, apartment.floorNumber) &&
+                                                roomMatchesFilter(roomRange, apartment.rooms) &&
                                                 parseInt(apartment.netoSquare) >= sizeRange.startVal &&
                                                 parseInt(apartment.netoSquare) <= sizeRange.endVal &&
                                                 !apartment.isSold

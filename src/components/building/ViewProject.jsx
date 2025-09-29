@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { BuildingModal } from "../";
@@ -75,7 +75,7 @@ import { buildings, object } from "../../utils/server";
               {currentBuilding.points.map((point) => (
                 <path
                   key={point.id}
-                  className={point.name === 'a' ? 'sold' : 'available'}
+                  className={point.name === 'c' ? 'sold' : 'available'}
                   d={point.path}
                   onMouseEnter={() => setHoveredId(point.id)}
                   onMouseMove={handleMouseMove}
@@ -104,7 +104,7 @@ import { buildings, object } from "../../utils/server";
           <SlArrowRight color="#fff" />
         </button>
       </div>
-      <BuildingModal object={hoveredBuilding} mousePosition={mousePosition} />
+      {/* <BuildingModal object={hoveredBuilding} mousePosition={mousePosition} /> */}
     </div>
   );
 };
