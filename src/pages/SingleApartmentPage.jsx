@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getApartmentDetailModalData } from '../features/apartment/ApartmentSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { ApartmentsCarousel, Contact, GalleryCarousel, Interior, SingleApartment } from '../components'
+import { Contact, Interior, SingleApartment } from '../components'
 import { BASE_URL } from '../utils/consts';
-import { banners } from '../utils/server';
 import { getApartmentById } from '../features/apartment/ApartmentAPI';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { flats } from '../utils/flats';
 
 const SingleApartmentPage = () => {
   window.scrollTo({ top: 0 })

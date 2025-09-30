@@ -9,7 +9,7 @@ const Hero = () => {
         <div className="w-full md:h-[120vh]  relative flex items-center justify-center bg-white bg-opacity-80 ">
             <img
                 src="/assets/images/hero/bck/bck2.png"
-                alt="Otrant Reef"
+                alt="Zambaku Residence"
                 className="absolute h-full w-full object-right object-contain z-0"
             />
             <div className="w-11/12 relative z-10 pt-12 md:pt-0">

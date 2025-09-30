@@ -10,9 +10,9 @@ const Interior = ({ images }) => {
     const [swiper, setSwiper] = useState(null);
     const trackRef = useRef(null);
     const handleRef = useRef(null);
-    const [progress, setProgress] = useState(0); // 0..1
+    const [progress, setProgress] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-    // Attach listeners when swiper instance becomes available
     useEffect(() => {
         const s = swiper;
         if (!s) return;
@@ -35,42 +35,95 @@ const Interior = ({ images }) => {
         };
     }, [swiper]);
 
-    // Advance-only button behavior: on click, advance to next slide; if last slide, go to start
     const onHandleClick = () => {
         const s = swiperRef.current || swiper;
         if (!s) return;
-        const slidesCount = Math.max(images?.length || (s.slides && s.slides.length) || 1, 1);
+        // const slidesCount = Math.max((slides && slides.length) || (s.slides && s.slides.length) || 1, 1);
+        const slidesCount = s.slides ? s.slides.length : 1;
         const current = typeof s.realIndex === 'number' ? s.realIndex : (typeof s.activeIndex === 'number' ? s.activeIndex : 0);
         const lastIndex = slidesCount - 1;
         const duration = 600;
 
         if (s.params && s.params.loop) {
-            // loop mode: just call slideNext
             s.slideNext(duration);
-            // optimistic progress update
             const next = (current + 1) % slidesCount;
             setProgress(lastIndex === 0 ? 0 : next / lastIndex);
+            setCurrentIndex(next);
             return;
         }
 
         const nextIndex = current >= lastIndex ? 0 : current + 1;
         setProgress(lastIndex === 0 ? 0 : nextIndex / lastIndex);
-        // prefer slideTo for exact positioning
+        setCurrentIndex(nextIndex);
         try {
             s.slideTo(nextIndex, duration);
         } catch (e) {
-            // fallback
             try { s.slideTo(nextIndex); } catch (er) { s.slideNext && s.slideNext(); }
         }
     };
-
-    // derive slides from images prop; fallback to a small default set when images is empty
-    const fallbackSlides = [
-        '/projektet/assets/images/apartments/1.png',
-        '/projektet/assets/images/apartments/3.png',
-        '/projektet/assets/images/apartments/4.jpg',
+    const slides = [
+        (
+            <div className='w-full h-full flex text-white relative gap-12'>
+                <div className='w-1/2 h-full'>
+                    <h1 className='text-secondary text-[48px] font-semibold montserrat'>Një Pamje që Flet Vetë</h1>
+                    <p className='montserrat text-[24px]'>Galeria e Zambaku Residence sjell në fokus arkitekturën moderne, hapësirat e brendshme elegante dhe ambientin e jashtëm të harmonizuar me natyrën. Çdo fotografi pasqyron stilin e jetesës që ju pret – të bukur, të qetë dhe plot cilësi.</p>
+                </div>
+                <div className='w-1/2 h-full'>
+                    <img
+                        className="w-full object-cover h-146"
+                        src="/projektet/assets/images/apartments/4.jpg"
+                        alt=""
+                    />
+                </div>
+                <img
+                    src="/projektet/assets/images/apartments/5.jpg"
+                    alt=""
+                    className='absolute top-100 left-1/3 w-4/12'
+                />
+            </div>
+        ), (
+            <div className='w-full h-full flex items-center justify-end'>
+                <div className='w-2/3 h-full flex flex-col justify-start items-start'>
+                    <img
+                        className="h-96 object-contain"
+                        src="/projektet/assets/images/apartments/2.png"
+                        alt=""
+                    />
+                    <div className='w-full h-full text-white'>
+                        <h1 className='text-secondary text-[48px] font-semibold montserrat'>Zbuloni elegancën në detaje</h1>
+                        <p className='montserrat text-[24px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus harum, reiciendis placeat eos rem tempora praesentium sunt. Corrupti architecto rerum veniam obcaecati mollitia odit tempora culpa, molestias quibusdam, quos suscipit laboriosam dignissimos. Itaque, deleniti? Unde, quas! Accusamus quo quibusdam asperiores.</p>
+                    </div>
+                </div>
+            </div>
+        ), (
+            <div className='relative w-full h-full flex items-center justify-start'>
+                <img
+                    className="w-3/4 h-146 object-cover"
+                    src="/projektet/assets/images/apartments/3.png"
+                    alt=""
+                />
+                <img
+                    className="absolute right-0 w-1/3 h-86 object-cover"
+                    src="/projektet/assets/images/apartments/3.png"
+                    alt=""
+                />
+            </div>
+        ), (
+            <div className='w-full h-full flex items-start justify-end text-white'>
+                <div className='w-1/2 h-full'>
+                    <h1 className='text-secondary text-[48px] font-semibold montserrat'>Një Pamje që Flet Vetë</h1>
+                    <p className='montserrat text-[24px]'>Galeria e Zambaku Residence sjell në fokus arkitekturën moderne, hapësirat e brendshme elegante dhe ambientin e jashtëm të harmonizuar me natyrën. Çdo fotografi pasqyron stilin e jetesës që ju pret – të bukur, të qetë dhe plot cilësi.</p>
+                </div>
+                <div className='w-1/2 h-full'>
+                    <img className="w-full h-full object-cover" src="/projektet/assets/images/apartments/4.jpg" alt="" />
+                </div>
+            </div>
+        ), (
+            <div className='w-full h-full flex'>
+                <img className="w-full h-156 object-contain" src="/projektet/assets/images/apartments/5.jpg" alt="" />
+            </div>
+        ),
     ];
-    const slideSources = (images && images.length) ? images : fallbackSlides;
 
     return (
         <div className='w-full h-full flex flex-col items-center justify-center py-36'>
@@ -99,24 +152,30 @@ const Interior = ({ images }) => {
                         </div>
                     ))}
             </div>
-            <div className="relative base-width h-screen flex flex-col gap-6 py-12 overflow-x-hidden">
+            <div className="relative base-width h-full flex flex-col gap-6 py-24 overflow-hidden">
                 <Swiper
                     onSwiper={(s) => { swiperRef.current = s; setSwiper(s); }}
-                    onProgress={() => { /* handled via effect */ }}
-                    navigation={true}
+                    navigation
+                    breakpoints={{
+                        340: {
+                            slidesPerView: 1,
+                            spaceBetween: 6
+                        },
+                        700: {
+                            slidesPerView: 1,
+                            spaceBetween: 20
+                        }
+                    }}
                     modules={[Pagination, Navigation]}
-                    className="mySwiper"
+                    className="mySwiper h-full"
+                    style={{
+                        maxWidth: "100%",
+                        maxHeight: '70vh'
+                    }}
                 >
-                    {slideSources.map((src, index) => (
-                        <SwiperSlide key={index}>
-                            {typeof src === 'string' ? (
-                                <div>
-                                    <img src={src} alt={`Slide ${index + 1}`} className="w-full object-cover" />
-                                </div>
-                            ) : (
-                                // if images array contains react nodes or objects, render directly
-                                src
-                            )}
+                    {slides.map((slideContent, index) => (
+                        <SwiperSlide key={index} className="flex items-center justify-center h-[70vh]">
+                            {slideContent}
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -138,19 +197,13 @@ const Interior = ({ images }) => {
                             aria-valuenow={Math.round(progress * 100)}
                             tabIndex={0}
                             onKeyDown={(e) => {
-                                // allow Enter/Space to activate the advance behavior
                                 if (e.key === 'Enter' || e.key === ' ') {
                                     e.preventDefault();
                                     onHandleClick();
                                 }
                             }}
                             onClick={onHandleClick}
-                            className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-secondary shadow-lg flex items-center justify-center cursor-pointer"
-                            // style={{ 
-                            //     left: `${progress * 100}%`, 
-                            //     transform: 'translate(-50%, -50%)',
-                            //      transition: 'left 600ms cubic-bezier(0.22,0.9,0.35,1)' 
-                            //    }}
+                            className="absolute top-16/2 -translate-y-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-secondary shadow-lg flex items-center justify-center cursor-pointer"
                             style={{
                                 left: `${progress * 100}%`,
                                 transform: 'translate(-50%, -50%)',

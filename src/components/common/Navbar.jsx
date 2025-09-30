@@ -95,7 +95,7 @@ const Navbar = () => {
           <NavLink to="/">
             <img
               src={`${isScrolled ? "/projektet/assets/images/brand/logo.png" : "/projektet/assets/images/brand/logo.png"}`}
-              alt="Otrant Reef"
+              alt="logo"
               className="h-24 mx-auto"
             />
           </NavLink>
@@ -119,7 +119,7 @@ const Navbar = () => {
           <NavLink to="/" className='w-1/3 flex items-center justify-start'>
             <img
               src="/projektet/assets/images/brand/logo.png"
-              alt="Otrant Reef"
+              alt="Zambaku Residence"
               className="h-14 w-full"
             />
           </NavLink>
