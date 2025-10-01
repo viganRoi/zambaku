@@ -38,7 +38,7 @@ function App() {
           <Route path="/psvg-extrator" element={<ParkingSvgExtractor />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        <Cookies />
+        {/* <Cookies /> */}
       </ConditionalLayout>
     </Router>
   );

@@ -92,13 +92,20 @@ const Navbar = () => {
               <span className="relative z-10">Selekto Apartmentin</span>
             </button>
           </div>
-          <NavLink to="/">
+          {/* <NavLink to="/">
             <img
               src={`${isScrolled ? "/projektet/assets/images/brand/logo.png" : "/projektet/assets/images/brand/logo.png"}`}
               alt="logo"
               className="h-24 mx-auto"
             />
-          </NavLink>
+          </NavLink> */}
+          <a href="https://zambaku.roitiv.com/">
+            <img
+              src={`${isScrolled ? "/projektet/assets/images/brand/logo.png" : "/projektet/assets/images/brand/logo.png"}`}
+              alt="logo"
+              className="h-24 mx-auto"
+            />
+          </a>
           <div className="w-1/3 flex items-center justify-end gap-4 text-white" >
             <button
               onClick={() => navigate("/buildings")}
@@ -107,70 +114,13 @@ const Navbar = () => {
               <span className="absolute left-1/2 -bottom-40 -translate-x-1/2 w-0 h-0 transition-all duration-700 ease-out bg-secondary rounded-full group-hover:w-72 group-hover:h-72 z-0"></span>
               <span className="relative z-10">Turi Vizual</span>
             </button>
-            <button
+            <a
+              href="https://zambaku.roitiv.com/kontakti/"
               className="px-12 py-3 rounded-full bg-secondary border border-secondary text-primary text-nowrap"
-              onClick={() => navigate("/contact")}
             >
               Na Kontaktoni
-            </button>
+            </a>
           </div>
-        </div>
-        <div className="w-11/12 flex md:hidden items-center justify-between">
-          <NavLink to="/" className='w-1/3 flex items-center justify-start'>
-            <img
-              src="/projektet/assets/images/brand/logo.png"
-              alt="Zambaku Residence"
-              className="h-14 w-full"
-            />
-          </NavLink>
-          <div className="w-full  flex justify-end gap-2 items-center">
-            <NavLink
-              to="/wishlist"
-              className="relative"
-            >
-              {wishListItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 sm:top-[-10px] sm:right-[-10px] bg-primary text-white text-[10px] sm:text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
-                  {wishListItemCount}
-                </span>
-              )}
-              {wishListItemCount > 0 ? (
-                <IoIosHeart className="fill-white text-2xl" />
-              ) : (
-                <IoIosHeartEmpty className="fill-white text-2xl" />
-              )}
-            </NavLink>
-            <div style={{ position: "relative", display: 'inline-block' }}>
-              <button onClick={() => setIsFlagDropdownOpen((prev) => !prev)}>
-                <p className="text-white">{selected}</p>
-              </button>
-              {isFlagDropdownOpen && (
-                <div style={{ position: 'absolute', top: "40px" }}>
-                  {Object.keys(flagToLangMap)
-                    .filter((code) => code !== selected)
-                    .map((code) => (
-                      <button key={code} onClick={() => handleSelect(code)}>
-                        <p className="text-white">{code}</p>
-                      </button>
-                    ))}
-                </div>
-              )}
-            </div>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className={`text-base text-white gap-2 py-3 rounded-lg hover:opacity-90 duration-300 text-nowrap text-sm flex items-center justify-center`}
-            >
-              <svg
-                viewBox="0 0 32 32"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 fill-white"
-              >
-                <g id="pin-number">
-                  <path d="M0 2.5A1.5 1.5 0 0 0 1.5 4h19a1.5 1.5 0 0 0 0-3h-19A1.5 1.5 0 0 0 0 2.5z" />
-                  <path d="M30.5 14h-29a1.5 1.5 0 0 0 0 3h29a1.5 1.5 0 0 0 0-3z" />
-                  <path d="M30.5 28h-19a1.5 1.5 0 0 0 0 3h19a1.5 1.5 0 0 0 0-3z" />
-                </g>
-              </svg>
-            </button></div>
         </div>
       </nav>
 
@@ -187,17 +137,25 @@ const Navbar = () => {
           <AiOutlineClose className="text-white text-2xl" />
         </button>
         <div className="w-full flex items-center justify-between text-white">
-          <img src="/projektet/assets/images/brand/whiteLogo.png" alt="" className="object-contain h-36" />
+          <a href="https://zambaku.roitiv.com/">
+            <img src="/projektet/assets/images/brand/whiteLogo.png" alt="" className="object-contain h-36" />
+          </a>
           <div className="w-full flex items-center justify-end gap-4">
             <button
-              onClick={() => navigate("/apartments")}
+              onClick={() => {
+                navigate("/apartments");
+                setIsOpen(false);
+              }}
               className="relative inline-flex items-center justify-center px-12 py-3 overflow-hidden text-white bg-transparent rounded-full group text-nowrap border border-secondary"
             >
               <span className="absolute left-1/2 -bottom-40 -translate-x-1/2 w-0 h-0 transition-all duration-700 ease-out bg-secondary rounded-full group-hover:w-72 group-hover:h-72 z-0"></span>
               <span className="relative z-10">Selekto Apartmentin</span>
             </button>
             <button
-              onClick={() => navigate("/buildings")}
+              onClick={() => {
+                navigate("/buildings");
+                setIsOpen(false);
+              }}
               className="relative inline-flex items-center justify-center px-12 py-3 overflow-hidden text-white bg-transparent rounded-full group text-nowrap border border-secondary"
             >
               <span className="absolute left-1/2 -bottom-40 -translate-x-1/2 w-0 h-0 transition-all duration-700 ease-out bg-secondary rounded-full group-hover:w-72 group-hover:h-72 z-0"></span>
@@ -207,34 +165,41 @@ const Navbar = () => {
         </div>
         <div className="w-full h-full flex flex-col md:flex-row items-center justify-center">
           <div className="w-full md:w-1/2 h-1/2 md:h-full flex flex-col items-start gap-6 text-4xl font-light text-white relative border-r border-secondary ">
-            <NavLink
+            {/* <NavLink
               to="/about"
               className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
               onClick={() => setIsOpen(false)}
             >
               Rreth projektit tone
-            </NavLink>
-            <NavLink
-              to="/"
+            </NavLink> */}
+            <a
+              href="https://zambaku.roitiv.com/rreth-nesh/"
+              className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
+              onClick={() => setIsOpen(false)}
+            >
+              Rreth projektit tone
+            </a>
+            <a
+              href="https://zambaku.roitiv.com/benefitet/"
               className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
               onClick={() => setIsOpen(false)}
             >
               Benefitet
-            </NavLink>
-            <NavLink
-              to="/about"
+            </a>
+            <a
+              href="https://zambaku.roitiv.com/galeria/"
               className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
               onClick={() => setIsOpen(false)}
             >
               Galeria
-            </NavLink>
-            <NavLink
-              to="/"
+            </a>
+            <a
+              href="https://zambaku.roitiv.com/kontakti/"
               className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
               onClick={() => setIsOpen(false)}
             >
               Kontakti
-            </NavLink>
+            </a>
           </div>
           <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center relative">
             <div className="w-full flex items-start justify-start px-20 flex-col gap-10">
