@@ -80,7 +80,7 @@ import { buildings, object } from "../../utils/server";
                   onMouseEnter={() => setHoveredId(point.id)}
                   onMouseMove={handleMouseMove}
                   onMouseLeave={() => setHoveredId(null)}
-                  onClick={() => navigate(`/buildings/${point.id}`)}
+                  onClick={() => navigate(`/buildings/${point.name}`)}
                   style={{
                     cursor: 'pointer'
                   }}
