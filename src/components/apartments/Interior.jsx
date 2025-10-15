@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 
 const Interior = ({ images }) => {
+    const isSmallDev = window.innerWidth < 768;
     const swiperRef = useRef(null);
     const [swiper, setSwiper] = useState(null);
     const trackRef = useRef(null);
@@ -63,14 +64,14 @@ const Interior = ({ images }) => {
     };
     const slides = [
         (
-            <div className='w-full h-full flex text-white relative gap-12'>
-                <div className='w-1/2 h-full'>
-                    <h1 className='text-secondary text-[48px] font-semibold montserrat'>Një Pamje që Flet Vetë</h1>
-                    <p className='montserrat text-[24px]'>Galeria e Zambaku Residence sjell në fokus arkitekturën moderne, hapësirat e brendshme elegante dhe ambientin e jashtëm të harmonizuar me natyrën. Çdo fotografi pasqyron stilin e jetesës që ju pret – të bukur, të qetë dhe plot cilësi.</p>
+            <div className='w-full h-full flex flex-col md:flex-row text-white relative gap-6 md:gap-12'>
+                <div className='w-full md:w-1/2 h-full'>
+                    <h1 className='text-secondary text-2xl md:text-[48px] font-semibold montserrat'>Një Pamje që Flet Vetë</h1>
+                    <p className='montserrat text-lg md:text-[24px]'>Galeria e Zambaku Residence sjell në fokus arkitekturën moderne, hapësirat e brendshme elegante dhe ambientin e jashtëm të harmonizuar me natyrën. Çdo fotografi pasqyron stilin e jetesës që ju pret – të bukur, të qetë dhe plot cilësi.</p>
                 </div>
-                <div className='w-1/2 h-full'>
+                <div className='w-full md:w-1/2 h-full'>
                     <img
-                        className="w-full object-cover h-146"
+                        className="w-full object-cover h-48 md:h-146"
                         src="/projektet/assets/images/apartments/4.jpg"
                         alt=""
                     />
@@ -78,56 +79,60 @@ const Interior = ({ images }) => {
                 <img
                     src="/projektet/assets/images/apartments/5.jpg"
                     alt=""
-                    className='absolute top-100 left-1/3 w-4/12'
+                    className='absolute top-86 md:top-100 left-1/3 w-1/2 md:w-4/12'
                 />
             </div>
         ), (
             <div className='w-full h-full flex items-center justify-end'>
-                <div className='w-2/3 h-full flex flex-col justify-start items-start'>
+                <div className='w-full md:w-2/3 h-full flex flex-col justify-start items-center md:items-start gap-2 md:gap-0'>
                     <img
-                        className="h-96 object-contain"
+                        className="h-48 md:h-96 object-contain"
                         src="/projektet/assets/images/apartments/2.png"
                         alt=""
                     />
                     <div className='w-full h-full text-white'>
-                        <h1 className='text-secondary text-[48px] font-semibold montserrat'>Zbuloni elegancën në detaje</h1>
-                        <p className='montserrat text-[24px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus harum, reiciendis placeat eos rem tempora praesentium sunt. Corrupti architecto rerum veniam obcaecati mollitia odit tempora culpa, molestias quibusdam, quos suscipit laboriosam dignissimos. Itaque, deleniti? Unde, quas! Accusamus quo quibusdam asperiores.</p>
+                        <h1 className='text-secondary text-xl md:text-[48px] font-semibold montserrat'>Zbuloni elegancën në detaje</h1>
+                        <p className='montserrat text-base md:text-[24px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus harum, reiciendis placeat eos rem tempora praesentium sunt. Corrupti architecto rerum veniam obcaecati mollitia odit tempora culpa, molestias quibusdam, quos suscipit laboriosam dignissimos. Itaque, deleniti? Unde, quas! Accusamus quo quibusdam asperiores.</p>
                     </div>
                 </div>
             </div>
         ), (
             <div className='relative w-full h-full flex items-center justify-start'>
                 <img
-                    className="w-3/4 h-146 object-cover"
+                    className="w-3/4 h-108 md:h-146 object-cover"
                     src="/projektet/assets/images/apartments/3.png"
                     alt=""
                 />
                 <img
-                    className="absolute right-0 w-1/3 h-86 object-cover"
+                    className="absolute right-0 w-1/2 md:w-1/3 h-64 md:h-86 object-cover"
                     src="/projektet/assets/images/apartments/3.png"
                     alt=""
                 />
             </div>
         ), (
-            <div className='w-full h-full flex items-start justify-end text-white'>
-                <div className='w-1/2 h-full'>
-                    <h1 className='text-secondary text-[48px] font-semibold montserrat'>Një Pamje që Flet Vetë</h1>
-                    <p className='montserrat text-[24px]'>Galeria e Zambaku Residence sjell në fokus arkitekturën moderne, hapësirat e brendshme elegante dhe ambientin e jashtëm të harmonizuar me natyrën. Çdo fotografi pasqyron stilin e jetesës që ju pret – të bukur, të qetë dhe plot cilësi.</p>
+            <div className='w-full h-full flex flex-col md:flex-row text-white relative gap-6 md:gap-12'>
+                <div className='w-full md:w-1/2 h-full'>
+                    <h1 className='text-secondary text-2xl md:text-[48px] font-semibold montserrat'>Një Pamje që Flet Vetë</h1>
+                    <p className='montserrat text-lg md:text-[24px]'>Galeria e Zambaku Residence sjell në fokus arkitekturën moderne, hapësirat e brendshme elegante dhe ambientin e jashtëm të harmonizuar me natyrën. Çdo fotografi pasqyron stilin e jetesës që ju pret – të bukur, të qetë dhe plot cilësi.</p>
                 </div>
-                <div className='w-1/2 h-full'>
-                    <img className="w-full h-full object-cover" src="/projektet/assets/images/apartments/4.jpg" alt="" />
+                <div className='w-full md:w-1/2 h-full'>
+                    <img
+                        className="w-full object-cover h-48 md:h-146"
+                        src="/projektet/assets/images/apartments/4.jpg"
+                        alt=""
+                    />
                 </div>
             </div>
         ), (
             <div className='w-full h-full flex'>
-                <img className="w-full h-156 object-contain" src="/projektet/assets/images/apartments/5.jpg" alt="" />
+                <img className="w-full h-96 md:h-156 object-contain" src="/projektet/assets/images/apartments/5.jpg" alt="" />
             </div>
         ),
     ];
 
     return (
-        <div className='w-full h-full flex flex-col items-center justify-center py-36'>
-            <div className="base-width flex flex-col gap-6">
+        <div className='w-full h-full flex flex-col items-center justify-center py-24 md:py-36'>
+            <div className="base-width flex flex-col gap-2 md:gap-6">
                 {images &&
                     images.reduce((rows, image, index) => {
                         if (index % 3 === 0) {
@@ -139,7 +144,7 @@ const Interior = ({ images }) => {
                     }, []).map((row, rowIndex) => (
                         <div
                             key={rowIndex}
-                            className={`grid gap-6 ${row.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}
+                            className={`grid gap-2 md:gap-6 ${row.length === 2 ? "grid-cols-2" : "grid-cols-1"}`}
                         >
                             {row.map((img, i) => (
                                 <img
@@ -152,7 +157,7 @@ const Interior = ({ images }) => {
                         </div>
                     ))}
             </div>
-            <div className="relative base-width h-full flex flex-col gap-6 py-24 overflow-hidden">
+            <div className="relative base-width h-full flex flex-col gap-6 pt-12 pb-24 md:py-24 overflow-hidden">
                 <Swiper
                     onSwiper={(s) => { swiperRef.current = s; setSwiper(s); }}
                     navigation
@@ -170,11 +175,11 @@ const Interior = ({ images }) => {
                     className="mySwiper h-full"
                     style={{
                         maxWidth: "100%",
-                        maxHeight: '70vh'
+                        maxHeight: isSmallDev ? '50vh' : '70vh'
                     }}
                 >
                     {slides.map((slideContent, index) => (
-                        <SwiperSlide key={index} className="flex items-center justify-center h-[70vh]">
+                        <SwiperSlide key={index} className="flex items-center justify-center h-[50vh] md:h-[70vh]">
                             {slideContent}
                         </SwiperSlide>
                     ))}
@@ -184,7 +189,7 @@ const Interior = ({ images }) => {
                     className="absolute left-1/2 -translate-x-1/2 bottom-6 base-width h-20 flex items-center justify-center pointer-events-auto"
                     style={{ zIndex: 60 }}
                 >
-                    <div className="relative w-full h-1 bg-white/30 rounded-full">
+                    <div className="relative w-10/12 md:w-full h-1 bg-white/30 rounded-full">
                         <div
                             style={{ width: `${progress * 100}%` }}
                             className="absolute left-0 top-0 h-full rounded-full bg-secondary"
@@ -203,7 +208,7 @@ const Interior = ({ images }) => {
                                 }
                             }}
                             onClick={onHandleClick}
-                            className="absolute top-16/2 -translate-y-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-secondary shadow-lg flex items-center justify-center cursor-pointer"
+                            className="absolute top-12/2 md:top-16/2 -translate-y-1/2 -translate-x-1/2 w-12 md:w-16 h-12 md:h-16 rounded-full bg-secondary shadow-lg flex items-center justify-center cursor-pointer"
                             style={{
                                 left: `${progress * 100}%`,
                                 transform: 'translate(-50%, -50%)',

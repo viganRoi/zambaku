@@ -10,37 +10,37 @@ const Footer = () => {
   const { t } = useTranslation()
   return (
     <footer className="bg-primary text-white w-full h-full flex flex-col items-center justify-center py-10">
-      <div className="base-width flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 py-12">
-        <div className="w-1/3 flex flex-col axiforma-thin text-center md:text-left gap-4 md:gap-0">
-          <img src="/projektet/assets/images/brand/fullLogo.png" alt="logo" className="h-48 object-contain" />
+      <div className="base-width flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 py-6 md:py-12">
+        <div className="w-full md:w-1/3 flex flex-col axiforma-thin text-center md:text-left gap-4 md:gap-0">
+          <img src="/projektet/assets/images/brand/fullLogo.png" alt="logo" className="h-36 md:h-48 object-contain" />
         </div>
-        <div className="w-2/3 flex items-center justify-end flex-wrap gap-4">
-          <div className="flex gap-4">
-            <NavLink to="/" className="text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
+        <div className="w-full md:w-2/3 flex flex-col items-center md:items-end justify-end gap-4">
+          <div className="flex flex-wrap gap-2 md:gap-4">
+            <NavLink to="/" className="text-sm md:text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
               Ballina
             </NavLink>
-            <NavLink to="/about" className="text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
+            <NavLink to="/about" className="text-sm md:text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
               Rreth nesh
             </NavLink>
-            <NavLink to="/" className="text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
+            <NavLink to="/" className="text-sm md:text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
               Benefitet
             </NavLink>
-            <NavLink to="/gallery" className="text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
+            <NavLink to="/gallery" className="text-sm md:text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
               Galeria
             </NavLink>
-            <NavLink to="/contact" className="text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
+            <NavLink to="/contact" className="text-sm md:text-lg text-white/50 hover:text-secondary text-nowrap duration-300">
               Na kontaktoni
             </NavLink>
           </div>
-          <div className="flex gap-4">
-            <a className="text-white border border-secondary border-[1px] px-12 py-4 rounded-full font-semibold text-nowrap">Instagram</a>
-            <a className="text-white border border-secondary border-[1px] px-12 py-4 rounded-full font-semibold text-nowrap">facebook</a>
-            <a className="text-white border border-secondary border-[1px] px-12 py-4 rounded-full font-semibold text-nowrap">linkedin</a>
+          <div className="w-full md:w-auto flex flex-col md:flex-row gap-4">
+            <a className="w-full md:w-auto flex items-center justify-center text-white border border-secondary border-[1px] px-12 py-2 md:py-4 rounded-full font-semibold text-nowrap">Instagram</a>
+            <a className="w-full md:w-auto flex items-center justify-center text-white border border-secondary border-[1px] px-12 py-2 md:py-4 rounded-full font-semibold text-nowrap">facebook</a>
+            <a className="w-full md:w-auto flex items-center justify-center text-white border border-secondary border-[1px] px-12 py-2 md:py-4 rounded-full font-semibold text-nowrap">linkedin</a>
           </div>
         </div>
       </div>
       <div
-        className="base-width flex justify-between items-center gap-6 border-t border-b py-12"
+        className="base-width flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-6 border-t border-b py-3 md:py-12"
         style={{
           borderColor: 'transparent',
           borderImageSlice: 1,
@@ -75,8 +75,8 @@ const Footer = () => {
           <h1>Prizren</h1>
         </div>
       </div>
-      <div className="base-width flex flex-col md:flex-row items-center justify-between pt-6 gap-4 md:gap-0">
-        <div className="text-secondaryTxt text-sm">
+      <div className="base-width flex flex-col md:flex-row items-center justify-between pt-3 md:pt-6 gap-2 md:gap-0">
+        <div className="text-secondaryTxt text-xs md:text-sm">
           © Zambaku Residence 2025. All rights reserved.
         </div>
         <div className="text-secondaryTxt text-sm flex gap-4">
@@ -88,7 +88,7 @@ const Footer = () => {
           </a>
         </div>
         <button
-          className="px-16 py-4 bg-secondary rounded-full flex items-center gap-2 text-primary hover:opacity-90 duration-300"
+          className="w-full md:w-auto px-16 py-4 bg-secondary rounded-full flex items-center gap-2 text-primary hover:opacity-90 duration-300"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">

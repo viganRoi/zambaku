@@ -47,8 +47,8 @@ const SingleApartmentPage = () => {
   return (
     <div className='flex flex-col w-full items-center'>
       <SingleApartment apartment={apartment} />
-      <div className='relative base-width mb-20 flex items-center justify-center'>
-        <h1 className='absolute text-[150px] text-white anya font-400 uppercase'>Interior</h1>
+      <div className='relative base-width md:mb-20 flex items-center justify-center'>
+        <h1 className='absolute text-[84px] md:text-[150px] text-white anya font-400 uppercase'>Interior</h1>
       </div>
       <Interior
         // images={apartment.images}

@@ -1,8 +1,8 @@
-import { getRegularFloors, getRegularRoomFilter, getRegularSquareFilter, handleRegularFilterReset, maxFloor, maxSquare, minFloor, minSquare, setRegularFloorFilter, setRegularRoomFilter, setRegularSeeViewFilter, setRegularSquareFilter, setRegularFloorToggle } from '../../features/filter/FilterSlice';
+import { getRegularRoomFilter, getRegularSquareFilter, handleRegularFilterReset, maxFloor, maxSquare, minFloor, minSquare, setRegularRoomFilter, setRegularSquareFilter, setRegularFloorToggle, getRegularFloorFilter, setRegularFloorFilter } from '../../features/filter/FilterSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Slider } from '@mui/material';
 import './style.css'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
@@ -11,69 +11,20 @@ const BuildingFilter = ({ setFilterState, building, apartmentList }) => {
   const { t } = useTranslation();
   const roomFilter = useSelector(getRegularRoomFilter);
   const squareFilter = useSelector(getRegularSquareFilter);
-  const floorButtons = useSelector(getRegularFloors);
+  const floorFilter = useSelector(getRegularFloorFilter);
   const dispatch = useDispatch();
   const location = useLocation();
-
-  const [open, setOpen] = useState(false);
-
-  // Derive floor range from passed data (apartmentList or building.maxFloor).
-  // Fallback to defaults from the filter slice constants when no data available.
-  const apartments = apartmentList || building?.apartmentList || [];
-  const floorNumbers = apartments
-    .map((a) => {
-      // some data uses strings like "4"; handle 'p' and non-numeric gracefully
-      const n = parseInt(a.floorNumber, 10);
-      return Number.isFinite(n) ? n : null;
-    })
-    .filter((n) => n !== null);
-
-  let computedMinFloor = minFloor;
-  let computedMaxFloor = maxFloor;
-
-  if (floorNumbers.length > 0) {
-    computedMinFloor = Math.min(...floorNumbers);
-    computedMaxFloor = Math.max(...floorNumbers);
-  } else if (building && typeof building.maxFloor === 'number' && building.maxFloor > 0) {
-    computedMinFloor = Math.min(minFloor, 1);
-    computedMaxFloor = building.maxFloor;
-  }
 
   const handleRoomChange = (event) => {
     dispatch(setRegularRoomFilter(event.target.name));
   };
 
-
-  const handleFloorChange = (event) => {
-    const name = event.target.name;
-    const value = name === 'p' ? 'p' : name;
-    dispatch(setRegularFloorToggle(value));
+  const handleFloorChange = (event, newFloorRange) => {
+    dispatch(setRegularFloorFilter(newFloorRange));
   };
 
   const handleSizeChange = (event, newSizeRange) => {
     dispatch(setRegularSquareFilter(newSizeRange));
-  };
-  const floorLabelMapping = {
-    p: "P",
-  };
-
-  const getFloorLabel = (floor) => {
-    if (floor === 'p') return floorLabelMapping.p;
-    return floor;
-  };
-
-  const topSplitFloor = 4;
-  const maxTop = Math.min(topSplitFloor, computedMaxFloor);
-  // include 'p' as in the original design
-  const topFloors = [
-    'p',
-    ...Array.from({ length: Math.max(0, maxTop - computedMinFloor + 1) }, (_, i) => String(computedMinFloor + i)),
-  ];
-  const bottomFloors =
-    computedMaxFloor > maxTop ? Array.from({ length: computedMaxFloor - maxTop }, (_, i) => String(maxTop + 1 + i)) : [];
-
-  const handleReset = () => {
-    dispatch(handleRegularFilterReset());
   };
 
   useEffect(() => {
@@ -81,46 +32,51 @@ const BuildingFilter = ({ setFilterState, building, apartmentList }) => {
   }, [location.pathname]);
 
   return (
-    <div className='absolute bottom-12 right-44 w-auto h-auto p-12 flex items-center justify-center bg-primary z-100 text-white rounded-3xl shadow-lg'>
-      <div className="w-full h-full flex flex-col gap-2 md:gap-8 justify-between items-start text-white">
+    <div className="relative w-99 md:w-108 h-auto px-6 md:px-12 pb-12 pt-16 flex items-center justify-center bg-primary text-white rounded-3xl shadow-lg">
+      <div className="w-full h-full flex flex-col gap-4 md:gap-8 justify-between items-start text-white">
         <div className="w-full flex flex-col items-start gap-2 md:gap-4">
           <h1 className="text-secondary">{t('rooms')}</h1>
-          <div className='w-full flex gap-8 justify-start'>
-            <button name='1' onClick={handleRoomChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${roomFilter.includes('1') ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>1</button>
-            <button name='2' onClick={handleRoomChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${roomFilter.includes('2') ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>2</button>
-            <button name='3' onClick={handleRoomChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${roomFilter.includes('3') ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>3</button>
-            <button name='4' onClick={handleRoomChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${roomFilter.includes('4') ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>4</button>
+          <div className='w-full flex gap-6 justify-start'>
+            <button name='1' onClick={handleRoomChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${roomFilter.includes('1') ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>1 + 1</button>
+            <button name='2' onClick={handleRoomChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${roomFilter.includes('2') ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>2 + 1</button>
+            <button name='3' onClick={handleRoomChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${roomFilter.includes('3') ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>3 + 1</button>
+            <button name='4' onClick={handleRoomChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${roomFilter.includes('4') ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>4 + 1</button>
           </div>
         </div>
         <div className="w-full flex flex-col items-start gap-2 md:gap-4">
           <h1 className="text-secondary">{t('floor')}</h1>
-          <div className='w-full flex flex-col gap-2'>
-            <div className='w-full flex gap-4 flex-wrap justify-start'>
-              {topFloors.map((fl) => (
-                <button
-                  key={fl}
-                  name={fl}
-                  onClick={handleFloorChange}
-                  className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${floorButtons.includes(fl) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}
-                >
-                  {getFloorLabel(fl)}
-                </button>
-              ))}
-            </div>
-            {bottomFloors.length > 0 && (
-              <div className='w-full flex gap-4 flex-wrap justify-start'>
-                {bottomFloors.map((fl) => (
-                  <button
-                    key={fl}
-                    name={fl}
-                    onClick={handleFloorChange}
-                    className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${floorButtons.includes(fl) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}
-                  >
-                    {getFloorLabel(fl)}
-                  </button>
-                ))}
+          <div className='relative w-full flex flex-col justify-between'>
+            <div className='border border-white/50 rounded-full px-4 w-full flex justify-between items-center'>
+              <div className='border-r border-white/50 w-1/2 h-full py-2'>
+                <h1 className='text-white/50'>Nga: <span className='text-secondary'>{floorFilter.startVal}</span></h1>
               </div>
-            )}
+              <div className='p-2 w-1/2 h-full flex justify-start'>
+                <h1 className='text-white/50'>Deri: <span className='text-secondary'>{floorFilter.endVal}</span></h1>
+              </div>
+            </div>
+            <div className="absolute top-5 md:top-7 w-full flex items-center justify-center">
+              <Slider
+                getAriaLabel={() => "Floor range"}
+                value={[floorFilter.startVal, floorFilter.endVal]}
+                shiftStep={1}
+                onChange={handleFloorChange}
+                step={1}
+                min={minFloor}
+                max={maxFloor}
+                color="var(--color-secondary)"
+                sx={{
+                  color: "var(--color-secondary)",
+                  height: '1px',
+                  width: '80%',
+                  '& .MuiSlider-thumb': {
+                    width: 16,
+                    height: 10,
+                    borderRadius: '999px',
+                    boxShadow: 'none',
+                  },
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className="w-full flex flex-col items-start gap-2 md:gap-4">
@@ -134,7 +90,7 @@ const BuildingFilter = ({ setFilterState, building, apartmentList }) => {
                 <h1 className='text-white/50'>Deri: <span className='text-secondary'>{squareFilter.endVal}m<sup>2</sup></span></h1>
               </div>
             </div>
-            <div className="absolute top-7 w-full flex items-center justify-center">
+            <div className="absolute top-5 md:top-7 w-full flex items-center justify-center">
               <Slider
                 getAriaLabel={() => "size range"}
                 value={[squareFilter.startVal, squareFilter.endVal]}
@@ -172,8 +128,8 @@ const BuildingFilter = ({ setFilterState, building, apartmentList }) => {
             </svg>
             Reseto
           </button>
-          <button 
-          className="text-white border border-2 hover: border-secondary px-4 py-2 rounded-full font-semibold text-nowrap"
+          <button
+            className="text-white border border-2 hover: border-secondary px-4 py-2 rounded-full font-semibold text-nowrap"
           >
             Selekto Apartmentin
           </button>

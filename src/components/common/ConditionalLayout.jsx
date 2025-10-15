@@ -32,7 +32,7 @@ const ConditionalLayout = ({ children }) => {
   return (
     <>
       {!shouldHideNavbar && <Navbar />}
-      {!shouldHideNavbar && <NavFooter darkBackground={hasDarkBackground} />}
+      {/* {!shouldHideNavbar && <NavFooter darkBackground={hasDarkBackground} />} */}
       {children}
       {!shouldHideFooter && <Footer />}
     </>
