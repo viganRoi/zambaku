@@ -11,6 +11,7 @@ const SingleApartmentPage = () => {
   window.scrollTo({ top: 0 })
   const [apartments, setApartments] = useState([]);
   const [relatedApartments, setRelatedApartments] = useState([]);
+  const [selectedTab, setSelectedTab] = useState("2d");
 
   const apartment = useSelector(getApartmentDetailModalData);
   const dispatch = useDispatch();
@@ -22,7 +23,10 @@ const SingleApartmentPage = () => {
     }
   }, [dispatch, id]);
 
-
+  const handleTabClick = (view) => {
+    setSelectedTab(view);
+  };
+  
   useEffect(() => {
     const fetchApartments = async () => {
       try {
@@ -46,7 +50,11 @@ const SingleApartmentPage = () => {
 
   return (
     <div className='flex flex-col w-full items-center'>
-      <SingleApartment apartment={apartment} />
+      <SingleApartment
+        apartment={apartment}
+        selectedTab={selectedTab}
+        handleTabClick={handleTabClick}
+      />
       <div className='relative base-width md:mb-20 flex items-center justify-center'>
         <h1 className='absolute text-[84px] md:text-[150px] text-white anya font-400 uppercase'>Interior</h1>
       </div>

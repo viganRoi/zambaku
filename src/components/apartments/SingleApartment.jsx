@@ -11,7 +11,7 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-const SingleApartment = ({ apartment }) => {
+const SingleApartment = ({ apartment, handleTabClick, selectedTab }) => {
     const isSmallDev = window.innerWidth < 768;
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -25,16 +25,15 @@ const SingleApartment = ({ apartment }) => {
         >
             <div className="absolute inset-0 bg-primary/60" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }} />
             <div className="base-width h-1/2 z-10  flex flex-col-reverse md:flex-row items-center justify-center scroller-thin gap-6 md:gap-0">
-                <div className="w-full md:w-1/2 h-full text-white flex flex-col items-center justify-between gap-4 md:pb-0 md:pr-12">
+                <div className="w-full md:w-1/2 h-full md:h-[750px] text-white flex flex-col items-start justify-between gap-4  md:pr-12 py-6">
                     <div className='hidden md:block w-full flex items-center'>
                         <button onClick={() => navigate(-1)} className='px-6 py-3 border border-secondary text-white rounded-full flex items-center justify-center'>
                             Kthehu
                         </button>
                     </div>
-                    <div className='w-full flex flex-col items-start gap-2 py-4'>
+                    <div className='w-full  flex flex-col items-start gap-2 py-4'>
                         <div className='w-full flex flex-col w-full items-start justify-between py-0 md:py-4'>
-                            <p className='text-[60px] md:text-[150px] font-thin leading-[60px] md:leading-[150px]' style={{ lineHeight: isSmallDev ? '70px' : '160px' }}>{name}</p>
-                            <p className='text-[60px] md:text-[150px] text-secondary leading-[60px] md:leading-[150px]' style={{ lineHeight: isSmallDev ? '70px' : '160px' }}>{(netoSquare || 0).toFixed(2)}m<sup>2</sup></p>
+                            <p className='text-[60px] md:text-[100px] font-thin leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{name} <span className='text-[60px] md:text-[100px] text-secondary font-normal leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{(netoSquare || 0).toFixed(2)}m<sup>2</sup></span> </p>
                         </div>
                         <div className="w-full flex gap-2 md:gap-4 items-center">
                             <svg width="48" height="50" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,19 +69,50 @@ const SingleApartment = ({ apartment }) => {
                         Kontaktoni per cmimin
                     </button>
                 </div>
-                <div className='w-full md:w-1/2 h-full flex flex-col md:items-center justify-center relative rounded-xl bg-secondary p-6 md:p-12'>
-                    <img 
-                    // src={`${homepage}${planmetricImageUrl}${name}-3d.png`}
-                        src={'/projektet/assets/images/apartments/apartment3d.png'}
-                        alt={"3D view"}
-                        className="h-full object-contain cursor-pointer"
-                    />
-                </div>
-                    <div className='block md:hidden w-full flex items-center'>
-                        <button onClick={() => navigate(-1)} className='px-6 py-3 border border-secondary text-white rounded-full flex items-center justify-center'>
-                            Kthehu
+                <div className='w-full md:w-1/2 h-full md:h-[750px] flex flex-col md:items-center justify-center relative rounded-xl bg-secondary p-6 md:p-12'>
+                    <div className='absolute top-8 right-8 flex gap-4'>
+                        <button
+                            onClick={() => handleTabClick("onFloor")}
+                            className='px-6 py-2 rounded-md border border-primary bg-primary text-white duration-300 hover:bg-secondary'
+                        >
+                            on Floor
+                        </button>
+                        <button
+                            onClick={() => handleTabClick("2d")}
+                            className='px-6 py-2 rounded-md border border-primary bg-primary text-white duration-300 hover:bg-secondary'
+                        >
+                            2D
+                        </button>
+                        <button
+                            onClick={() => handleTabClick("3d")}
+                            className='px-6 py-2 rounded-md border border-primary bg-primary text-white duration-300 hover:bg-secondary'
+                        >
+                            3D
                         </button>
                     </div>
+                    <img
+                        src={
+                            selectedTab === "onFloor"
+                                ? `${homepage}${planmetricImageUrl}${name}-onFloor.png`
+                                : selectedTab === "2d"
+                                    ? `${homepage}${planmetricImageUrl}${imageUrl}`
+                                    : `${homepage}${planmetricImageUrl}${image3dUrl}`
+                        }
+                        alt={
+                            selectedTab === "onFloor"
+                                ? `on Floor view`
+                                : selectedTab === "2d"
+                                    ? `2d view`
+                                    : `3d view`
+                        }
+                        className="w-full h-[450px] md:h-[700px] object-contain"
+                    />
+                </div>
+                <div className='block md:hidden w-full flex items-center'>
+                    <button onClick={() => navigate(-1)} className='px-6 py-3 border border-secondary text-white rounded-full flex items-center justify-center'>
+                        Kthehu
+                    </button>
+                </div>
             </div>
         </div>
     )

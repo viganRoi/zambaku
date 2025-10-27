@@ -130,7 +130,7 @@ const Navbar = () => {
 
               <button
                 onClick={() => {
-                  navigate("/apartments");
+                  navigate("/");
                   setIsOpen(false);
                 }}
                 className="border border-secondary px-8 py-3 rounded-full mt-6 text-base"
@@ -196,7 +196,7 @@ const Navbar = () => {
                   </svg>MENU</span>
                 </button>
                 <button
-                  onClick={() => navigate("/apartments")}
+                  onClick={() => navigate("/")}
                   className="relative inline-flex items-center justify-center px-12 py-3 overflow-hidden text-white bg-transparent rounded-full group text-nowrap border border-secondary"
                 >
                   <span className="absolute left-1/2 -bottom-40 -translate-x-1/2 w-0 h-0 transition-all duration-700 ease-out bg-secondary rounded-full group-hover:w-72 group-hover:h-72 z-0"></span>
@@ -268,29 +268,38 @@ const Navbar = () => {
             <div className="w-full h-full flex flex-col md:flex-row items-center justify-center">
               <div className="w-full md:w-1/2 h-1/2 md:h-full flex flex-col items-start gap-6 text-4xl font-light text-white relative border-r border-secondary ">
                 <a
+                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
+                  onClick={() => {
+                    navigate("/apartments");
+                    setIsOpen(false);
+                  }}
+                >
+                  Selekto sipas kriterit
+                </a>
+                <a
                   href="https://zambaku.roitiv.com/rreth-nesh/"
-                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
+                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
                   onClick={() => setIsOpen(false)}
                 >
                   Rreth projektit tone
                 </a>
                 <a
                   href="https://zambaku.roitiv.com/benefitet/"
-                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
+                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
                   onClick={() => setIsOpen(false)}
                 >
                   Benefitet
                 </a>
                 <a
                   href="https://zambaku.roitiv.com/galeria/"
-                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
+                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
                   onClick={() => setIsOpen(false)}
                 >
                   Galeria
                 </a>
                 <a
                   href="https://zambaku.roitiv.com/kontakti/"
-                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-7xl"
+                  className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
                   onClick={() => setIsOpen(false)}
                 >
                   Kontakti
