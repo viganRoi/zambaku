@@ -356,7 +356,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <VrTourInterior isOpen={vrOpen} onClose={() => setVrOpen(false)} vctourUrl={'https://kuula.co/share/collection/7H5jr?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1'} />
+          <VrTourInterior isOpen={vrOpen} onClose={() => setVrOpen(false)} vtourUrl={'https://kuula.co/share/collection/7H5jr?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1'} />
         </>
       )}
     </>
