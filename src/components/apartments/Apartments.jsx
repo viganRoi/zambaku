@@ -7,7 +7,7 @@ const Apartments = ({ filteredApartments }) => {
 
     return (
         <div className="w-full h-full min-h-[160vh] flex flex-col items-center justify-start py-12 md:py-24 mb-44 bg-transparent">
-            <div className="base-width grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
+            <div className="w-23/24 md:base-width grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
                 {filteredApartments.slice(0, 9).map((el) => {
                     const key = el.apartmentId ?? el.id ?? el.apartmentNumber;
                     const sqft = el.netoSquare ?? el.square ?? el.sqft ?? '';

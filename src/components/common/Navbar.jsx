@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import VrTourInterior from "../hero/VrTourInterior";
 
 
 const Navbar = () => {
@@ -9,6 +10,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const drawerRef = useRef(null);
+
+  const [vrOpen, setVrOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -123,11 +126,15 @@ const Navbar = () => {
 
             {/* Links */}
             <div className="flex flex-col items-center gap-8 text-white mt-16 text-2xl">
+              <a
+                onClick={() => {
+                  navigate("/apartments");
+                  setIsOpen(false);
+                }} >Selekto sipas kriterit</a>
               <a href="https://zambaku.roitiv.com/rreth-nesh/" onClick={() => setIsOpen(false)}>Rreth Projektit</a>
               <a href="https://zambaku.roitiv.com/benefitet/" onClick={() => setIsOpen(false)}>Benefitet</a>
               <a href="https://zambaku.roitiv.com/galeria/" onClick={() => setIsOpen(false)}>Galeria</a>
               <a href="https://zambaku.roitiv.com/kontakti/" onClick={() => setIsOpen(false)}>Kontakti</a>
-
               <button
                 onClick={() => {
                   navigate("/");
@@ -212,7 +219,7 @@ const Navbar = () => {
               </a>
               <div className="w-1/3 flex items-center justify-end gap-4 text-white" >
                 <button
-                  onClick={() => navigate("/buildings")}
+                  onClick={() => setVrOpen(true)}
                   className="relative inline-flex items-center justify-center px-12 py-3 overflow-hidden text-white bg-transparent rounded-full group text-nowrap border border-secondary"
                 >
                   <span className="absolute left-1/2 -bottom-40 -translate-x-1/2 w-0 h-0 transition-all duration-700 ease-out bg-secondary rounded-full group-hover:w-72 group-hover:h-72 z-0"></span>
@@ -255,7 +262,7 @@ const Navbar = () => {
                 </button>
                 <button
                   onClick={() => {
-                    navigate("/buildings");
+                    setVrOpen(true);
                     setIsOpen(false);
                   }}
                   className="relative inline-flex items-center justify-center px-12 py-3 overflow-hidden text-white bg-transparent rounded-full group text-nowrap border border-secondary"
@@ -349,6 +356,7 @@ const Navbar = () => {
               </div>
             </div>
           </div>
+          <VrTourInterior isOpen={vrOpen} onClose={() => setVrOpen(false)} vctourUrl={'https://kuula.co/share/collection/7H5jr?logo=-1&info=0&fs=1&vr=1&sd=1&initload=0&thumbs=1'} />
         </>
       )}
     </>

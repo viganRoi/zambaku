@@ -11,6 +11,7 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
   const roomFilter = useSelector(getRegularRoomFilter);
   const squareFilter = useSelector(getRegularSquareFilter);
   const floorRange = useSelector(getRegularFloorFilter);
+  const floorFilter = useSelector(getRegularFloorFilter);
   const floorButtons = useSelector(getRegularFloors);
   const dispatch = useDispatch();
   const isSmallDev = window.innerWidth < 768;
@@ -47,13 +48,9 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
 
 
   return (
-    <div className='w-full h-full py-12 md:py-24 flex items-center justify-center bg-transparent border-t border-white/10'>
+    <div className='w-full h-full py-6 md:py-24 flex items-center justify-center bg-transparent border-t border-white/10'>
       <div className="base-width h-full md:h-28 text-white flex flex-col justify-between items-center gap-4 axiformaThin">
         <div className="w-full h-full flex flex-col md:flex-row gap-2 md:gap-4 justify-between items-start">
-          <div className="w-full md:w-auto h-full flex items-center">
-            <a className="text-white bg-secondary px-16 py-2 rounded-full font-semibold text-nowrap">Llamella B</a>
-          </div>
-          <a className='w-[1px] bg-white h-full' />
           <div className="w-full md:w-auto flex flex-col items-start gap-1 md:gap-4">
             <h1 className="text-secondary">{t('rooms')}</h1>
             <div className='w-full flex gap-2 justify-start'>
@@ -75,49 +72,71 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
                   <h1 className='text-white/50'>Deri: <span className='text-secondary'>{squareFilter.endVal}m<sup>2</sup></span></h1>
                 </div>
               </div>
-              
-            <div className="absolute top-7 w-full flex items-center justify-center">
-              <Slider
-                getAriaLabel={() => "size range"}
-                value={[squareFilter.startVal, squareFilter.endVal]}
-                shiftStep={1}
-                onChange={handleSizeChange}
-                step={1}
-                min={minSquare}
-                max={maxSquare}
-                color="var(--color-secondary)"
-                sx={{
-                  color: "var(--color-secondary)",
-                  height: '1px',
-                  width: '80%',
-                  '& .MuiSlider-thumb': {
-                    width: 16,
-                    height: 10,
-                    borderRadius: '999px',
-                    boxShadow: 'none',
-                  },
-                }}
-              />
-            </div>
+              <div className="absolute top-5 md:top-7 w-full flex items-center justify-center">
+                <Slider
+                  getAriaLabel={() => "size range"}
+                  value={[squareFilter.startVal, squareFilter.endVal]}
+                  shiftStep={1}
+                  onChange={handleSizeChange}
+                  step={1}
+                  min={minSquare}
+                  max={maxSquare}
+                  color="var(--color-secondary)"
+                  sx={{
+                    color: "var(--color-secondary)",
+                    height: '1px',
+                    width: '80%',
+                    '& .MuiSlider-thumb': {
+                      width: 16,
+                      height: 10,
+                      borderRadius: '999px',
+                      boxShadow: 'none',
+                    },
+                  }}
+                />
+              </div>
             </div>
           </div>
           <a className='w-[1px] bg-white h-full' />
-          <div className="w-full md:w-auto flex flex-col items-start gap-1 md:gap-4">
+          <div className="w-full flex flex-col items-start gap-2 md:gap-4">
             <h1 className="text-secondary">{t('floor')}</h1>
-            <div className='w-full flex gap-2 justify-start'>
-              {
-                // helper to check if a floor button is active (inside current range)
-              }
-              <button name='p' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('p')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>P</button>
-              <button name='1' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('1')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>1</button>
-              <button name='2' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('2')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>2</button>
-              <button name='3' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('3')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>3</button>
-              <button name='4' onClick={handleFloorChange} className={`px-4 py-2 rounded-full border border-white/50 text-nowrap ${(floorButtons.includes('4')) ? 'bg-white text-secondary' : 'bg-brand text-white'}`}>4</button>
+            <div className='relative w-full flex flex-col justify-between'>
+              <div className='border border-white/50 rounded-full px-4 w-full flex justify-between items-center'>
+                <div className='border-r border-white/50 w-1/2 h-full py-2'>
+                  <h1 className='text-white/50'>Nga: <span className='text-secondary'>{floorFilter.startVal}</span></h1>
+                </div>
+                <div className='p-2 w-1/2 h-full flex justify-start'>
+                  <h1 className='text-white/50'>Deri: <span className='text-secondary'>{floorFilter.endVal}</span></h1>
+                </div>
+              </div>
+              <div className="absolute top-5 md:top-7 w-full flex items-center justify-center">
+                <Slider
+                  getAriaLabel={() => "Floor range"}
+                  value={[floorFilter.startVal, floorFilter.endVal]}
+                  shiftStep={1}
+                  onChange={handleFloorChange}
+                  step={1}
+                  min={minFloor}
+                  max={maxFloor}
+                  color="var(--color-secondary)"
+                  sx={{
+                    color: "var(--color-secondary)",
+                    height: '1px',
+                    width: '80%',
+                    '& .MuiSlider-thumb': {
+                      width: 16,
+                      height: 10,
+                      borderRadius: '999px',
+                      boxShadow: 'none',
+                    },
+                  }}
+                />
+              </div>
             </div>
           </div>
           <a className='w-[1px] bg-white h-full' />
           <div className="w-full md:w-auto flex flex-col items-start justify-center gap-1 md:gap-4">
-            <div className='flex flex-col items-center justify-center gap-2 md:gap-4 '>
+            <div className='w-full flex flex-row md:flex-col items-center justify-between md:justify-center gap-2 md:gap-4 '>
               <button
                 className='flex items-center gap-4'
                 onClick={() => {

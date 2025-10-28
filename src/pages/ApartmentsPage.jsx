@@ -9,6 +9,7 @@ import './bckApartment.css'
 
 const AllApartmentsPage = () => {
   window.scrollTo({ top: 0 })
+  const isSmallDev = window.innerWidth < 700;
   const [apartments, setApartments] = useState([]);
   const [filteredApartments, setFilteredApartments] = useState([]);
   const [filterState, setFilterState] = useState(false);
@@ -82,13 +83,17 @@ const AllApartmentsPage = () => {
 
   return (
     <div className='mt-32 flex flex-col items-center'>
-      <div className='base-width mt-[100px]'>
-        <h1 className='anya text-white text-[100px]'>Apartmentet</h1>
+      <div className='base-width md:mt-[100px]'>
+        <h1 className='anya text-white text-3xl md:text-[100px]'>Apartmentet</h1>
       </div>
       <ApartmentsFilter setFilterState={setFilterState} available={filteredApartments?.length} />
+      {isSmallDev ? (
+        <Apartments filteredApartments={filteredApartments} />
+      ) : (
       <div className='apartment-page-bck scroller-thin'>
         <Apartments filteredApartments={filteredApartments} />
       </div>
+    )}
       <Contact />
     </div>
   );

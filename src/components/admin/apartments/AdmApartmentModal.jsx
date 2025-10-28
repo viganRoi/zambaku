@@ -332,7 +332,7 @@ function AdmApartmentModal() {
               <TextField
                 size="small"
                 multiline
-                label="URL e fotos per orientim"
+                label="URL e fotos per kate"
                 fullWidth
                 value={apartmentData.apartmentPositionImageUrl}
                 name="apartmentPositionImageUrl"
@@ -353,7 +353,7 @@ function AdmApartmentModal() {
                 }}
               />
             </Box>
-            <Box display={"flex"} justifyContent={"center"} mt={2}>
+            {/* <Box display={"flex"} justifyContent={"center"} mt={2}>
               <TextField
                 size="small"
                 value={apartmentData.floorImageUrl}
@@ -375,7 +375,7 @@ function AdmApartmentModal() {
                   ),
                 }}
               />
-            </Box>
+            </Box> */}
           </Box>
           <Divider
             variant="fullWidth"
