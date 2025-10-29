@@ -61,7 +61,7 @@ const SingleApartmentPage = () => {
 
 
   const handleOpenPdf = (pdfUrl) => {
-    window.open(`${homepage}/pdfs/${pdfUrl}`, '_blank');
+    window.open(`${homepage}/projektet/pdf/${pdfUrl}`, '_blank');
   };
 
   return (
