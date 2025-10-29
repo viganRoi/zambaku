@@ -8,6 +8,7 @@ import './tabs.css'
 import AdmApartmentIdModal from '../admin/apartments/AdmApartmentIdModal';
 import { imagePath } from '../../utils/consts';
 import { useTranslation } from "react-i18next";
+import ApartmentModal from '../cards/ApartmentModal';
 
 const BuildingView = ({
   handleNext,
@@ -111,7 +112,7 @@ const BuildingView = ({
                           image: apartment.image3dUrl,
                           title: apartment.name,
                           navigateTo: () => navigate(`/apartments/${apartment.id}`),
-                          sqft: apartment.netoSquare,
+                          sqft: apartment.square,
                           bedroom: apartment.rooms,
                           floor: apartment.floorNumber,
                         },
@@ -213,7 +214,7 @@ const BuildingView = ({
           <ContextMenu menu={contextMenu} setMenu={setContextMenu} />
         </AuthProvider>
       }
-      {/* {popup.open && <ApartmentModal apartment={popup.data} mousePosition={mousePosition} />} */}
+      {popup.open && <ApartmentModal apartment={popup.data} mousePosition={mousePosition} />}
       <AdmApartmentModal />
       <AdmApartmentIdModal />
     </div>
