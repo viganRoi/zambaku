@@ -17,7 +17,7 @@ const ApartmentModal = ({ apartment, mousePosition }) => {
             <div className='relative flex flex-col justify-between items-end w-full h-full'>
                 <div className="flex w-full justify-between items-start mb-2">
                     <div>
-                    <p className="text-base opacity-60 text-white">Terasa: {apartment.terrace}</p>
+                    <p className="text-base opacity-60 text-white">Terasa: {apartment.balconySquare}m<sup>2</sup></p>
                     <p className="text-base opacity-60 text-white">Dhoma: {apartment.bedroom === 0 || apartment.bedroom === "Studio" ? apartment.bedroom : `${apartment.bedroom} + 1`}</p>
                     <p className="text-base opacity-60 text-white">Kati: {apartment.floor}</p>
                     </div>

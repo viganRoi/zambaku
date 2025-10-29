@@ -56,9 +56,7 @@ const SingleApartment = ({ apartment,
                             
                             </svg>
                             <p className="text-lg md:text-2xl">
-                                {rooms === "Studio" || rooms === 0
-                                    ? rooms
-                                    : `${rooms} Terasa`}
+                                {(balconySquare || 0).toFixed(2)}m<sup>2</sup> Terasë
                             </p>
                         </div>
                         <div className="w-full flex gap-2 md:gap-4 items-center">
@@ -93,7 +91,7 @@ const SingleApartment = ({ apartment,
                             className="flex items-center justify-center w-full text-nowrap px-12 py-3 text-primary text-base md:text-xl bg-secondary hover:bg-primary hover:text-secondary duration-300 rounded-full">
                             Shkarko PDF
                         </button>
-                        <button className="flex items-center justify-center w-full text-nowrap px-12 py-3 text-primary text-base md:text-xl bg-secondary hover:bg-primary hover:text-secondary duration-300 rounded-full">
+                        <button className="flex items-center justify-center w-full text-nowrap px-12 py-3 text-secondary text-base md:text-xl border hover:bg-secondary hover:text-primary duration-300 rounded-full">
                             Kontaktoni per cmimin
                         </button>
                     </div>
