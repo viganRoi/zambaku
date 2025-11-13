@@ -565,36 +565,6 @@ function AdmApartmentModal() {
                   </RadioGroup>
                 </FormControl>
               </Grid>
-              <Grid item sm={12} md={6}>
-                <FormControl>
-                  <FormLabel id="demo-row-radio-buttons-group-label">
-                    Ka pamje nga deti
-                  </FormLabel>
-                  <RadioGroup
-                    value={apartmentData.hasSeaView === true ? "true" : "false"}
-                    row
-                    onChange={(e) => {
-                      setApartmentData((prev) => ({
-                        ...prev,
-                        hasSeaView: e.target.value === "true",
-                      }));
-                    }}
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      value="true"
-                      control={<Radio />}
-                      label="PO"
-                    />
-                    <FormControlLabel
-                      value="false"
-                      control={<Radio />}
-                      label="JO"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </Grid>
               <Grid item sm={12} md={12}>
                 <TextField
                   multiline

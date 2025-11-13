@@ -49,7 +49,15 @@ const SingleApartment = ({ apartment,
                     </div>
                     <div className='w-full  flex flex-col items-start gap-2 py-4'>
                         <div className='w-full flex flex-col w-full items-start justify-between py-0 md:py-4'>
-                            <p className='text-[60px] md:text-[100px] font-thin leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{name} <span className='text-[60px] md:text-[100px] text-secondary font-normal leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{(square || 0).toFixed(2)}m<sup>2</sup></span> </p>
+                            <p className='text-[60px] md:text-[100px] font-thin leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{name} <span className='text-[60px] md:text-[100px] text-secondary font-normal leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{(square + balconySquare || 0).toFixed(2)}m<sup>2</sup></span> </p>
+                        </div>
+                        <div className="w-full flex gap-2 md:gap-4 items-center">
+                            <svg width="48" height="50" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            
+                            </svg>
+                            <p className="text-lg md:text-2xl">
+                                {(square || 0).toFixed(2)}m<sup>2</sup> Sipërfaqe
+                            </p>
                         </div>
                         <div className="w-full flex gap-2 md:gap-4 items-center">
                             <svg width="48" height="50" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +74,7 @@ const SingleApartment = ({ apartment,
                             <p className="text-lg md:text-2xl">
                                 {rooms === "Studio" || rooms === 0
                                     ? rooms
-                                    : `${rooms} Dhoma`}
+                                    : `${rooms} + 1`}
                             </p>
                         </div>
                         <div className="w-full flex gap-2 md:gap-4 items-center">
