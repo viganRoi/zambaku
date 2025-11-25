@@ -53,7 +53,7 @@ const Navbar = () => {
             className={`fixed top-0 left-0 w-full h-24 md:h-32 flex items-center justify-between px-6 md:px-20 z-200 duration-300 ${isOpen || isScrolled ? "bg-primary shadow-xl" : "bg-primary shadow-xl"
               }`}
           >
-            <a href="https://zambaku.roitiv.com/">
+            <a href="https://zambaku.com/">
               <img
                 src={`/projektet/assets/images/brand/logo.png`}
                 alt="logo"
@@ -76,7 +76,7 @@ const Navbar = () => {
                 <span className="relative z-10">Turi Vizual</span>
               </button>
               <a
-                href="https://zambaku.roitiv.com/kontakti/"
+                href="https://zambaku.com/kontakti/"
                 className="px-10 py-3 rounded-full bg-secondary border border-secondary text-primary text-nowrap"
               >
                 Na Kontaktoni
@@ -116,7 +116,7 @@ const Navbar = () => {
             </button>
 
             {/* Logo */}
-            <a href="https://zambaku.roitiv.com/" className="mx-auto mt-8">
+            <a href="https://zambaku.com/" className="mx-auto mt-8">
               <img
                 src="/projektet/assets/images/brand/logo.png"
                 alt="logo"
@@ -131,10 +131,10 @@ const Navbar = () => {
                   navigate("/apartments");
                   setIsOpen(false);
                 }} >Selekto sipas kriterit</a>
-              <a href="https://zambaku.roitiv.com/rreth-nesh/" onClick={() => setIsOpen(false)}>Rreth Projektit</a>
-              <a href="https://zambaku.roitiv.com/benefitet/" onClick={() => setIsOpen(false)}>Benefitet</a>
-              <a href="https://zambaku.roitiv.com/galeria/" onClick={() => setIsOpen(false)}>Galeria</a>
-              <a href="https://zambaku.roitiv.com/kontakti/" onClick={() => setIsOpen(false)}>Kontakti</a>
+              <a href="https://zambaku.com/rreth-nesh/" onClick={() => setIsOpen(false)}>Rreth Projektit</a>
+              <a href="https://zambaku.com/benefitet/" onClick={() => setIsOpen(false)}>Benefitet</a>
+              <a href="https://zambaku.com/galeria/" onClick={() => setIsOpen(false)}>Galeria</a>
+              <a href="https://zambaku.com/kontakti/" onClick={() => setIsOpen(false)}>Kontakti</a>
               <button
                 onClick={() => {
                   navigate("/");
@@ -210,7 +210,7 @@ const Navbar = () => {
                   <span className="relative z-10">Selekto Apartmentin</span>
                 </button>
               </div>
-              <a href="https://zambaku.roitiv.com/">
+              <a href="https://zambaku.com/">
                 <img
                   src={`${isScrolled ? "/projektet/assets/images/brand/logo.png" : "/projektet/assets/images/brand/logo.png"}`}
                   alt="logo"
@@ -226,7 +226,7 @@ const Navbar = () => {
                   <span className="relative z-10">Turi Vizual</span>
                 </button>
                 <a
-                  href="https://zambaku.roitiv.com/kontakti/"
+                  href="https://zambaku.com/kontakti/"
                   className="px-12 py-3 rounded-full bg-secondary border border-secondary text-primary text-nowrap"
                 >
                   Na Kontaktoni
@@ -246,7 +246,7 @@ const Navbar = () => {
               <AiOutlineClose className="text-white text-2xl" />
             </button>
             <div className="w-full flex items-center justify-between text-white">
-              <a href="https://zambaku.roitiv.com/">
+              <a href="https://zambaku.com/">
                 <img src="/projektet/assets/images/brand/whiteLogo.png" alt="" className="object-contain h-36" />
               </a>
               <div className="w-full flex items-center justify-end gap-4">
@@ -284,28 +284,28 @@ const Navbar = () => {
                   Selekto sipas kriterit
                 </a>
                 <a
-                  href="https://zambaku.roitiv.com/rreth-nesh/"
+                  href="https://zambaku.com/rreth-nesh/"
                   className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
                   onClick={() => setIsOpen(false)}
                 >
                   Rreth projektit tone
                 </a>
                 <a
-                  href="https://zambaku.roitiv.com/benefitet/"
+                  href="https://zambaku.com/benefitet/"
                   className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
                   onClick={() => setIsOpen(false)}
                 >
                   Benefitet
                 </a>
                 <a
-                  href="https://zambaku.roitiv.com/galeria/"
+                  href="https://zambaku.com/galeria/"
                   className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
                   onClick={() => setIsOpen(false)}
                 >
                   Galeria
                 </a>
                 <a
-                  href="https://zambaku.roitiv.com/kontakti/"
+                  href="https://zambaku.com/kontakti/"
                   className="w-full cursor-pointer z-20 md:opacity-80 hover:opacity-100 duration-300 anya text-3xl md:text-6xl"
                   onClick={() => setIsOpen(false)}
                 >
