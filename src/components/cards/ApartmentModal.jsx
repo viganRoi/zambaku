@@ -5,7 +5,7 @@ const ApartmentModal = ({ apartment, mousePosition }) => {
     const {t} = useTranslation(); 
     return (
         <div
-            className='relative z-10 h-52 w-84 px-4 py-4 bg-primary rounded-lg shadow-lg flex flex-col justify-between'
+            className='relative z-100 h-52 w-84 px-4 py-4 bg-primary rounded-lg shadow-lg flex flex-col justify-between'
             style={{
                 position: "fixed",
                 pointerEvents: "none",
@@ -17,7 +17,8 @@ const ApartmentModal = ({ apartment, mousePosition }) => {
             <div className='relative flex flex-col justify-between items-end w-full h-full'>
                 <div className="flex w-full justify-between items-start mb-2">
                     <div>
-                    <p className="text-base opacity-60 text-white">Terasa: {apartment.balconySquare}m<sup>2</sup></p>
+                    <p className="text-base opacity-60 text-white">Terasa: {(apartment.sqft || 0).toFixed(2)}m<sup>2</sup></p>
+                    <p className="text-base opacity-60 text-white">Terasa: {(apartment.balconySquare || 0).toFixed(2)}m<sup>2</sup></p>
                     <p className="text-base opacity-60 text-white">Dhoma: {apartment.bedroom === 0 || apartment.bedroom === "Studio" ? apartment.bedroom : `${apartment.bedroom} + 1`}</p>
                     <p className="text-base opacity-60 text-white">Kati: {apartment.floor}</p>
                     </div>
@@ -26,7 +27,7 @@ const ApartmentModal = ({ apartment, mousePosition }) => {
                     </div>
                 </div>
                 <div className='flex flex-col'>
-                    <h1 className="certon text-2xl text-secondary">{apartment.sqft}m<sup>2</sup></h1>
+                    <h1 className="certon text-2xl text-secondary">{(apartment.sqft + apartment.balconySquare || 0).toFixed(2)}m<sup>2</sup></h1>
                 </div>
             </div>
         </div>

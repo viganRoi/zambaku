@@ -6,7 +6,7 @@ const Contact = () => {
             className='relative w-full h-full md:min-h-[1500px] flex flex-col items-center justify-start gap-2 text-center relative py-28 md:py-48'
             style={{ backgroundImage: `url(/projektet/assets/images/hero/bckContact.jpg)`, backgroundSize: 'cover', backgroundPosition: '0, 0' }}
         >
-            <div className='absolute -top-50 base-width md:h-80 bg-secondary transition-colors duration-300 hover:bg-gradient-to-t hover:from-secondary/100 hover:to-primary/10 flex flex-col items-center justify-center group'>
+            <div className='absolute -top-40 base-width md:h-80 bg-secondary transition-colors duration-300 hover:bg-gradient-to-t hover:from-secondary/100 hover:to-primary/10 flex flex-col items-center justify-center group'>
                 <div className='base-width uppercase flex justify-center md:justify-between items-center flex-wrap py-12 md:py-0'>
                     <h1 className='text-primary montserrat text-600 text-xl md:text-[38px] md:text-nowrap'>jeni tË interesuar pËr projektin tonË ?</h1>
                     <button className='bg-primary text-secondary rounded-full w-30 md:w-36 h-30 md:h-36 text-nowrap text-sm md:text-base'>Na kontaktoni</button>

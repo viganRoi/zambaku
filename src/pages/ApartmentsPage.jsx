@@ -90,10 +90,10 @@ const AllApartmentsPage = () => {
       {isSmallDev ? (
         <Apartments filteredApartments={filteredApartments} />
       ) : (
-      <div className='apartment-page-bck scroller-thin'>
-        <Apartments filteredApartments={filteredApartments} />
-      </div>
-    )}
+        <div className='apartment-page-bck scroller-thin'>
+          <Apartments filteredApartments={filteredApartments} />
+        </div>
+      )}
       <Contact />
     </div>
   );

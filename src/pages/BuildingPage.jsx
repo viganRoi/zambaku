@@ -103,11 +103,11 @@ const BuildingPage = () => {
   };
 
   return (
-    <div className='relative h-screen w-full flex flex-col'>
-      <h1 className='absolute top-28 md:top-36 left-4 md:left-22 z-50 text-primary bg-secondary px-4 md:px-6 py-2 md:py-3 rounded-lg uppercase text-xl md:text-3xl anya'>Llamella {buildingData[0]?.buildingName}</h1>
+    <div className='relative h-screen w-full flex flex-col items-center'>
+      <h1 className='absolute top-28 md:top-36  md:left-22 z-50 text-primary bg-secondary px-4 md:px-6 py-2 md:py-3 rounded-lg uppercase text-xl md:text-3xl anya'>Llamella {buildingData[0]?.buildingName}</h1>
       <button
         onClick={toggleFilter}
-        className="absolute top-28 md:top-36 right-4 md:right-22 w-48 md:w-108 z-50 text-secondary bg-primary px-4 md:pl-6 md:pr-3 py-2 md:py-3 flex items-center justify-between gap-4 md:gap-44 rounded-2xl text-xl text-nowrap transition-all duration-300"
+        className="absolute bottom-28 md:bottom-auto md:top-36 left-4 md:left-auto md:right-22 w-48 md:w-108 z-50 text-primary md:text-secondary bg-secondary md:bg-primary px-4 md:pl-6 md:pr-3 py-2 md:py-3 flex items-center justify-between gap-4 md:gap-44 rounded-2xl text-xl text-nowrap transition-all duration-300"
       >
         <p>{filterOpen ? "Mbyll filterin" : "Shiko filterin"}</p>
         <svg
@@ -116,18 +116,18 @@ const BuildingPage = () => {
           viewBox="0 0 24 12"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={`transition-transform duration-300 ${filterOpen ? "" : "rotate-180"}`}
+          className={`absolute right-2 md:right-10 transition-transform duration-300 ${filterOpen ? "" : "rotate-180"}`}
         >
           <path
             fillRule="evenodd"
             clipRule="evenodd"
             d="M12.7116 1.84306L18.3686 7.50006L16.9546 8.91406L12.0046 3.96406L7.05463 8.91406L5.64062 7.50006L11.2976 1.84306C11.4852 1.65559 11.7395 1.55028 12.0046 1.55028C12.2698 1.55028 12.5241 1.65559 12.7116 1.84306Z"
-            fill="#E4AB8E"
+            fill={isSmallDev ? "var(--color-primary)" : "var(--color-secondary)"}
           />
         </svg>
       </button>
       <div
-        className={`absolute top-28 md:top-36 right-4 md:right-48 overflow-hidden transition-all duration-500 ease-in-out z-40 ${filterOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
+        className={`absolute  bottom-28 md:bottom-auto md:top-36 left-4 md:left-auto md:right-22 overflow-hidden transition-all duration-500 ease-in-out z-40 ${filterOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
           }`}
       >
         <BuildingFilter setFilterState={setFilterState} available={available} buildingName={buildingData[0]?.buildingNr} />

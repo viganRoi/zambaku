@@ -66,10 +66,10 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
             <div className='relative w-full md:w-64 flex flex-col justify-between'>
               <div className='border border-white/50 rounded-full px-4 w-full flex justify-between items-center'>
                 <div className='border-r border-white/50 w-1/2 h-full py-2'>
-                  <h1 className='text-white/50'>Nga: <span className='text-secondary'>{squareFilter.startVal}m<sup>2</sup></span></h1>
+                  <h1 className='text-white/50 text-nowrap'>Nga: <span className='text-secondary'>{squareFilter.startVal}m<sup>2</sup></span></h1>
                 </div>
                 <div className='p-2 w-1/2 h-full flex justify-start'>
-                  <h1 className='text-white/50'>Deri: <span className='text-secondary'>{squareFilter.endVal}m<sup>2</sup></span></h1>
+                  <h1 className='text-white/50 text-nowrap'>Deri: <span className='text-secondary'>{squareFilter.endVal}m<sup>2</sup></span></h1>
                 </div>
               </div>
               <div className="absolute top-5 md:top-7 w-full flex items-center justify-center">
@@ -98,15 +98,15 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
             </div>
           </div>
           <a className='w-[1px] bg-white h-full' />
-          <div className="w-full flex flex-col items-start gap-2 md:gap-4">
+          <div className="w-full md:w-auto flex flex-col items-start gap-2 md:gap-4">
             <h1 className="text-secondary">{t('floor')}</h1>
-            <div className='relative w-full flex flex-col justify-between'>
+            <div className='relative w-full md:w-64 flex flex-col justify-between'>
               <div className='border border-white/50 rounded-full px-4 w-full flex justify-between items-center'>
                 <div className='border-r border-white/50 w-1/2 h-full py-2'>
-                  <h1 className='text-white/50'>Nga: <span className='text-secondary'>{floorFilter.startVal}</span></h1>
+                  <h1 className='text-white/50 text-nowrap'>Nga: <span className='text-secondary'>{floorFilter.startVal}</span></h1>
                 </div>
                 <div className='p-2 w-1/2 h-full flex justify-start'>
-                  <h1 className='text-white/50'>Deri: <span className='text-secondary'>{floorFilter.endVal}</span></h1>
+                  <h1 className='text-white/50 text-nowrap'>Deri: <span className='text-secondary'>{floorFilter.endVal}</span></h1>
                 </div>
               </div>
               <div className="absolute top-5 md:top-7 w-full flex items-center justify-center">
@@ -115,7 +115,7 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
                   value={[floorFilter.startVal, floorFilter.endVal]}
                   shiftStep={1}
                   onChange={handleFloorChange}
-                  step={1}
+                  step={1} text-nowrap
                   min={minFloor}
                   max={maxFloor}
                   color="var(--color-secondary)"
@@ -149,8 +149,8 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
                 </svg>
                 Reseto
               </button>
-              <button className="text-white border border-2 hover: border-secondary px-4 py-2 rounded-full font-semibold text-nowrap">
-                Selekto Apartmentin
+              <button className="text-white border border-2 hover: border-secondary px-4 py-2 rounded-full text-nowrap">
+                Filtro Apartmentin
               </button>
             </div>
           </div>

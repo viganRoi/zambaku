@@ -1,0 +1,190 @@
+import React, { useState, useEffect } from 'react'
+import { BASE_URL, EURO_SYMBOL } from '../../../utils/consts';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+const OffertModal = ({ open, handleClose, apartmentData }) => {
+  const [clientName, setClientName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+
+  const [apartmentId, setApartmentId] = useState(apartmentData?.id || '');
+  const [pricePerM2, setPricePerM2] = useState(0);
+  const [apartmentSquare, setApartmentSquare] = useState(apartmentData?.square || 0);
+
+  const [parkingId, setParkingId] = useState('');
+  const [parkingPrice, setParkingPrice] = useState(0);
+
+  const [depoId, setDepoId] = useState('');
+  const [depoPrice, setDepoPrice] = useState(0);
+
+  const [installmentsCount, setInstallmentsCount] = useState(1);
+  const [installments, setInstallments] = useState(Array.from({ length: 1 }, () => ({ amount: 0 })));
+
+  useEffect(() => {
+    setApartmentId(apartmentData?.id || '');
+    setApartmentSquare(apartmentData?.square || 0);
+  }, [apartmentData]);
+
+  useEffect(() => {
+    // keep installments array in sync with count
+    setInstallments((prev) => {
+      const next = [...prev];
+      while (next.length < installmentsCount) next.push({ amount: 0 });
+      while (next.length > installmentsCount) next.pop();
+      return next;
+    });
+  }, [installmentsCount]);
+
+
+  const totalM2Price = (parseFloat(pricePerM2) || 0) * (parseFloat(apartmentSquare) || 0);
+  const grandTotal = totalM2Price + (parseFloat(parkingPrice) || 0) + (parseFloat(depoPrice) || 0);
+
+  // Distribute grand total into installments if they are all zero
+  useEffect(() => {
+    if ((parseFloat(grandTotal) || 0) <= 0) return;
+    setInstallments((prev) => {
+      const allZero = prev.every((it) => !it.amount);
+      if (!allZero) return prev;
+      // single installment should take full amount
+      if (installmentsCount === 1) {
+        return [{ amount: +(+grandTotal).toFixed(2) }];
+      }
+      const per = +((grandTotal / installmentsCount).toFixed(2));
+      const arr = Array.from({ length: installmentsCount }, () => ({ amount: per }));
+      // adjust last to match rounding
+      const sum = arr.reduce((s, i) => s + i.amount, 0);
+      const diff = +(grandTotal - sum).toFixed(2);
+      if (diff !== 0) arr[arr.length - 1].amount = +(arr[arr.length - 1].amount + diff).toFixed(2);
+      return arr;
+    });
+  }, [grandTotal, installmentsCount]);
+
+  const handleInstallmentChange = (index, value) => {
+    setInstallments((prev) => {
+      const next = [...prev];
+      const parsed = parseFloat(value) || 0;
+      const otherSum = prev.reduce((s, it, i) => (i === index ? s : s + (parseFloat(it.amount) || 0)), 0);
+      const maxAllowed = Math.max(0, +(grandTotal - otherSum).toFixed(2));
+      const newAmount = Math.min(parsed, maxAllowed);
+      next[index] = { amount: newAmount };
+      return next;
+    });
+  };
+
+  const incrementInstallments = () => setInstallmentsCount((c) => Math.min(8, c + 1));
+  const decrementInstallments = () => setInstallmentsCount((c) => Math.max(1, c - 1));
+
+  const sumInstallments = installments.reduce((s, it) => s + (parseFloat(it.amount) || 0), 0);
+  const remaining = +(grandTotal - sumInstallments).toFixed(2);
+  const canSave = (grandTotal === 0) || Math.abs(remaining) < 0.01;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!canSave) {
+      toast.error('Installments must sum to grand total');
+      return;
+    }
+
+    const data = {
+      clientName,
+      phoneNumber,
+      email,
+      apartmentId,
+      pricePerM2: parseFloat(pricePerM2) || 0,
+      apartmentSquare: parseFloat(apartmentSquare) || 0,
+      parkingId,
+      parkingPrice: parseFloat(parkingPrice) || 0,
+      depoId,
+      depoPrice: parseFloat(depoPrice) || 0,
+      installments: installments.map((it) => ({ amount: it.amount, percent: grandTotal > 0 ? ((it.amount / grandTotal) * 100).toFixed(2) : '0.00' })),
+      total: parseFloat(grandTotal) || 0,
+    };
+
+    try {
+      await axios.post(`${BASE_URL}/api/v1/sales`, data, { headers: { 'Content-Type': 'application/json' } });
+      toast.success('U ruajt me sukses!');
+      handleClose();
+    } catch (err) {
+      console.error(err);
+      toast.error('Gabim gjatë ruajtjes');
+    }
+  };
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 99900 }}>
+      <div className="absolute inset-0 bg-black opacity-50 z-10" onClick={handleClose} />
+      <div className="relative bg-white rounded-lg shadow-lg w-full max-w-3xl mx-4 p-6 z-20">
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-semibold">Offert</h3>
+          <button onClick={handleClose} className="text-gray-600 hover:text-gray-900">✕</button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="mt-4 space-y-1">
+          <h1 className='font-semibold text-lg'>Client Info</h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <input required value={clientName} onChange={(e) => setClientName(e.target.value)} name="clientName" placeholder="Name" className="border rounded px-3 py-2" />
+            <input required value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} name="phoneNumber" placeholder="Telephone" className="border rounded px-3 py-2" />
+            <input value={email} onChange={(e) => setEmail(e.target.value)} name="email" placeholder="E-mail" className="border rounded px-3 py-2" />
+          </div>
+          <h1 className='font-semibold text-lg'>Apartment Info</h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <input value={apartmentId} onChange={(e) => setApartmentId(e.target.value)} name="apartmentId" placeholder="Apartment ID" className="border rounded px-3 py-2" />
+            <input value={pricePerM2} onChange={(e) => setPricePerM2(e.target.value)} name="pricePerM2" placeholder={`Price per m2 (${EURO_SYMBOL})`} className="border rounded px-3 py-2" />
+            <input value={apartmentSquare} onChange={(e) => setApartmentSquare(e.target.value)} name="apartmentSquare" placeholder="m2" className="border rounded px-3 py-2" />
+          </div>
+          <h1 className='font-semibold text-lg'>Parking Info</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input value={parkingId} onChange={(e) => setParkingId(e.target.value)} name="parkingId" placeholder="Parking ID" className="border rounded px-3 py-2" />
+            <input value={parkingPrice} onChange={(e) => setParkingPrice(e.target.value)} name="parkingPrice" placeholder={`Parking price (${EURO_SYMBOL})`} className="border rounded px-3 py-2" />
+          </div>
+          <h1 className='font-semibold text-lg'>Depo Info</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input value={depoId} onChange={(e) => setDepoId(e.target.value)} name="depoId" placeholder="Depo ID" className="border rounded px-3 py-2" />
+            <input value={depoPrice} onChange={(e) => setDepoPrice(e.target.value)} name="depoPrice" placeholder={`Depo price (${EURO_SYMBOL})`} className="border rounded px-3 py-2" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="col-span-2 flex items-center gap-3">
+              <span className="font-semibold">Installments</span>
+              <div className="flex items-center gap-2">
+                <button type="button" onClick={decrementInstallments} className="px-2 py-1 bg-gray-200 rounded">-</button>
+                <div className="px-3">{installmentsCount}</div>
+                <button type="button" onClick={incrementInstallments} className="px-2 py-1 bg-gray-200 rounded">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            {installments.map((it, idx) => (
+              <div key={idx} className="flex gap-3 items-center">
+                <input value={it.amount} onChange={(e) => handleInstallmentChange(idx, e.target.value)} placeholder={`Installment ${idx + 1} amount (${EURO_SYMBOL})`} className="flex-1 border rounded px-3 py-2" />
+                <div className="w-28 text-right text-sm">{grandTotal > 0 ? `${((it.amount / grandTotal) * 100 || 0).toFixed(2)}%` : '0.00%'}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+              <div className="text-sm text-gray-600">Total m2 price</div>
+              <div className="font-semibold text-lg">{totalM2Price.toFixed(2)} {EURO_SYMBOL}</div>
+            </div>
+            <div>
+              <div className="text-sm text-gray-600">Grand total</div>
+              <div className="font-semibold text-lg">{grandTotal.toFixed(2)} {EURO_SYMBOL}</div>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3">
+            <button type="button" onClick={handleClose} className="px-4 py-2 border rounded">Cancel</button>
+            <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default OffertModal

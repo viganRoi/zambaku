@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import VrTourInterior from "../hero/VrTourInterior";
+import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
+import { getWishlistCount } from "../../features/wishList/WishlistSlice";
+import { useSelector } from "react-redux";
 
 
 const Navbar = () => {
@@ -10,6 +13,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const drawerRef = useRef(null);
+  const wishListItemCount = useSelector(getWishlistCount);
 
   const [vrOpen, setVrOpen] = useState(false);
 
@@ -137,6 +141,23 @@ const Navbar = () => {
               <a href="https://zambaku.com/kontakti/" onClick={() => setIsOpen(false)}>Kontakti</a>
               <button
                 onClick={() => {
+                  if (wishListItemCount > 0)
+                    navigate("/wishlist");
+                  setIsOpen(false);
+                }}
+                disabled={wishListItemCount === 0}
+                aria-disabled={wishListItemCount === 0}
+                className={`relative ${wishListItemCount === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                {wishListItemCount > 0 && (
+                  <span className="absolute -top-1 -right-5 sm:top-[-10px] sm:right-[-10px] bg-secondary md:bg-[#042033] text-primary md:text-white text-[10px] sm:text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {wishListItemCount}
+                  </span>
+                )}
+                Wishlist
+              </button>
+              <button
+                onClick={() => {
                   navigate("/");
                   setIsOpen(false);
                 }}
@@ -189,55 +210,74 @@ const Navbar = () => {
         </>
       ) : (
         <>
-          <nav className={`fixed top-0 left-0 w-full h-32 flex items-center justify-center z-200  duration-300 ${isOpen || isScrolled ? "bg-primary shadow-xl" : "bg-transparent"}`}>
+          <nav className={`fixed top-0 left-0 w-full h-24 flex items-center justify-center z-200  duration-300 ${isOpen || isScrolled ? "bg-primary shadow-xl" : "bg-transparent"}`}>
             <div className="base-width hidden md:flex items-center justify-between">
-              <div className="w-1/3 flex items-center gap-8">
+              <div className="w-1/3 flex items-center gap-2">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   disabled={isOpen}
-                  className="relative inline-flex items-center justify-center px-12 py-3 overflow-hidden text-white group-hover:text-primary transition-colors duration-300 bg-transparent rounded-full group text-nowrap border border-secondary"
+                  className="relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white group-hover:text-primary transition-colors duration-300 bg-primary rounded-full group text-nowrap border border-secondary text-sm"
                 >
                   <span className="absolute left-1/2 -bottom-40 -translate-x-1/2 w-0 h-0 transition-all duration-700 ease-out bg-secondary rounded-full group-hover:w-72 group-hover:h-72 z-0"></span>
-                  <span className="relative z-10 flex gap-2"><svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="fill-current">
-                    <path d="M4 18.5C3.71667 18.5 3.47934 18.404 3.288 18.212C3.09667 18.02 3.00067 17.7827 3 17.5C2.99934 17.2173 3.09534 16.98 3.288 16.788C3.48067 16.596 3.718 16.5 4 16.5H20C20.2833 16.5 20.521 16.596 20.713 16.788C20.905 16.98 21.0007 17.2173 21 17.5C20.9993 17.7827 20.9033 18.0203 20.712 18.213C20.5207 18.4057 20.2833 18.5013 20 18.5H4ZM4 13.5C3.71667 13.5 3.47934 13.404 3.288 13.212C3.09667 13.02 3.00067 12.7827 3 12.5C2.99934 12.2173 3.09534 11.98 3.288 11.788C3.48067 11.596 3.718 11.5 4 11.5H20C20.2833 11.5 20.521 11.596 20.713 11.788C20.905 11.98 21.0007 12.2173 21 12.5C20.9993 12.7827 20.9033 13.0203 20.712 13.213C20.5207 13.4057 20.2833 13.5013 20 13.5H4ZM4 8.5C3.71667 8.5 3.47934 8.404 3.288 8.212C3.09667 8.02 3.00067 7.78267 3 7.5C2.99934 7.21733 3.09534 6.98 3.288 6.788C3.48067 6.596 3.718 6.5 4 6.5H20C20.2833 6.5 20.521 6.596 20.713 6.788C20.905 6.98 21.0007 7.21733 21 7.5C20.9993 7.78267 20.9033 8.02033 20.712 8.213C20.5207 8.40567 20.2833 8.50133 20 8.5H4Z" fill="currentColor" />
-                  </svg>MENU</span>
+                  <span className="relative z-10 flex gap-1">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="fill-current">
+                      <path d="M4 18.5C3.71667 18.5 3.47934 18.404 3.288 18.212C3.09667 18.02 3.00067 17.7827 3 17.5C2.99934 17.2173 3.09534 16.98 3.288 16.788C3.48067 16.596 3.718 16.5 4 16.5H20C20.2833 16.5 20.521 16.596 20.713 16.788C20.905 16.98 21.0007 17.2173 21 17.5C20.9993 17.7827 20.9033 18.0203 20.712 18.213C20.5207 18.4057 20.2833 18.5013 20 18.5H4ZM4 13.5C3.71667 13.5 3.47934 13.404 3.288 13.212C3.09667 13.02 3.00067 12.7827 3 12.5C2.99934 12.2173 3.09534 11.98 3.288 11.788C3.48067 11.596 3.718 11.5 4 11.5H20C20.2833 11.5 20.521 11.596 20.713 11.788C20.905 11.98 21.0007 12.2173 21 12.5C20.9993 12.7827 20.9033 13.0203 20.712 13.213C20.5207 13.4057 20.2833 13.5013 20 13.5H4ZM4 8.5C3.71667 8.5 3.47934 8.404 3.288 8.212C3.09667 8.02 3.00067 7.78267 3 7.5C2.99934 7.21733 3.09534 6.98 3.288 6.788C3.48067 6.596 3.718 6.5 4 6.5H20C20.2833 6.5 20.521 6.596 20.713 6.788C20.905 6.98 21.0007 7.21733 21 7.5C20.9993 7.78267 20.9033 8.02033 20.712 8.213C20.5207 8.40567 20.2833 8.50133 20 8.5H4Z" fill="currentColor" />
+                    </svg>
+                    MENU</span>
                 </button>
                 <button
-                  onClick={() => navigate("/")}
-                  className="relative inline-flex items-center justify-center px-12 py-3 overflow-hidden text-white bg-transparent rounded-full group text-nowrap border border-secondary"
+                  onClick={() => setVrOpen(true)}
+                  className="relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white bg-primary rounded-full group text-nowrap border border-secondary text-sm"
                 >
                   <span className="absolute left-1/2 -bottom-40 -translate-x-1/2 w-0 h-0 transition-all duration-700 ease-out bg-secondary rounded-full group-hover:w-72 group-hover:h-72 z-0"></span>
-                  <span className="relative z-10">Selekto Apartmentin</span>
+                  <span className="relative z-10">VIRTUAL TOUR</span>
                 </button>
               </div>
               <a href="https://zambaku.com/">
                 <img
                   src={`${isScrolled ? "/projektet/assets/images/brand/logo.png" : "/projektet/assets/images/brand/logo.png"}`}
                   alt="logo"
-                  className="h-24 mx-auto"
+                  className="h-15 mx-auto"
                 />
               </a>
-              <div className="w-1/3 flex items-center justify-end gap-4 text-white" >
+              <div className="w-1/3 flex items-center justify-end gap-3 text-white" >
                 <button
-                  onClick={() => setVrOpen(true)}
-                  className="relative inline-flex items-center justify-center px-12 py-3 overflow-hidden text-white bg-transparent rounded-full group text-nowrap border border-secondary"
+                  onClick={() => { if (wishListItemCount > 0) navigate("/wishlist"); }}
+                  disabled={wishListItemCount === 0}
+                  aria-disabled={wishListItemCount === 0}
+                  className={`relative ${wishListItemCount === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  {wishListItemCount > 0 && (
+                    <span className="absolute -top-1 -right-1 sm:top-[-10px] sm:right-[-10px] bg-[#042033] text-white text-[10px] sm:text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
+                      {wishListItemCount}
+                    </span>
+                  )}
+                  {wishListItemCount > 0 ? (
+                    <IoIosHeart className="fill-secondary text-lg sm:text-2xl" />
+                  ) : (
+                    <IoIosHeartEmpty className="fill-secondary text-lg sm:text-2xl" />
+                  )}
+                </button>
+                <button
+                  onClick={() => navigate("/")}
+                  className="relative inline-flex items-center justify-center px-8 py-2 overflow-hidden text-white bg-primary rounded-full group text-nowrap border border-secondary text-sm"
                 >
                   <span className="absolute left-1/2 -bottom-40 -translate-x-1/2 w-0 h-0 transition-all duration-700 ease-out bg-secondary rounded-full group-hover:w-72 group-hover:h-72 z-0"></span>
-                  <span className="relative z-10">Turi Vizual</span>
+                  <span className="relative z-10">Selektimi gjeneral</span>
                 </button>
                 <a
                   href="https://zambaku.com/kontakti/"
-                  className="px-12 py-3 rounded-full bg-secondary border border-secondary text-primary text-nowrap"
+                  className="px-8 py-2 rounded-full bg-secondary border border-secondary text-primary text-nowrap text-sm"
                 >
-                  Na Kontaktoni
+                  Kontaktoni
                 </a>
               </div>
             </div>
           </nav>
           <div
             ref={drawerRef}
-            className={`fixed top-0 left-0 w-full h-[85vh] md:h-[80vh] bg-primary z-50 md:z-300 transform 
-          ${isOpen ? "translate-y-0 md:translate-y-0" : "-translate-y-full"} transition-transform duration-1000 ease-in-out flex flex-col rounded-b-[160px] px-20 py-12 gap-20`}
+            className={`fixed -top-80 left-0 w-full h-[85vh] md:h-[80vh] bg-primary z-50 md:z-300 transform 
+          ${isOpen ? "translate-y-0 md:translate-y-80" : "-translate-y-full"} transition-transform duration-1000 ease-in-out flex flex-col rounded-b-[160px] px-20 py-12 gap-20`}
           >
             <button
               onClick={() => setIsOpen(false)}

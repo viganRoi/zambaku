@@ -26,7 +26,7 @@ const SingleApartment = ({ apartment,
 
     return (
         <div
-            className='w-full h-full min-h-[1200px] flex flex-col items-center justify-center relative py-24'
+            className='w-full h-full min-h-[1200px] flex flex-col items-center justify-center relative py-28 md:py-24'
             style={{ backgroundImage: `url(/projektet/assets/images/hero/bckSingle.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         >
             <div className="absolute inset-0 bg-primary/60" style={{ backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)' }} />
@@ -49,11 +49,11 @@ const SingleApartment = ({ apartment,
                     </div>
                     <div className='w-full  flex flex-col items-start gap-2 py-4'>
                         <div className='w-full flex flex-col w-full items-start justify-between py-0 md:py-4'>
-                            <p className='text-[60px] md:text-[100px] font-thin leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{name} <span className='text-[60px] md:text-[100px] text-secondary font-normal leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{(square + balconySquare || 0).toFixed(2)}m<sup>2</sup></span> </p>
+                            <p className='text-[40px] md:text-[80px] font-thin leading-[60px] md:leading-[80px] text-nowrap' style={{ lineHeight: isSmallDev ? '70px' : '120px' }}>{name} <span className='text-[40px] md:text-[80px] text-secondary font-normal leading-[60px] md:leading-[120px]' style={{ lineHeight: isSmallDev ? '70px' : '80px' }}>{(square + balconySquare || 0).toFixed(2)}m<sup>2</sup></span> </p>
                         </div>
                         <div className="w-full flex gap-2 md:gap-4 items-center">
                             <svg width="48" height="50" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            
+
                             </svg>
                             <p className="text-lg md:text-2xl">
                                 {(square || 0).toFixed(2)}m<sup>2</sup> Sipërfaqe
@@ -61,7 +61,7 @@ const SingleApartment = ({ apartment,
                         </div>
                         <div className="w-full flex gap-2 md:gap-4 items-center">
                             <svg width="48" height="50" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            
+
                             </svg>
                             <p className="text-lg md:text-2xl">
                                 {(balconySquare || 0).toFixed(2)}m<sup>2</sup> Terasë
@@ -143,10 +143,20 @@ const SingleApartment = ({ apartment,
                         className="w-full h-[450px] md:h-[700px] object-contain"
                     />
                 </div>
-                <div className='block md:hidden w-full flex items-center'>
+                <div className='block md:hidden w-full flex items-center relative'>
                     <button onClick={() => navigate(-1)} className='px-6 py-3 border border-secondary text-white rounded-full flex items-center justify-center'>
                         Kthehu
                     </button>
+                        <button
+                            onClick={handleWishlistDataFunction}
+                            className="absolute right-0 bg-transparent border border-[#ccc] transition-all duration-75 hover:text-bck w-[40px] md:w-[50px] h-[40px] md:h-[50px] radius-50 rounded-[50px] flex items-center justify-center"
+                        >
+                            {isInWishlist ? (
+                                <IoIosHeart className="fill-white text-2xl" />
+                            ) : (
+                                <IoIosHeartEmpty className="fill-white text-2xl" />
+                            )}
+                        </button>
                 </div>
             </div>
         </div>

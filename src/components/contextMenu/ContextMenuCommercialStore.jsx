@@ -16,16 +16,16 @@ import { setApartmentIdModalApartmentId, setApartmentIdModalId, setApartmentIdMo
 import { setCommercialStoreEditModalData, setCommercialStoreEditModalState } from '../../features/commercialStore/CommercialStoreSlice';
 
 const ContextMenuCommercialStore = ({ menu, setMenu }) => {
-    const dispatch = useDispatch()
-    const status = null
-    const handleClose = () => {
-        setMenu((prev) => ({
-            ...prev,
-            open: false,
-            data: {},
-            anchorEl: null
-        }))
-    }
+  const dispatch = useDispatch()
+  const status = null
+  const handleClose = () => {
+    setMenu((prev) => ({
+      ...prev,
+      open: false,
+      data: {},
+      anchorEl: null
+    }))
+  }
   React.useEffect(() => {
     if (status === "updateApartment_isSold_success") {
       handleClose()
@@ -35,17 +35,17 @@ const ContextMenuCommercialStore = ({ menu, setMenu }) => {
           dispatch(resetStatusAndMsgTophane())
         },
       });
-      
+
     }
     if (status === 'updateApartment_isSold_rejected') {
       handleClose()
       toast.error(
         'Gabim ne ruajtjen e dokumentit', {
-          position: 'top-right',
-          onClose: () => {
-            dispatch(resetStatusAndMsgTophane())
-          }
+        position: 'top-right',
+        onClose: () => {
+          dispatch(resetStatusAndMsgTophane())
         }
+      }
       )
     }
   }, [status]);
@@ -62,56 +62,56 @@ const ContextMenuCommercialStore = ({ menu, setMenu }) => {
       }}
     >
       <Paper sx={{ width: 250, maxWidth: '100%' }}>
-      <MenuList>
-        <MenuItem disabled onClick={() => {
-          const dataToUpdate = {
-            isSold: !menu?.data.isSold,
-            id: menu?.data.id
-          }
-          dispatch(updateIsSold(dataToUpdate))
-        }}>
-          <ListItemIcon>
-            {menu?.data?.isSold ? <CheckBoxOutlineBlank fontSize='small' /> : <CheckBox fontSize="small" />}
-          </ListItemIcon>
-          <ListItemText>{menu?.data?.isSold ? 'Etiketo si jo e shitur' : 'Etiketo si e shitur'}</ListItemText>         
-                  
-        </MenuItem>
-        <MenuItem 
+        <MenuList>
+          <MenuItem disabled onClick={() => {
+            const dataToUpdate = {
+              isSold: !menu?.data.isSold,
+              id: menu?.data.id
+            }
+            dispatch(updateIsSold(dataToUpdate))
+          }}>
+            <ListItemIcon>
+              {menu?.data?.isSold ? <CheckBoxOutlineBlank fontSize='small' /> : <CheckBox fontSize="small" />}
+            </ListItemIcon>
+            <ListItemText>{menu?.data?.isSold ? 'Etiketo si jo e shitur' : 'Etiketo si e shitur'}</ListItemText>
 
-        onClick={() => {
-            dispatch(setCommercialStoreEditModalState(true))
-            dispatch(setCommercialStoreEditModalData(menu?.data))
-            setMenu((prev) => ({...prev, open: false, anchorEl: null}))
-        }}
-        // onClick={() => {
-        //   const session = getSession()
-        //   const length = session ? Object.keys(session).length : 0;
-        //   if(length > 1 && session?.isAuth === true){
-        //     dispatch(setApartmentEditModalState(true))
-        //     dispatch(setApartmentEditModalData(data))
-        //     setMenu((prev) => ({...prev, open: false, anchorEl: null}))
-        //   }
-        //   else{
-        //     dispatch(handleLoginModalState(true) )
-        //   }         
-        // }}
-        >
-          <ListItemIcon>
-            <Edit fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Edito</ListItemText>
-        </MenuItem>
-        <MenuItem disabled onClick={() => {
-          dispatch(setApartmentIdModalId(menu?.data.id));
-          dispatch(setApartmentIdModalApartmentId(menu?.data.apartmentId));
-          dispatch(setApartmentIdModalState(true));
-        }}>
-          <ListItemIcon>
-            <FlipCameraAndroid fontSize='small'/>
-          </ListItemIcon>
-          <ListItemText>Ndro ID</ListItemText>
-        </MenuItem>
-        <MenuItem 
+          </MenuItem>
+          <MenuItem
+
+            onClick={() => {
+              dispatch(setCommercialStoreEditModalState(true))
+              dispatch(setCommercialStoreEditModalData(menu?.data))
+              setMenu((prev) => ({ ...prev, open: false, anchorEl: null }))
+            }}
+          // onClick={() => {
+          //   const session = getSession()
+          //   const length = session ? Object.keys(session).length : 0;
+          //   if(length > 1 && session?.isAuth === true){
+          //     dispatch(setApartmentEditModalState(true))
+          //     dispatch(setApartmentEditModalData(data))
+          //     setMenu((prev) => ({...prev, open: false, anchorEl: null}))
+          //   }
+          //   else{
+          //     dispatch(handleLoginModalState(true) )
+          //   }         
+          // }}
+          >
+            <ListItemIcon>
+              <Edit fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Edito</ListItemText>
+          </MenuItem>
+          <MenuItem disabled onClick={() => {
+            dispatch(setApartmentIdModalId(menu?.data.id));
+            dispatch(setApartmentIdModalApartmentId(menu?.data.apartmentId));
+            dispatch(setApartmentIdModalState(true));
+          }}>
+            <ListItemIcon>
+              <FlipCameraAndroid fontSize='small' />
+            </ListItemIcon>
+            <ListItemText>Ndro ID</ListItemText>
+          </MenuItem>
+          {/* <MenuItem 
         // onClick={() => { 
         //   const session = getSession()
         //   const length = session ? Object.keys(session).length : 0;
@@ -129,18 +129,25 @@ const ContextMenuCommercialStore = ({ menu, setMenu }) => {
             <SupportAgent fontSize="small" />
           </ListItemIcon>
           <ListItemText>Shitja</ListItemText>
-        </MenuItem>       
-        <Divider />
-        <MenuItem onClick={() => { 
-          
-          setMenu((prev) => ({...prev, open: false, anchorEl: null}))}}>
-          <ListItemIcon>
-            <Close fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Mbyll</ListItemText>
-        </MenuItem>
-      </MenuList>
-    </Paper>
+        </MenuItem>        */}
+          <MenuItem >
+            <ListItemIcon>
+              <SupportAgent fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Oferta</ListItemText>
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={() => {
+
+            setMenu((prev) => ({ ...prev, open: false, anchorEl: null }))
+          }}>
+            <ListItemIcon>
+              <Close fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Mbyll</ListItemText>
+          </MenuItem>
+        </MenuList>
+      </Paper>
     </Popover>
   );
 }

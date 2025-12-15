@@ -17,32 +17,30 @@ const ApartmentWishlistCard = ({
 }) => {
     const { t } = useTranslation();
     return (
-        <div className="w-full h-[380px] md:h-[500px] relative overflow-hidden hover:shadow-xl bg-white border border-dark hover:cursor-pointer valky text-primary flex flex-col items-center p-4 relavite">
+        <div className="w-full h-full md:h-[500px] relative overflow-hidden hover:shadow-xl bg-white/80 hover:bg-white hover:cursor-pointer valky text-primary flex flex-col items-center p-4 relavite duration-300 rounded-xl">
             <img
-                // src={`${homepage}${planmetricImageUrl}${image}.jpg`}
-                src={`${homepage}${planmetricImageUrl}${image}-3d.png`}
-                // src={`/assets/images/apartments/1.png`}
+                src={`${homepage}${planmetricImageUrl}${image}`}
                 alt=''
-                className="w-full h-[370px] object-contain"
+                className="w-full mt-8 h-[250px] md:h-[370px] object-contain"
                 onClick={navigateTo}
             />
             <button
                 onClick={() => onRemove(id)}
-                className="absolute top-4 right-4 bg-primary flex text-white px-4 py-4 text-sm border-primary border-[1px] rounded-full hover:shadow-md transition certon z-[999]"
+                className="absolute top-4 right-4 bg-primary flex text-white p-3 md:p-4 text-sm border-primary border-[1px] rounded-full hover:shadow-md transition certon z-[9]"
             >
                 <IoTrashOutline className="text-white text-xl" />
             </button>
             <div className="absolute top-4 left-4">
                 <p className="axiforma">{title}</p>
             </div>
-            <div className="text-brand flex flex-col gap-4 items-center">
+            <div className="text-brand flex flex-col gap-2 items-center">
                 <p className="text-sm md:text-lg uppercase">
                     {bedroom === "Studio" || bedroom === 0
                         ? bedroom
                         : `${bedroom} ${t('bedroom')}`}
                 </p>
-                <h1 className="text-5xl">
-                    {sqft}m<sup className="text-3xl">2</sup>
+                <h1 className="text-2xl md:text-5xl">
+                    {sqft}m<sup className="text-lg md:text-3xl">2</sup>
                 </h1>
             </div>
         </div>

@@ -234,11 +234,9 @@ const Floor = () => {
             </div>
           </div>
         </div>
-        {contextMenu.open && (
-          <AuthProvider hide={true}>
-            <ContextMenu menu={contextMenu} setMenu={setContextMenu} />
-          </AuthProvider>
-        )}
+        <AuthProvider hide={true}>
+          <ContextMenu menu={contextMenu} setMenu={setContextMenu} />
+        </AuthProvider>
         <AdmApartmentModal />
         <ApartmentFloorModal apartment={hoveredApartment} mousePosition={mousePosition} />
       </div>

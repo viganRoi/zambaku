@@ -25,8 +25,8 @@ const BuildingMobile = ({
 
   return (
     <div className="relative w-full h-[90vh] flex items-center justify-center mb-4">
-      <div className="absolute w-full h-[0px] flex justify-center items-center z-1">
-        <div className="absolute w-11/12 h-0 flex justify-between px-4">
+      <div className="absolute w-full h-[0px] flex justify-end items-center z-1 bottom-14 right-1">
+        <div className="absolute w-1/4 h-0 flex justify-between px-4">
           <button onClick={handlePrevious} className='bg-secondary transition-all hover:text-bck w-[35px] md:w-[60px] h-[35px] md:h-[60px] radius-50 rounded-[50px] flex items-center justify-center'>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12L19 12M5 12L11 18M5 12L11 6" stroke="#00345B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -45,7 +45,7 @@ const BuildingMobile = ({
             key={building.buildingName}
             style={{
               height: index === currentIndex ? getSvgHeight() : "0px",
-              width: "300%",
+              width: "200%",
               opacity: currentIndex === index ? 1 : 0,
               transition: "opacity 0.1s ease-in-out",
               position: "absolute",

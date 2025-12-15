@@ -32,7 +32,7 @@ const BuildingFilter = ({ setFilterState, building, apartmentList }) => {
   }, [location.pathname]);
 
   return (
-    <div className="relative w-99 md:w-108 h-auto px-6 md:px-12 pb-12 pt-16 flex items-center justify-center bg-primary text-white rounded-3xl shadow-lg">
+    <div className="relative w-99 md:w-108 h-auto px-6 md:px-12 pb-12 pt-8 md:pt-16 flex items-center justify-center bg-primary text-white rounded-3xl shadow-lg">
       <div className="w-full h-full flex flex-col gap-4 md:gap-8 justify-between items-start text-white">
         <div className="w-full flex flex-col items-start gap-2 md:gap-4">
           <h1 className="text-secondary">{t('rooms')}</h1>
@@ -129,7 +129,7 @@ const BuildingFilter = ({ setFilterState, building, apartmentList }) => {
             Reseto
           </button>
           <button
-            className="text-white border border-2 hover: border-secondary px-4 py-2 rounded-full font-semibold text-nowrap"
+            className="text-white border border-2 hover: border-secondary px-4 py-2 rounded-full text-nowrap"
           >
             Selekto Apartmentin
           </button>

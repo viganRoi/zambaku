@@ -211,11 +211,9 @@ const BuildingView = ({
           </button>
         </div>
       </div>
-      {contextMenu.open &&
-        <AuthProvider hide={true}>
-          <ContextMenu menu={contextMenu} setMenu={setContextMenu} />
-        </AuthProvider>
-      }
+      <AuthProvider hide={true}>
+        <ContextMenu menu={contextMenu} setMenu={setContextMenu} />
+      </AuthProvider>
       {popup.open && <ApartmentModal apartment={popup.data} mousePosition={mousePosition} />}
       <AdmApartmentModal />
       <AdmApartmentIdModal />
