@@ -62,9 +62,8 @@ const AllApartmentsPage = () => {
     if (roomFilter.length && !roomFilter.includes('all')) {
       filtered = filtered.filter(apartment => roomMatchesFilter(roomFilter, apartment.rooms));
     }
-
-    if (floorFilter.length && !floorFilter.includes('all')) {
-      filtered = filtered.filter(apartment => floorMatchesFilter(floorFilter, apartment.floorNumber));
+    if (floorFilter.startVal !== undefined && floorFilter.endVal !== undefined) {
+      filtered = filtered.filter(apartment => apartment.floorNumber >= floorFilter.startVal && apartment.floorNumber <= floorFilter.endVal);
     }
     if (squareFilter.startVal !== undefined && squareFilter.endVal !== undefined) {
       filtered = filtered.filter(apartment => {
@@ -86,7 +85,7 @@ const AllApartmentsPage = () => {
       <div className='base-width md:mt-[100px]'>
         <h1 className='anya text-white text-3xl md:text-[100px]'>Apartmentet</h1>
       </div>
-      <ApartmentsFilter setFilterState={setFilterState} available={filteredApartments?.length} />
+      <ApartmentsFilter setFilterState={setFilterState}/>
       {isSmallDev ? (
         <Apartments filteredApartments={filteredApartments} />
       ) : (
