@@ -127,7 +127,7 @@ const BuildingPage = () => {
         </svg>
       </button>
       <div
-        className={`absolute  bottom-28 md:bottom-auto md:top-36 left-4 md:left-auto md:right-22 overflow-hidden transition-all duration-500 ease-in-out z-40 ${filterOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
+        className={`absolute bottom-28 md:bottom-auto md:top-36 left-4 md:left-auto md:right-22 overflow-hidden transition-all duration-500 ease-in-out z-40 ${filterOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
           }`}
       >
         <BuildingFilter setFilterState={setFilterState} available={available} buildingName={buildingData[0]?.buildingNr} />
