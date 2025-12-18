@@ -1,6 +1,7 @@
 export const mainUrl = 'https://zambaku.com/projektet/';
 // export const BASE_URL = 'http://localhost:8080';
-export const BASE_URL = 'https://srv412786.hstgr.cloud:7153'
+// export const OFFERT_URL = 'http://localhost:8080';
+export const BASE_URL = 'https://srv1174470.hstgr.cloud:7153'
 export const OFFERT_URL = 'https://srv1174470.hstgr.cloud:7153'
 export const objectImageUrl = 'images/'
 export const planmetricImageUrl = '/projektet/planimetrit/'
