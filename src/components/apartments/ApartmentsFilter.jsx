@@ -7,12 +7,10 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from 'react-router-dom';
 
 
-const ApartmentsFilter = ({ setFilterState, available }) => {
+const ApartmentsFilter = ({ setFilterState }) => {
   const roomFilter = useSelector(getRegularRoomFilter);
   const squareFilter = useSelector(getRegularSquareFilter);
-  const floorRange = useSelector(getRegularFloorFilter);
   const floorFilter = useSelector(getRegularFloorFilter);
-  const floorButtons = useSelector(getRegularFloors);
   const dispatch = useDispatch();
   const isSmallDev = window.innerWidth < 768;
   const { t } = useTranslation();
@@ -22,15 +20,12 @@ const ApartmentsFilter = ({ setFilterState, available }) => {
     dispatch(handleRegularFilterReset());
   }, [location.pathname]);
 
-
   const handleRoomChange = (event) => {
     dispatch(setRegularRoomFilter(event.target.name));
   };
-
-  const handleFloorChange = (event) => {
-    const name = event.target.name;
-    const value = name === 'p' ? 'p' : name;
-    dispatch(setRegularFloorToggle(value));
+  
+  const handleFloorChange = (event, newFloorRange) => {
+    dispatch(setRegularFloorFilter(newFloorRange));
   };
 
   const handleSizeChange = (event, newSizeRange) => {

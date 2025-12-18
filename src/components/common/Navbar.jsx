@@ -183,7 +183,7 @@ const Navbar = () => {
                 <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M34.1455 28.5664L27.3705 22.4064C27.0504 22.1149 26.6295 21.9594 26.1968 21.9728C25.7641 21.9862 25.3536 22.1674 25.0521 22.4781L21.0638 26.5797C20.1038 26.3964 18.1738 25.7947 16.1871 23.8131C14.2005 21.8247 13.5988 19.8897 13.4205 18.9364L17.5188 14.9464C17.8295 14.645 18.0107 14.2345 18.0241 13.8018C18.0374 13.3691 17.8819 12.9481 17.5905 12.6281L11.4321 5.85475C11.1405 5.53368 10.7353 5.33892 10.3024 5.31185C9.86951 5.28477 9.44313 5.42751 9.1138 5.70975L5.49714 8.81141C5.20899 9.10061 5.037 9.4855 5.0138 9.89308C4.9888 10.3097 4.51214 20.1797 12.1655 27.8364C18.8421 34.5114 27.2055 34.9997 29.5088 34.9997C29.8455 34.9997 30.0521 34.9897 30.1071 34.9864C30.5144 34.9624 30.8986 34.7898 31.1871 34.5014L34.2871 30.8831C34.5705 30.5548 34.7143 30.1288 34.6878 29.6959C34.6613 29.2631 34.4667 28.8577 34.1455 28.5664Z" fill="#E4AB8E" />
                 </svg>
-                <h1 className="text-sm">+ 383 49 123 123</h1>
+                <h1 className="text-sm">+ 383 48 776 366</h1>
               </div>
               <div className="flex items-center gap-2 md:gap-4">
                 <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,7 +197,7 @@ const Navbar = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <h1 className="text-sm">info@zambakuresidence.com</h1>
+                <h1 className="text-sm">info@zambaku.com</h1>
               </div>
               <div className="flex items-center gap-2 md:gap-4">
                 <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -287,7 +287,7 @@ const Navbar = () => {
             </button>
             <div className="w-full flex items-center justify-between text-white">
               <a href="https://zambaku.com/">
-                <img src="/projektet/assets/images/brand/whiteLogo.png" alt="" className="object-contain h-36" />
+                <img src="/projektet/assets/images/brand/logo.png" alt="" className="object-contain h-18" />
               </a>
               <div className="w-full flex items-center justify-end gap-4">
                 <button
@@ -364,7 +364,7 @@ const Navbar = () => {
                       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M34.1455 28.5664L27.3705 22.4064C27.0504 22.1149 26.6295 21.9594 26.1968 21.9728C25.7641 21.9862 25.3536 22.1674 25.0521 22.4781L21.0638 26.5797C20.1038 26.3964 18.1738 25.7947 16.1871 23.8131C14.2005 21.8247 13.5988 19.8897 13.4205 18.9364L17.5188 14.9464C17.8295 14.645 18.0107 14.2345 18.0241 13.8018C18.0374 13.3691 17.8819 12.9481 17.5905 12.6281L11.4321 5.85475C11.1405 5.53368 10.7353 5.33892 10.3024 5.31185C9.86951 5.28477 9.44313 5.42751 9.1138 5.70975L5.49714 8.81141C5.20899 9.10061 5.037 9.4855 5.0138 9.89308C4.9888 10.3097 4.51214 20.1797 12.1655 27.8364C18.8421 34.5114 27.2055 34.9997 29.5088 34.9997C29.8455 34.9997 30.0521 34.9897 30.1071 34.9864C30.5144 34.9624 30.8986 34.7898 31.1871 34.5014L34.2871 30.8831C34.5705 30.5548 34.7143 30.1288 34.6878 29.6959C34.6613 29.2631 34.4667 28.8577 34.1455 28.5664Z" fill="#E4AB8E" />
                       </svg>
-                      <h1>+ 383 49 123 123</h1>
+                      <h1>+ 383 48 776 366</h1>
                     </div>
                     <div className="flex items-center gap-2 md:gap-4">
                       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -378,7 +378,7 @@ const Navbar = () => {
                           </clipPath>
                         </defs>
                       </svg>
-                      <h1>info@zambakuresidence.com</h1>
+                      <h1>info@zambaku.com</h1>
                     </div>
                     <div className="flex items-center gap-2 md:gap-4">
                       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
