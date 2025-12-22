@@ -40,20 +40,13 @@ const AdminPage = () => {
   const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
   return (
-    <Box
-      sx={{
-        display: "flex",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
-      <ToastContainer />
+    <div className="h-screen w-full flex ">
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           width: open ? "210px" : "60px",
-          backgroundColor: "#1d1d3a",
+          backgroundColor: 'var(--primary-color)',
           flexShrink: 0,
           transition: "width 0.2s ease-in-out",
           position: "fixed",
@@ -91,7 +84,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton onClick={() => navigate("")}>
               <ListItemIcon>
-                <Apartment sx={{ color: "#c1ac40" }} />
+                <Apartment sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Apartamentet" />
             </ListItemButton>
@@ -99,7 +92,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton onClick={() => navigate("news")}>
               <ListItemIcon>
-                <Public sx={{ color: "#c1ac40" }} />
+                <Public sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Lajmet" />
             </ListItemButton>
@@ -107,7 +100,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton onClick={() => navigate("project")}>
               <ListItemIcon>
-                <Construction sx={{ color: "#c1ac40" }} />
+                <Construction sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Projektet" />
             </ListItemButton>
@@ -115,7 +108,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton onClick={() => navigate("garage")}>
               <ListItemIcon>
-                <LocalParking sx={{ color: "#c1ac40" }} />
+                <LocalParking sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Garazha" />
             </ListItemButton>
@@ -123,7 +116,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton onClick={() => navigate("project")}>
               <ListItemIcon>
-                <AddBusiness sx={{ color: "#c1ac40" }} />
+                <AddBusiness sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Lokalet" />
             </ListItemButton>
@@ -131,7 +124,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton>
               <ListItemIcon>
-                <Person sx={{ color: "#c1ac40" }} />
+                <Person sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Klientët" />
             </ListItemButton>
@@ -139,7 +132,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton onClick={() => navigate("notes")}>
               <ListItemIcon>
-                <Note sx={{ color: "#c1ac40" }} />
+                <Note sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Shënimet" />
             </ListItemButton>
@@ -147,7 +140,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton onClick={() => navigate("d")}>
               <ListItemIcon>
-                <Receipt sx={{ color: "#c1ac40" }} />
+                <Receipt sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Shitje" />
             </ListItemButton>
@@ -155,7 +148,7 @@ const AdminPage = () => {
           <ListItem disablePadding sx={{ height: "40px" }}>
             <ListItemButton onClick={() => navigate("requests")}>
               <ListItemIcon>
-                <RequestPage sx={{ color: "#c1ac40" }} />
+                <RequestPage sx={{ color: "#fff" }} />
               </ListItemIcon>
               <ListItemText primary="Kërkesat" />
             </ListItemButton>
@@ -184,15 +177,9 @@ const AdminPage = () => {
           </ListItem>
         </List>
       </Box>
-      <Box
-        sx={{
-          flexGrow: 1,
-          height: "100%",
-          p: "10px",
-          ml: open ? "210px" : "60px",
-          transition: "margin-left 0.2s ease-in-out",
-        }}
-      >
+      <div className={`flex-grow h-full p-[10px] transition-[margin-left] duration-300 ease-in-out bg-white ${
+        open ? 'ml-[210px]' : 'ml-[60px]'
+      }`}>
         <Routes>
           <Route path="" element={<AdmApartments />} />
           <Route path="/notes" element={<Notes />} />
@@ -202,8 +189,9 @@ const AdminPage = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/requests" element={<AdmRequestPage />} />
         </Routes>
-      </Box>
-    </Box>
+      </div>
+      <ToastContainer />
+    </div>
   );
 };
 

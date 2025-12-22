@@ -278,31 +278,32 @@ export const AuthProvider = ({ children, hide = false }) => {
           alignItems: 'center',
           padding: '50px',
           borderRadius: '20px',
-          backgroundColor: '#000',
+          backgroundColor: '#fff',
         }}>
         <img
-          src="\assets\images\brand\logo.png"
+          src="/projektet/assets/images/brand/logo.png"
           alt="logo"
           style={{
-            color: '#bbb',
+            color: 'var(--primary-color)',
             height: "100px",
           }}
         />
-        {/* <Typography
+        <Typography
           // onClick={() => navigate('/login')}
-          variant="h4"
+          variant="p"
           sx={{
-            color: 'var(--brand-color)',
+            mt: 2,
+            color: 'var(--primary-color)',
             ":hover": { filter: "drop-shadow(0 2px 3.5rem black)" },
           }}
         >
           Please login to access this page! Kyqu tani
-        </Typography> */}
+        </Typography>
         <form onSubmit={(e) => {
           e.preventDefault();
           login({ username, password });
         }}>
-          <FormControl sx={{ mt: 10, }}>
+          <FormControl sx={{ mt: 2 }}>
             <Grid container spacing={3} width={"400px"}> 
               <Grid item xs={12} sx={{
                 width: '100%',
@@ -318,28 +319,28 @@ export const AuthProvider = ({ children, hide = false }) => {
                   onChange={(e) => setUsername(e.target.value)}
                   sx={{
                     backgroundColor: 'transparent',
-                    color: 'red',
+                    color: 'var(--primary-color)',
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
-                        borderColor: 'green',
+                        borderColor: 'var(--primary-color)',
                         borderRadius: '20px'
                       },
                       '&:hover fieldset': {
-                        borderColor: 'green',
+                        borderColor: 'var(--primary-color)',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: 'green',
+                        borderColor: 'var(--primary-color)',
                         borderWidth: '1px',
-                        color: '#fff'
+                        color: 'var(--primary-color)'
                       },
                       '& input': {
-                        color: '#bbb', // Text color
+                        color: 'var(--primary-color)', // Text color
                       },
                     },
                     '& .MuiInputLabel-root': {
-                      color: 'green',
+                      color: 'var(--primary-color)',
                       '&.Mui-focused': {
-                        color: 'green',
+                        color: 'var(--primary-color)',
                       },
                     },
                   }}
@@ -357,25 +358,25 @@ export const AuthProvider = ({ children, hide = false }) => {
                     backgroundColor: 'transparent',
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
-                        borderColor: 'green',
+                        borderColor: 'var(--primary-color)',
                         borderRadius: '20px'
                       },
                       '&:hover fieldset': {
-                        borderColor: 'green',
+                        borderColor: 'var(--primary-color)',
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: 'green',
+                        borderColor: 'var(--primary-color)',
                         borderWidth: '1px',
-                        color: '#fff'
+                        color: 'var(--primary-color)'
                       },
                     },
                     '& input': {
-                      color: '#bbb', // Text color
+                      color: 'var(--primary-color)', // Text color
                     },
                     '& .MuiInputLabel-root': {
-                      color: 'green',
+                      color: 'var(--primary-color)',
                       '&.Mui-focused': {
-                        color: 'green',
+                        color: 'var(--primary-color)',
                       },
                     },
                   }}
@@ -388,13 +389,13 @@ export const AuthProvider = ({ children, hide = false }) => {
                 justifyContent: 'flex-end'
               }}>
                 <Button type='submit' variant='contained' sx={{
-                  backgroundColor: 'var(--green)',
+                  backgroundColor: 'var(--primary-color)',
                   color: '#000',
                   borderRadius: '20px',
                   fontSize: '14px',
                   textTransform: 'capitalize',
                   ':hover': {
-                    backgroundColor: 'var(--brand-color)'
+                    backgroundColor: 'var(--primary-color)'
                   }
                 }}>Login</Button>
               </Grid>
