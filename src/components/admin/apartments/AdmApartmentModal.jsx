@@ -638,6 +638,21 @@ function AdmApartmentModal() {
                 </Box>
               </Grid>
             </Grid>
+              <Grid  item sm={12} md={12} lg={12} xl={12}>
+                <TextField
+                  fullWidth
+                  size="small"
+                  name="description"
+                  value={apartmentData.description}
+                  onChange={(e) => {
+                    setApartmentData((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }));
+                  }}
+                  label="Description"
+                />
+              </Grid>
           </Box>
         </Box>
 
